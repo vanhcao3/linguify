@@ -1,3 +1,5 @@
-export default function SignIn() {
-  return <h1>Sign in page</h1>;
+import { LoginForm } from '@/components/ui/auth/login-form';
+
+export default function SignInPage() {
+  return <LoginForm />;
 }
