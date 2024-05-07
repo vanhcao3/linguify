@@ -10,6 +10,8 @@ import { Button } from '../button';
 import { CardWrapper } from '@/components/ui/auth/card-wrapper';
 import { FormSuccess } from '../../form-success';
 import { FormError } from '../../form-error';
+import { login } from '@/actions/login';
+
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -20,7 +22,8 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    //Call API
+    //Server actions from actions/login
+    login(values);
   };
 
   return (
@@ -31,7 +34,7 @@ export const LoginForm = () => {
       showSocial
     >
       <Form {...form}>
-        <form className="space-y-6" onSubmit={form.handleSubmit(() => {})}>
+        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-4">
             <FormField
               control={form.control}
