@@ -30,5 +30,5 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     },
   });
 
-  return { success: 'Userc ' };
+  return { success: 'Account created successfully!' };
 };
