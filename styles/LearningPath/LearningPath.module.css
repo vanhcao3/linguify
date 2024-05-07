@@ -1,0 +1,23 @@
+.wrapper {
+    @apply flex flex-col;
+    @apply px-7 pt-5;
+}
+
+.heading-title {
+    @apply text-3xl font-bold;
+    @apply text-gray-800;
+    @apply mb-4;
+}
+
+.heading-content {
+    @apply flex items-center gap-3;
+    @apply w-full;
+    @apply text-sm;
+}
+
+.check-level {
+    /* @apply inline-block; */
+    @apply inline-flex flex-row items-center gap-3;
+    @apply text-red-400 hover:text-red-500;
+    @apply hover:scale-110;
+}
