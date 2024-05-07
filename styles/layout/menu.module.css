@@ -1,0 +1,159 @@
+/* Header */
+.header-wrapper {
+  @apply flex flex-row items-center px-5 py-4;
+}
+
+.header-title {
+  @apply font-semibold;
+}
+
+.header-btn {
+  @apply ml-auto;
+}
+
+.header-btn a {
+  @apply w-max px-2 py-1 rounded-lg hover:bg-white active:bg-orange-100;
+  @apply text-red-600 text-sm;
+}
+/* End of Header */
+
+.menu-list {
+  @apply flex flex-col gap-1;
+  @apply bg-white  rounded-lg  overflow-hidden;
+  @apply w-[380px] max-h-[70vw] pb-2;
+}
+
+.body {
+  @apply flex flex-col gap-3;
+  @apply max-h-[500px] overflow-y-auto;
+}
+
+/* Course */
+
+.course-wrapper {
+  @apply flex flex-row mx-2 px-3 py-2 gap-2 rounded-lg;
+  @apply hover:bg-slate-100;
+}
+
+.course-image {
+  @apply flex justify-center items-center;
+  @apply rounded-lg overflow-hidden cursor-pointer;
+  @apply flex-shrink-0;
+}
+
+.course-image > img {
+  @apply object-fill;
+}
+
+.course-title {
+  @apply font-semibold cursor-pointer;
+}
+
+.course-desc {
+  @apply text-sm;
+}
+
+.lastComplete {
+  @apply text-xs mt-1;
+}
+
+.progressBar {
+  @apply mt-2 w-52 h-[6px] bg-slate-400 rounded-full overflow-hidden;
+}
+
+.inProgress {
+  @apply h-[100%] bg-orange-500;
+}
+/* End of Course */
+
+/* Notification */
+.notification-wrapper {
+  @apply flex flex-row mx-2 px-3 py-2 rounded-lg cursor-pointer;
+  @apply hover:bg-slate-100;
+}
+
+.notification-image {
+  @apply w-11 h-11 rounded-full overflow-hidden;
+}
+
+.notification-image > img {
+  @apply w-full h-full object-cover;
+}
+
+.notification-body {
+  @apply flex flex-col px-2;
+}
+
+.createdTime {
+  @apply text-xs text-red-400 font-semibold mt-2;
+}
+
+.view-all-noti {
+  @apply flex justify-center items-center;
+  @apply w-[100%] h-11 -mb-2;
+  @apply border-t-[1px] border-slate-300 hover:bg-slate-200 active:bg-slate-300;
+  @apply text-xs text-red-500 font-semibold cursor-pointer;
+}
+/* End of Notifacation */
+
+/* Avatar */
+.user-menu-list {
+  @apply flex flex-col gap-1;
+  @apply bg-white  rounded-lg  overflow-hidden;
+  @apply w-[230px];
+}
+
+.inner-user-menu {
+  @apply px-6 py-2;
+}
+
+.userInfo-wrapper {
+  @apply flex flex-row;
+}
+
+.userInfo-avt {
+  @apply w-12 h-12 rounded-full overflow-hidden;
+}
+
+.userInfo-avt > img {
+  @apply w-full h-full object-cover;
+}
+
+.userInfo-content {
+  @apply flex flex-col ml-3;
+}
+
+.userInfo-name {
+  @apply text-sm font-semibold;
+}
+
+.userInfo-nickname {
+  @apply text-xs mt-1;
+}
+
+.item-wrapper {
+  @apply flex flex-col;
+}
+
+.item-title {
+  @apply px-2 py-[10px] rounded-xl hover:font-semibold active:bg-slate-100;
+  @apply text-sm text-gray-600  cursor-pointer;
+}
+
+.hrTag {
+  @apply my-2;
+}
+/* End of Avatar */
+
+/* SidebarMenu */
+.sidebar-menu-wrapper {
+  @apply flex flex-col gap-2 py-2;
+  @apply w-[200px] bg-white rounded-lg;
+}
+
+.sidebar-menu-item {
+  @apply flex justify-center items-center;
+  @apply w-full py-2 cursor-pointer;
+  @apply hover:bg-slate-100 active:bg-slate-200;
+}
+/* End of SidebarMenu */

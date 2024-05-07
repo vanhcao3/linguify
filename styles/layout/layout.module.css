@@ -1,0 +1,11 @@
+.wrapper {
+  @apply flex flex-col w-[100%];
+}
+
+.body {
+  @apply flex flex-row w-[100%] bg-slate-100;
+}
+
+.content {
+  @apply w-[100%];
+}

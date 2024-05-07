@@ -1,0 +1,32 @@
+.wrapper {
+  @apply hidden lg:block w-24 bg-slate-100 text-xs;
+}
+
+.menu {
+  @apply sticky top-[75px] left-0 z-10 gap-3;
+  @apply flex flex-col w-24 items-center font-semibold;
+  @apply my-2;
+}
+
+.btn-wrapper {
+  @apply flex flex-col justify-center items-center gap-1  rounded-[15px];
+}
+
+.square {
+  @apply w-16 h-16 hover:bg-slate-200;
+}
+
+.round {
+  @apply w-11 h-11 rounded-full bg-blue-500;
+}
+
+.inner-icon {
+  @apply flex justify-center items-center;
+  @apply w-11 h-11 object-fill;
+  @apply rounded-full;
+  @apply transition hover:scale-125 focus:scale-125 focus:rotate-45;
+}
+
+.active {
+  @apply bg-slate-300;
+}

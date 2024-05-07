@@ -1,0 +1,51 @@
+.wrapper {
+  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-30;
+  @apply animate-fadeIn;
+}
+
+.content {
+  @apply flex flex-col;
+  @apply w-[80%] md:w-[70%] h-full px-7 py-4 bg-white;
+  @apply animate-floatLeftToRight;
+  @apply overflow-y-auto;
+}
+
+/* Section 1 */
+.section1 {
+  @apply flex flex-col gap-3;
+  @apply pl-5 mt-14 shrink-0;
+}
+
+.avt {
+  @apply w-24 h-24 rounded-full;
+}
+
+.avt img {
+  @apply w-full h-full object-cover rounded-full;
+}
+
+.name {
+  @apply font-semibold text-lg;
+}
+/* End of Section 1 */
+
+.hrTag {
+  @apply my-4;
+}
+
+/* Section 2 */
+.section2 {
+  @apply flex flex-col;
+}
+
+.item {
+  @apply flex flex-row items-center gap-5;
+  @apply py-6 pl-5;
+  @apply rounded-lg hover:bg-slate-200 active:bg-slate-300 cursor-pointer;
+  @apply font-semibold text-gray-600;
+}
+
+.item > img {
+  @apply w-auto h-auto;
+}
+/* End of Section 2 */

@@ -1,0 +1,5 @@
+.wrapper {
+  @apply flex flex-row justify-center items-center;
+  @apply text-gray-500 font-semibold text-[14px];
+  @apply w-max px-2 py-1 rounded-xl hover:bg-white active:bg-slate-200;
+}
