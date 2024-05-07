@@ -1,0 +1,101 @@
+.wrapper {
+  @apply flex flex-col gap-10 px-8 py-7;
+}
+
+/* Section 1 */
+.section1 {
+  @apply flex flex-col gap-3;
+}
+
+.section1-title {
+  @apply font-bold text-3xl;
+}
+/* End of Section 1 */
+
+/* Section 2 */
+.section2 {
+  @apply flex flex-col xs:grid xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5;
+}
+/* End of Section 2 */
+
+/* Item */
+.item-wrapper {
+  @apply flex flex-col gap-1 w-max lg:w-auto;
+  @apply mb-6;
+}
+
+.item-image {
+  @apply flex justify-center items-center bg-slate-300 w-[80vw] xs:w-[40vw] lg:w-[100%] aspect-video overflow-hidden rounded-lg relative;
+}
+
+.item-image > img {
+  @apply absolute w-full h-full;
+}
+
+.item-image > a {
+  @apply absolute w-full h-full;
+}
+
+.overlay {
+  @apply flex justify-center items-center w-full h-full hover:bg-gray-900 hover:bg-opacity-30 hover:transition-all hover:ease-in-out hover:duration-300;
+}
+
+.overlay > button {
+  @apply bg-white rounded-full hidden w-1/2 py-2;
+  /* Css cho hiệu ứng trượt lên - chưa làm được nên note lại */
+  /* @apply transition-transform duration-300 transform translate-y-full; */
+}
+
+.overlay:hover button {
+  @apply block translate-y-0;
+  /* @apply translate-y-0 */
+}
+
+.item-title {
+  @apply font-semibold w-full xs:w-[40vw] lg:w-full;
+}
+
+.last-complete {
+  @apply text-gray-500 text-sm;
+}
+
+.progress {
+  @apply w-[100%] h-[6px] bg-slate-400 rounded-full overflow-hidden;
+}
+
+.progress-bar {
+  @apply h-full bg-orange-500;
+}
+/* End of Item */
+
+/* Empty Item */
+.empty-item-wrapper {
+  @apply flex flex-col justify-center items-center gap-2 relative;
+  @apply w-[80vw] xs:w-[40vw] lg:w-full aspect-video rounded-lg;
+  @apply border-4 border-dashed border-gray-300 hover:border-orange-500 cursor-pointer;
+  &:hover .plus-icon {
+    @apply bg-orange-500;
+  }
+  &:hover .star-icon1 {
+    @apply block absolute top-[20%] left-[30%];
+    @apply animate-fadeIn;
+  }
+  &:hover .star-icon2 {
+    @apply block absolute bottom-[50%] right-[30%];
+    @apply animate-fadeIn;
+  }
+}
+
+.plus-icon {
+  @apply flex justify-center items-center text-center;
+  @apply w-[24px] h-[24px];
+  @apply rounded-full bg-slate-400;
+}
+
+.star-icon1 {
+  @apply hidden;
+}
+.star-icon2 {
+  @apply hidden;
+}
+/* End od Empty Item */
