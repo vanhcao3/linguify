@@ -14,6 +14,18 @@ declare module '@auth/core' {
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  pages: {
+    signIn: '/auth/sign-in',
+    error: '/auth/error',
+  },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
+  },
   callbacks: {
     async session({ session, user, token }) {
       console.log({ sessionToken: token });
