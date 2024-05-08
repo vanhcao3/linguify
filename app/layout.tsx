@@ -9,6 +9,7 @@ import styles from '../styles/layout/layout.module.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import Sidebar from '@/components/layout/sidebar';
+import ToastProvider from '@/components/ToastProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,7 +32,9 @@ export default function RootLayout({
         <Header />
         <div className={styles['body']}>
           {!isNotificationPage && <Sidebar />}
-          <div className={styles['content']}>{children}</div>
+          <div className={styles['content']}>
+            <ToastProvider>{children}</ToastProvider>
+          </div>
         </div>
 
         <Footer />
