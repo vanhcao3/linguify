@@ -32,8 +32,15 @@ function headerModal(props: IProps) {
     },
     {
       title: 'Khoá học của tôi',
-      hrTag: true,
+      hrTag: false,
       icon: '/icons/bookOpenIcon.svg',
+      visible: currentUser,
+    },
+    {
+      title: 'Viết Blog',
+      hrTag: true,
+      icon: '/icons/penIcon.svg',
+      href: 'blog/create',
       visible: currentUser,
     },
     {
