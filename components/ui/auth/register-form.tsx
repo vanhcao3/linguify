@@ -70,7 +70,7 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="example@email.com" type="email" disabled={isPending} />
+                    <Input {...field} placeholder="example@email.com" disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

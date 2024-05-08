@@ -33,8 +33,10 @@ export const LoginForm = () => {
     startTransition(() => {
       //Server actions from actions/login
       login(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+        if (!!data) {
+          setError(data.error);
+          setSuccess(data.success);
+        }
       });
     });
   };
@@ -56,7 +58,7 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="example@email.com" type="email" disabled={isPending} />
+                    <Input {...field} placeholder="example@email.com" disabled={isPending} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
