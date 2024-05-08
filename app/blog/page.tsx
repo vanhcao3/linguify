@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
-import styles from '@/styles/BLog/Blog.module.css';
 import Image from 'next/image';
+import axios from 'axios';
+import useSWR from 'swr';
+
+import styles from '@/styles/BLog/Blog.module.css';
 
 const pseudoData = [
   {
@@ -84,13 +89,20 @@ const pseudoData = [
   },
 ];
 
-function Blog({
-  searchParams,
-}: {
-  searchParams?: {
-    page?: string;
-  };
-}) {
+const fetcher = (url: string) =>
+  axios
+    .get(url)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+
+function Blog({ searchParams }: { searchParams?: { page?: string } }) {
+  const { data, error, isLoading } = useSWR('http://localhost:8080/blogs', fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  // Pagination
   let page = parseInt(searchParams?.page || '1', 10);
   page = !page || page < 1 ? 1 : page;
   const perPage = 4;
@@ -107,6 +119,7 @@ function Blog({
       pageNumbers.push(i);
     }
   }
+  // End Pagination
 
   return (
     <div className={styles['wrapper']}>
@@ -120,7 +133,7 @@ function Blog({
       <div className={styles['content']}>
         <div className="hidden">
           Chưa có bài viết nào. Hãy là người{' '}
-          <Link href="./" className={styles['create-first-blog']}>
+          <Link href="/blog/create" className={styles['create-first-blog']}>
             viết bài đầu tiên
           </Link>
         </div>
@@ -158,6 +171,48 @@ function Blog({
               </div>
             );
           })}
+          {data?.slice(perPage * (page - 1), perPage * (page - 1) + perPage).map((item: any, index: any) => {
+            if (!item.avt) {
+              item.avt = '/images/no-image.png';
+            }
+            return (
+              <div key={index} className={styles['item-wrapper']}>
+                <div className={styles['item-header']}>
+                  <div className={styles['author']}>
+                    <div className={styles['author-avatar']}>
+                      <Image src={item.avt} width={25} height={25} alt="" />
+                    </div>
+                    <div>{item.name}</div>
+                  </div>
+                  <div className={styles['btn-actions']}>
+                    <div className={styles['bookmark-btn']}>
+                      <Image src="/icons/bookmarkIcon.svg" alt="" width={24} height={20} />
+                    </div>
+                    <div className={styles['dots-btn']}>
+                      <Image src="/icons/dotsIcon.svg" alt="" width={24} height={24} />
+                    </div>
+                  </div>
+                </div>
+                <div className={styles['item-body']}>
+                  <div className={styles['item-info']}>
+                    <Link href={`/blog/${item._id}`} className={styles['info-title']}>
+                      {item.title}
+                    </Link>
+                    <div
+                      className={styles['info-description']}
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    ></div>
+                  </div>
+                  {item.image && (
+                    <div className={styles['thumb']}>
+                      <Image src={item.image} alt="" width={200} height={112} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+          {/* Pagination bar */}
           <div className={styles['pagination-wrapper']}>
             <div className={styles['pagination']}>
               {page === 1 ? (

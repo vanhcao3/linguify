@@ -1,17 +1,32 @@
 'use client';
-import React, { useRef, useState } from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import { useForm } from 'react-hook-form';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
+import { useRouter } from 'next/navigation';
+import { title } from 'process';
+
+const pseudoOwnerId = '663b004185120856d291dc85';
 
 function CreateBlog() {
-  const [contentValue, setContentValue] = useState('');
-  const [titleValue, setTitleValue] = useState('');
+  const router = useRouter();
   const contentRef = useRef<any>(null);
-  const { handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const submitSuccess = () => toast.success('Xuất bản bài viết thành công!');
+  const titleError = () => toast.error('Tiêu đề không được để trống!');
 
   const modules = {
     toolbar: [
@@ -36,40 +51,64 @@ function CreateBlog() {
     'link',
     'image',
   ];
+
+  const handeEditorChange = (value: string) => {
+    setValue('contentValue', value);
+  };
+
+  const handleFormSubmit = (data: any) => {
+    // console.log(contentValue.replace(/<[^>]*>/g, ' '));
+    // submitSuccess();
+    data.owner = pseudoOwnerId;
+    // console.log(data);
+
+    axios
+      .post('http://localhost:8080/blogs', {
+        title: data.titleValue,
+        content: data.contentValue,
+        owner: data.owner,
+      })
+      .then((res) => {
+        console.log(res);
+
+        if (res.status === 200) {
+          submitSuccess();
+          router.push('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    register('titleValue', { required: true });
+    register('contentValue', { required: true });
+  }, [register]);
+
+  const contentValue = watch('contentValue');
+
   return (
     <div className={styles['wrapper']}>
-      <form
-        onSubmit={handleSubmit(() => {
-          console.log('title value: ', titleValue);
-          console.log('content value: ', contentValue);
-
-          // axios
-          //   .post('http://localhost:8080/blogs', {
-          //     title: titleValue,
-          //     content: contentValue,
-          //   })
-          //   .then((res) => {
-          //     console.log(res);
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
-        })}
-        className={styles['form-wrapper']}
-      >
+      <form onSubmit={handleSubmit(handleFormSubmit)} className={styles['form-wrapper']}>
         <div className={styles['section1']}>
-          <div
-            className={styles['title']}
-            contentEditable
-            data-placeholder="Tiêu đề"
-            onInput={(e) => setTitleValue(e.currentTarget.textContent || '')}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                contentRef.current?.focus();
-              }
-            }}
-          ></div>
-          <button>Xuất bản</button>
+          <div className={styles['title-wrapper']}>
+            <div
+              className={styles['title']}
+              contentEditable
+              data-placeholder="Tiêu đề"
+              onInput={(e) => {
+                setValue('titleValue', e.currentTarget.textContent?.trimStart() || '');
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  contentRef.current?.focus();
+                }
+              }}
+            ></div>
+            <p className={styles['error-message']}>{errors.titleValue && 'Enter valid title'}</p>
+          </div>
+          <button className={styles['submit-button']}>Xuất bản</button>
         </div>
         <div>
           <ReactQuill
@@ -78,11 +117,12 @@ function CreateBlog() {
             modules={modules}
             formats={formats}
             value={contentValue}
-            onChange={setContentValue}
+            onChange={handeEditorChange}
             placeholder="Nội dung viết ở đây"
             className={styles['editor']}
           />
         </div>
+        {/* <div dangerouslySetInnerHTML={{ __html: contentValue }}></div> */}
       </form>
     </div>
   );
