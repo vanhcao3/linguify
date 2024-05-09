@@ -1,7 +1,7 @@
 import { auth, signOut } from '@/auth';
 import { Button } from '@/components/ui/button';
 
-const SignOutPage = async () => {
+const LandingPage = async () => {
   const session = await auth();
   return (
     <div className="flex flex-col items-center justify-center">
@@ -19,4 +19,4 @@ const SignOutPage = async () => {
   );
 };
 
-export default SignOutPage;
+export default LandingPage;
