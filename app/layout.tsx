@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import './globals.css';
 import styles from '../styles/layout/layout.module.css';
-import Header from '@/components/layout/header';
+import Header from '@/components/layout/Header/header';
 import Footer from '@/components/layout/footer';
 import Sidebar from '@/components/layout/sidebar';
 import ToastProvider from '@/components/ToastProvider';
