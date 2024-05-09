@@ -1,16 +1,14 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import ReactQuill from 'react-quill';
 import { useForm } from 'react-hook-form';
-import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
-import { useRouter } from 'next/navigation';
-import { title } from 'process';
+import Editor from '@/components/Blog/Editor';
 
 const pseudoOwnerId = '663b004185120856d291dc85';
 
@@ -26,59 +24,32 @@ function CreateBlog() {
   } = useForm();
 
   const submitSuccess = () => toast.success('Xuất bản bài viết thành công!');
-  const titleError = () => toast.error('Tiêu đề không được để trống!');
-
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-      ['link', 'image'],
-      ['clean'],
-    ],
-  };
-
-  const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-  ];
 
   const handeEditorChange = (value: string) => {
     setValue('contentValue', value);
   };
 
   const handleFormSubmit = (data: any) => {
-    // console.log(contentValue.replace(/<[^>]*>/g, ' '));
-    // submitSuccess();
     data.owner = pseudoOwnerId;
-    // console.log(data);
+    console.log(data);
 
-    axios
-      .post('http://localhost:8080/blogs', {
-        title: data.titleValue,
-        content: data.contentValue,
-        owner: data.owner,
-      })
-      .then((res) => {
-        console.log(res);
+    // axios
+    //   .post('http://localhost:8080/blogs', {
+    //     title: data.titleValue,
+    //     content: data.contentValue,
+    //     owner: data.owner,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
 
-        if (res.status === 200) {
-          submitSuccess();
-          router.push('/');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //     if (res.status === 200) {
+    //       submitSuccess();
+    //       router.push('/');
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   useEffect(() => {
@@ -102,6 +73,8 @@ function CreateBlog() {
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
+                  console.log(contentRef);
+
                   contentRef.current?.focus();
                 }
               }}
@@ -110,19 +83,7 @@ function CreateBlog() {
           </div>
           <button className={styles['submit-button']}>Xuất bản</button>
         </div>
-        <div>
-          <ReactQuill
-            ref={contentRef}
-            theme="snow"
-            modules={modules}
-            formats={formats}
-            value={contentValue}
-            onChange={handeEditorChange}
-            placeholder="Nội dung viết ở đây"
-            className={styles['editor']}
-          />
-        </div>
-        {/* <div dangerouslySetInnerHTML={{ __html: contentValue }}></div> */}
+        <Editor ref={contentRef} value={contentValue} onChange={handeEditorChange} />
       </form>
     </div>
   );

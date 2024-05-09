@@ -1,11 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
 import axios from 'axios';
 import useSWR from 'swr';
 
 import styles from '@/styles/BLog/Blog.module.css';
+import Pagiantion from '@/components/Blog/Pagination';
+import Header from '@/components/Blog/Header';
+import NoBlog from '@/components/Blog/NoBlog';
+import BlogItem from '@/components/Blog/BlogItem';
 
 const pseudoData = [
   {
@@ -96,152 +98,37 @@ const fetcher = (url: string) =>
     .catch((err) => console.log(err));
 
 function Blog({ searchParams }: { searchParams?: { page?: string } }) {
-  const { data, error, isLoading } = useSWR('http://localhost:8080/blogs', fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  // const { data, error, isLoading } = useSWR('http://localhost:8080/blogs', fetcher, {
+  //   revalidateIfStale: false,
+  //   revalidateOnFocus: false,
+  //   revalidateOnReconnect: false,
+  // });
 
   // Pagination
   let page = parseInt(searchParams?.page || '1', 10);
   page = !page || page < 1 ? 1 : page;
   const perPage = 4;
-  const totalPages = Math.ceil(pseudoData.length / perPage);
-
-  const prePage = page - 1 > 0 ? page - 1 : 1;
-  const nextPage = page + 1;
-
-  const pageNumbers: Array<number> = [];
-  const offsetNumber = 3;
-
-  for (let i = page - offsetNumber; i <= page + offsetNumber; i++) {
-    if (i > 0 && i <= totalPages) {
-      pageNumbers.push(i);
-    }
-  }
   // End Pagination
 
   return (
     <div className={styles['wrapper']}>
-      <div className={styles['heading']}>
-        <div className={styles['heading-title']}>Bài viết nổi bật</div>
-        <div className={styles['heading-description']}>
-          Tổng hợp các bài viết chia sẻ về kinh nghiệm học online, cách ghi nhớ từng vựng, cấu trúc, ...
-        </div>
-      </div>
+      <Header />
 
       <div className={styles['content']}>
-        <div className="hidden">
-          Chưa có bài viết nào. Hãy là người{' '}
-          <Link href="/blog/create" className={styles['create-first-blog']}>
-            viết bài đầu tiên
-          </Link>
-        </div>
+        {/* <NoBlog /> */}
         <div className={styles['section1']}>
           {pseudoData.slice(perPage * (page - 1), perPage * (page - 1) + perPage).map((item, index) => {
-            return (
-              <div key={index} className={styles['item-wrapper']}>
-                <div className={styles['item-header']}>
-                  <div className={styles['author']}>
-                    <div className={styles['author-avatar']}>
-                      <Image src={item.avt} width={25} height={25} alt="" />
-                    </div>
-                    <div>{item.name}</div>
-                  </div>
-                  <div className={styles['btn-actions']}>
-                    <div className={styles['bookmark-btn']}>
-                      <Image src="/icons/bookmarkIcon.svg" alt="" width={24} height={20} />
-                    </div>
-                    <div className={styles['dots-btn']}>
-                      <Image src="/icons/dotsIcon.svg" alt="" width={24} height={24} />
-                    </div>
-                  </div>
-                </div>
-                <div className={styles['item-body']}>
-                  <div className={styles['item-info']}>
-                    <div className={styles['info-title']}>{item.title}</div>
-                    <div className={styles['info-description']}>{item.description}</div>
-                  </div>
-                  {item.image && (
-                    <div className={styles['thumb']}>
-                      <Image src={item.image} alt="" width={200} height={112} />
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
+            return <BlogItem key={index} data={item} />;
           })}
-          {data?.slice(perPage * (page - 1), perPage * (page - 1) + perPage).map((item: any, index: any) => {
+          {/* Data from server */}
+          {/* {data?.slice(perPage * (page - 1), perPage * (page - 1) + perPage).map((item: any, index: any) => {
             if (!item.avt) {
               item.avt = '/images/no-image.png';
             }
-            return (
-              <div key={index} className={styles['item-wrapper']}>
-                <div className={styles['item-header']}>
-                  <div className={styles['author']}>
-                    <div className={styles['author-avatar']}>
-                      <Image src={item.avt} width={25} height={25} alt="" />
-                    </div>
-                    <div>{item.name}</div>
-                  </div>
-                  <div className={styles['btn-actions']}>
-                    <div className={styles['bookmark-btn']}>
-                      <Image src="/icons/bookmarkIcon.svg" alt="" width={24} height={20} />
-                    </div>
-                    <div className={styles['dots-btn']}>
-                      <Image src="/icons/dotsIcon.svg" alt="" width={24} height={24} />
-                    </div>
-                  </div>
-                </div>
-                <div className={styles['item-body']}>
-                  <div className={styles['item-info']}>
-                    <Link href={`/blog/${item._id}`} className={styles['info-title']}>
-                      {item.title}
-                    </Link>
-                    <div
-                      className={styles['info-description']}
-                      dangerouslySetInnerHTML={{ __html: item.content }}
-                    ></div>
-                  </div>
-                  {item.image && (
-                    <div className={styles['thumb']}>
-                      <Image src={item.image} alt="" width={200} height={112} />
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+            return <BlogItem key={index} data={item} />;
+          })} */}
           {/* Pagination bar */}
-          <div className={styles['pagination-wrapper']}>
-            <div className={styles['pagination']}>
-              {page === 1 ? (
-                <div className={styles['button-disabled']}>Previous</div>
-              ) : (
-                <Link href={`?page=${prePage}`} className={styles['pagination-button']}>
-                  Previous
-                </Link>
-              )}
-
-              {pageNumbers.map((pageNumber, index) => (
-                <Link
-                  key={index}
-                  href={`?page=${pageNumber}`}
-                  className={`${styles['page-number']} ${page === pageNumber ? styles['active-pagination'] : ''}`}
-                >
-                  {pageNumber}
-                </Link>
-              ))}
-
-              {page === totalPages ? (
-                <div className={styles['button-disabled']}>Next</div>
-              ) : (
-                <Link href={`?page=${nextPage}`} className={styles['pagination-button']}>
-                  Next
-                </Link>
-              )}
-            </div>
-          </div>
+          <Pagiantion totalBlogs={pseudoData.length} page={page} perPage={perPage} />
         </div>
 
         <div className={styles['section2']}>

@@ -17,8 +17,12 @@
   @apply border-[3px] border-dashed rounded-2xl border-slate-400 hover:border-slate-500 active:border-slate-600;
 }
 
+.title-wrapper {
+  @apply w-[80%];
+}
+
 .title {
-  @apply w-[80%] pl-3 py-3;
+  @apply pl-3 py-3;
   @apply text-2xl bg-inherit focus:outline-none focus:bg-slate-200 rounded-lg;
 }
 
@@ -27,9 +31,9 @@
   @apply text-slate-300 cursor-text;
 }
 
-/* .pseudoPlaceholder {
-  @apply text-slate-300;
-} */
+.error-message {
+  @apply text-red-500 text-xs;
+}
 
 .editer {
   @apply flex flex-col gap-3;
