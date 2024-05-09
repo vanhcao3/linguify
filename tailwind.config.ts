@@ -82,6 +82,14 @@ const config = {
             transform: 'translateX(0)',
           },
         },
+        floatRightToLeft: {
+          '0%': {
+            transform: 'translateX(100%)',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+          },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
@@ -95,6 +103,7 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         floatLeftToRight: 'floatLeftToRight 0.5s ease-out',
+        floatRightToLeft: 'floatRightToLeft 0.5s ease-out',
         fadeIn: 'fadeIn 0.5s ease-out',
         fadeOut: 'fadeOut 0.5s ease-out',
       },
