@@ -4,40 +4,33 @@ import { useTransition, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useSearchParams } from 'next/navigation';
-import { LoginSchema } from '@/schemas';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '../button';
-import Link from 'next/link';
+import { ResetSchema } from '@/schemas';
 import { CardWrapper } from '@/components/ui/auth/card-wrapper';
 import { FormSuccess } from '../../form-success';
 import { FormError } from '../../form-error';
-import { login } from '@/actions/login';
+import { reset } from '@/actions/reset';
 
-export const LoginForm = () => {
-  const searchParams = useSearchParams();
-  const urlError =
-    searchParams.get('error') === 'OAuthAccountNotLinked' ? 'Email already in use with different provider!' : '';
+export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
 
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof ResetSchema>>({
+    resolver: zodResolver(ResetSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof ResetSchema>) => {
     setError('');
     setSuccess('');
 
     startTransition(() => {
-      //Server actions from actions/login
-      login(values).then((data) => {
+      reset(values).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });
@@ -45,12 +38,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Unlock the power of words"
-      backButtonLabel="Don't have an account?"
-      backButtonHref="/auth/sign-up"
-      showSocial
-    >
+    <CardWrapper headerLabel="Forgot your password?" backButtonLabel="Back to login" backButtonHref="/auth/sign-in">
       <Form {...form}>
         <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-4">
@@ -67,27 +55,11 @@ export const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="********" type="password" disabled={isPending} />
-                  </FormControl>
-                  <Button size="sm" variant="link" asChild className="px-0 font-normal float-right">
-                    <Link href="/auth/reset">Forgot password?</Link>
-                  </Button>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </div>
           <FormSuccess message={success} />
-          <FormError message={error || urlError} />
+          <FormError message={error} />
           <Button type="submit" className="w-full" disabled={isPending}>
-            Login
+            Reset your password
           </Button>
         </form>
       </Form>
