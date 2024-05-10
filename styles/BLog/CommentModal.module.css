@@ -28,12 +28,22 @@
 }
 
 .write-comment {
-  @apply flex flex-row items-center gap-4;
+  @apply flex flex-row gap-4;
   @apply my-12;
 }
 
 .pseudoInput {
   @apply w-full text-gray-400 border-b hover:cursor-text;
+}
+
+.form-button {
+  @apply flex items-center gap-4;
+  @apply mt-4;
+}
+
+.submit-button {
+  @apply rounded-full bg-orange-300 hover:bg-orange-400 active:bg-orange-500;
+  @apply px-4 py-2 text-white font-semibold;
 }
 
 .comments {

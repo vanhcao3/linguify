@@ -7,10 +7,11 @@ import styles from '@/styles/Blog/CreateBlog.module.css';
 interface IProps {
   value: string;
   onChange: (value: string) => void;
+  height?: number;
 }
 
 function Editor(props: IProps, ref: React.ForwardedRef<any>) {
-  const { value, onChange } = props;
+  const { value, onChange, height } = props;
 
   const modules = {
     toolbar: [
@@ -36,7 +37,7 @@ function Editor(props: IProps, ref: React.ForwardedRef<any>) {
     'image',
   ];
   return (
-    <div>
+    <div className={`h-[${height}px]`}>
       <ReactQuill
         ref={ref}
         theme="snow"

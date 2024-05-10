@@ -35,8 +35,9 @@
   @apply text-red-500 text-xs;
 }
 
-.editer {
+.editor {
   @apply flex flex-col gap-3;
+  @apply h-full;
 }
 
 .editor div:nth-child(1) {
@@ -45,9 +46,9 @@
 
 .editor div:nth-child(2) {
   @apply border-2 border-dashed;
-  @apply mt-2 rounded-lg;
+  @apply w-full mt-2 rounded-lg;
 }
 
 .editor div:nth-child(2) > div {
-  @apply min-h-[500px];
+  @apply h-full;
 }

@@ -1,7 +1,10 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import styles from '@/styles/BLog/CommentModal.module.css';
 import CommentItem from './CommentItem';
+import Editor from '../Editor';
 
 const currentUser = {
   name: 'Hoàng Thế Anh',
@@ -48,6 +51,19 @@ interface IProps {
 
 function CommentModal(props: IProps) {
   const { closeModal } = props;
+  const [showEditor, setShowEditor] = useState(false);
+  const { register, setValue, handleSubmit, watch } = useForm();
+
+  const handleEditorChange = (value: string) => {
+    setValue('commentContent', value);
+  };
+
+  const commentContent = watch('commentContent');
+
+  useEffect(() => {
+    register('commentContent', { required: true });
+  }, [register]);
+
   return (
     <div className={styles['wrapper']} onClick={closeModal}>
       <div className={styles['content']} onClick={(e) => e.stopPropagation()}>
@@ -59,10 +75,30 @@ function CommentModal(props: IProps) {
           <div className={styles['help']}>(Nếu thấy bình luận spam, các bạn bấm report giúp admin nhé)</div>
         </div>
         <div className={styles['write-comment']}>
-          <div className="rounded-full overflow-hidden">
+          <div className="rounded-full overflow-hidden h-max w-max">
             <Image src={currentUser.avatar} alt="" width={40} height={40} />
           </div>
-          <div className={styles['pseudoInput']}>Viết bình luận của bạn...</div>
+          {!showEditor ? (
+            <div className={styles['pseudoInput']} onClick={() => setShowEditor(true)}>
+              Viết bình luận của bạn...
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit((data) => {
+                console.log(data);
+              })}
+            >
+              <Editor ref={null} value={commentContent} onChange={handleEditorChange} height={100} />
+              <div className={styles['form-button']}>
+                <button type="button" onClick={() => setShowEditor(false)}>
+                  Huỷ
+                </button>
+                <button type="submit" className={styles['submit-button']}>
+                  Bình luận
+                </button>
+              </div>
+            </form>
+          )}
         </div>
         <div className={styles['comments']}>
           {pseudoComments.map((comment, index) => (

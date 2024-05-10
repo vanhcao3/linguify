@@ -83,7 +83,7 @@ function CreateBlog() {
           </div>
           <button className={styles['submit-button']}>Xuất bản</button>
         </div>
-        <Editor ref={contentRef} value={contentValue} onChange={handeEditorChange} />
+        <Editor ref={contentRef} value={contentValue} onChange={handeEditorChange} height={500} />
       </form>
     </div>
   );
