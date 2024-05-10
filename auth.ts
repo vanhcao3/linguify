@@ -5,6 +5,7 @@ import authConfig from './auth.config';
 import { getUserById } from './data/user';
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation';
 import { UserRole } from '@prisma/client';
+import { DEFAULT_LOGIN_REDIRECT } from './routes';
 
 declare module '@auth/core' {
   interface Session {
@@ -48,7 +49,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return true;
     },
     async session({ session, user, token }) {
-      console.log({ sessionToken: token });
+      //console.log({ sessionToken: token });
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
