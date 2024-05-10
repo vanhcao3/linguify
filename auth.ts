@@ -3,7 +3,9 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import { db } from './lib/db';
 import authConfig from './auth.config';
 import { getUserById } from './data/user';
+import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation';
 import { UserRole } from '@prisma/client';
+import { DEFAULT_LOGIN_REDIRECT } from './routes';
 
 declare module '@auth/core' {
   interface Session {
@@ -33,18 +35,31 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       const existingUser = await getUserById(user.id!);
 
       if (!existingUser?.emailVerified) return false;
-      //TODO: Add two factor check
+
+      if (existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
+
+        if (!twoFactorConfirmation) return false;
+
+        await db.twoFactorConfirmation.delete({
+          where: { id: twoFactorConfirmation.id },
+        });
+      }
 
       return true;
     },
     async session({ session, user, token }) {
-      console.log({ sessionToken: token });
+      //console.log({ sessionToken: token });
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
 
       if (token.role && session.user) {
         session.user.role = token.role as UserRole;
+      }
+
+      if (token.isTwoFactorEnabled && session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as Boolean;
       }
 
       return session;
@@ -56,7 +71,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (!existingUser) return token;
 
       token.role = existingUser.role;
-
+      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
       return token;
     },
   },
