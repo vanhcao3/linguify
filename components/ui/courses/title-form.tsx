@@ -34,7 +34,15 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      //TODO: Create patch API
+      const { title } = values;
+      const { title: existingTitle } = initialData;
+
+      if (title === existingTitle) {
+        toast.error('Please make a change');
+        toggleEdit();
+        return;
+      }
+
       await axios.patch(`/api/courses/${courseId}`, values);
       toast.success('Updated changes');
       toggleEdit();
