@@ -37,7 +37,7 @@
 
 .editor {
   @apply flex flex-col gap-3;
-  @apply h-full;
+  @apply h-full w-[80%];
 }
 
 .editor div:nth-child(1) {
@@ -50,5 +50,5 @@
 }
 
 .editor div:nth-child(2) > div {
-  @apply h-full;
+  @apply h-full max-w-full;
 }

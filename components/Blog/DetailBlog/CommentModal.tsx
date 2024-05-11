@@ -88,7 +88,7 @@ function CommentModal(props: IProps) {
                 console.log(data);
               })}
             >
-              <Editor ref={null} value={commentContent} onChange={handleEditorChange} height={100} />
+              <Editor ref={null} value={commentContent} onChange={handleEditorChange} height={700} />
               <div className={styles['form-button']}>
                 <button type="button" onClick={() => setShowEditor(false)}>
                   Huỷ

@@ -36,8 +36,10 @@ function Editor(props: IProps, ref: React.ForwardedRef<any>) {
     'link',
     'image',
   ];
+  const heightStyle = `h-[${height}px]`;
+
   return (
-    <div className={`h-[${height}px]`}>
+    <div className={heightStyle}>
       <ReactQuill
         ref={ref}
         theme="snow"

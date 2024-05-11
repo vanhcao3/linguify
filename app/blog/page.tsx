@@ -8,6 +8,7 @@ import Pagiantion from '@/components/Blog/Pagination';
 import Header from '@/components/Blog/Header';
 import NoBlog from '@/components/Blog/NoBlog';
 import BlogItem from '@/components/Blog/BlogItem';
+import { getBlogs } from '@/actions/getBlogs';
 
 const pseudoData = [
   {
@@ -109,6 +110,9 @@ function Blog({ searchParams }: { searchParams?: { page?: string } }) {
   page = !page || page < 1 ? 1 : page;
   const perPage = 4;
   // End Pagination
+
+  const data = getBlogs();
+  console.log(data);
 
   return (
     <div className={styles['wrapper']}>

@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex flex-row w-full h-[66px] mx-0 px-1 md:px-7 justify-between items-center z-50;
+  @apply flex flex-row w-full h-[66px] mx-0 px-1 md:px-7 justify-between items-center z-20;
   @apply sticky top-0 left-0;
   @apply bg-slate-100 border-b-[1px];
 }
