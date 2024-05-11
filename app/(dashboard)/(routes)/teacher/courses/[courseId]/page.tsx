@@ -1,12 +1,13 @@
 import { getCourseById } from '@/data/courses';
 import { currentUserId } from '@/lib/auth';
+import { getCategories } from '@/data/categories';
 import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
 import { BookOpenText } from 'lucide-react';
 import { TitleForm } from '@/components/ui/courses/title-form';
 import { DescriptionForm } from '@/components/ui/courses/description-form';
 import { ImageForm } from '@/components/ui/courses/image-form';
-
+import { CategoryForm } from '@/components/ui/courses/category-form';
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const userId = await currentUserId();
 
@@ -15,6 +16,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   }
 
   const course = await getCourseById(params.courseId);
+  const categories = await getCategories();
 
   if (!course) {
     return redirect('/');
@@ -44,6 +46,14 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
           <TitleForm initialData={course} courseId={course.id} />
           <DescriptionForm initialData={course} courseId={course.id} />
           <ImageForm initialData={course} courseId={course.id} />
+          <CategoryForm
+            initialData={course}
+            courseId={course.id}
+            options={categories!.map((category) => ({
+              label: category.name,
+              value: category.id,
+            }))}
+          />
         </div>
       </div>
     </div>
