@@ -17,3 +17,4 @@ export const currentUserId = async () => {
 
   return session?.user?.id;
 };
+
