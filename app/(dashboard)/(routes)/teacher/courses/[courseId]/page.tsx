@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
 import { BookOpenText } from 'lucide-react';
 import { TitleForm } from '@/components/ui/courses/title-form';
+import { DescriptionForm } from '@/components/ui/courses/description-form';
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const userId = await currentUserId();
@@ -41,6 +42,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <h2 className="text-2xl">Customize your course</h2>
           </div>
           <TitleForm initialData={course} courseId={course.id} />
+          <DescriptionForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>
