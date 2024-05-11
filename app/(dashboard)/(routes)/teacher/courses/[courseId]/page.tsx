@@ -1,4 +1,3 @@
-import { db } from '@/lib/db';
 import { getCourseById } from '@/data/courses';
 import { currentUserId } from '@/lib/auth';
 import { redirect } from 'next/navigation';
@@ -6,6 +5,7 @@ import { IconBadge } from '@/components/icon-badge';
 import { BookOpenText } from 'lucide-react';
 import { TitleForm } from '@/components/ui/courses/title-form';
 import { DescriptionForm } from '@/components/ui/courses/description-form';
+import { ImageForm } from '@/components/ui/courses/image-form';
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const userId = await currentUserId();
@@ -43,6 +43,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
           </div>
           <TitleForm initialData={course} courseId={course.id} />
           <DescriptionForm initialData={course} courseId={course.id} />
+          <ImageForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>
