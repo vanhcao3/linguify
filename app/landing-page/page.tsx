@@ -1,12 +1,13 @@
 import { auth, signOut } from '@/auth';
+import { currentUserId } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { LogoutButton } from '@/components/ui/auth/logout-button';
 
 const LandingPage = async () => {
-  const session = await auth();
+  const userId = await currentUserId();
+  console.log(userId);
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>{JSON.stringify(session)}</div>
       <LogoutButton>
         <Button type="submit">Sign out</Button>
       </LogoutButton>

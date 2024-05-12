@@ -5,6 +5,8 @@ import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, publicRoutes, authRoutes } from 
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
+  return;
+
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const path = nextUrl.pathname;
