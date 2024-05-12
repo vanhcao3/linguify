@@ -3,11 +3,13 @@ import { currentUserId } from '@/lib/auth';
 import { getCategories } from '@/data/categories';
 import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
-import { BookOpenText } from 'lucide-react';
+import { BookOpenText, CircleDollarSign, File, ListChecks } from 'lucide-react';
 import { TitleForm } from '@/components/ui/courses/title-form';
 import { DescriptionForm } from '@/components/ui/courses/description-form';
 import { ImageForm } from '@/components/ui/courses/image-form';
 import { CategoryForm } from '@/components/ui/courses/category-form';
+import { PriceForm } from '@/components/ui/courses/price-form';
+import { AttachmentForm } from '@/components/ui/courses/attachment-form';
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const userId = await currentUserId();
 
@@ -54,6 +56,29 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               value: category.id,
             }))}
           />
+        </div>
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={ListChecks} />
+              <h2 className="text-xl">Course chapters</h2>
+            </div>
+            <div>Chapters</div>
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={CircleDollarSign} />
+              <h2 className="text-xl">Sell your course</h2>
+            </div>
+            <PriceForm initialData={course} courseId={course.id} />
+          </div>
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={File} />
+              <h2 className="text-xl">Resources</h2>
+            </div>
+            <AttachmentForm initialData={course} courseId={course.id} />
+          </div>
         </div>
       </div>
     </div>
