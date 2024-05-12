@@ -10,6 +10,7 @@ import { ImageForm } from '@/components/ui/courses/image-form';
 import { CategoryForm } from '@/components/ui/courses/category-form';
 import { PriceForm } from '@/components/ui/courses/price-form';
 import { AttachmentForm } from '@/components/ui/courses/attachment-form';
+import { ChapterForm } from '@/components/ui/courses/chapter-form';
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const userId = await currentUserId();
 
@@ -17,14 +18,21 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     return redirect('/');
   }
 
-  const course = await getCourseById(params.courseId);
+  const course = await getCourseById(params.courseId, userId);
   const categories = await getCategories();
 
   if (!course) {
     return redirect('/');
   }
 
-  const requiredFields = [course.title, course.description, course.imageUrl, course.price, course.categoryId];
+  const requiredFields = [
+    course.title,
+    course.description,
+    course.imageUrl,
+    course.price,
+    course.categoryId,
+    course.chapters.some((chapter) => chapter.isPublished),
+  ];
 
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
@@ -63,7 +71,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <IconBadge icon={ListChecks} />
               <h2 className="text-xl">Course chapters</h2>
             </div>
-            <div>Chapters</div>
+            <ChapterForm initialData={course} courseId={course.id} />
           </div>
           <div>
             <div className="flex items-center gap-x-2">
