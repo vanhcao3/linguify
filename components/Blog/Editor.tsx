@@ -10,7 +10,7 @@ interface IProps {
   height?: number;
 }
 
-function Editor(props: IProps, ref: React.ForwardedRef<any>) {
+function Editor(props: IProps, ref?: React.ForwardedRef<any>) {
   const { value, onChange, height } = props;
 
   const modules = {
@@ -36,10 +36,9 @@ function Editor(props: IProps, ref: React.ForwardedRef<any>) {
     'link',
     'image',
   ];
-  const heightStyle = `h-[${height}px]`;
 
   return (
-    <div className={heightStyle}>
+    <div className="h-max">
       <ReactQuill
         ref={ref}
         theme="snow"
@@ -49,6 +48,7 @@ function Editor(props: IProps, ref: React.ForwardedRef<any>) {
         onChange={onChange}
         placeholder="Nội dung viết ở đây"
         className={styles['editor']}
+        style={{ minHeight: `${height}px` }}
       />
     </div>
   );

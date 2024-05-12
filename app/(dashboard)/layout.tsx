@@ -25,16 +25,26 @@ export default function RootLayout({
   const isNotificationPage = pathName === '/me/notification';
 
   return (
-    <html lang="en">
-      <body className={inter.className + ' ' + styles['wrapper']}>
-        <Header />
-        <div className={styles['body']}>
-          {!isNotificationPage && <Sidebar />}
-          <div className={styles['content']}>{children}</div>
-        </div>
+    // <html lang="en">
+    //   <body className={inter.className + ' ' + styles['wrapper']}>
+    //     <Header />
+    //     <div className={styles['body']}>
+    //       {!isNotificationPage && <Sidebar />}
+    //       <div className={styles['content']}>{children}</div>
+    //     </div>
 
-        <Footer />
-      </body>
-    </html>
+    //     <Footer />
+    //   </body>
+    // </html>
+    <div className={styles['wrapper']}>
+      <Header />
+
+      <div className={styles['body']}>
+        {!isNotificationPage && <Sidebar />}
+        <div className={styles['content']}>{children}</div>
+      </div>
+
+      <Footer />
+    </div>
   );
 }

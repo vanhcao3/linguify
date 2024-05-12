@@ -1,15 +1,15 @@
 import styles from '@/styles/Blog/DetailBlog.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
-import CommentModal from './CommentModal';
+import CommentModal from './CommentModal/CommentModal';
 
-interface IProps {
+interface props {
   name: string;
   avt: string;
+  blogId: string;
 }
 
-function UserInfo(props: IProps) {
-  const { name, avt } = props;
+function UserInfo({ name, avt, blogId }: props) {
   const [commentModal, setCommentModal] = useState(false);
 
   const openCommentModal = () => setCommentModal(true);
@@ -29,7 +29,7 @@ function UserInfo(props: IProps) {
           <Image src="/icons/commentIcon.svg" alt="" width={24} height={24} onClick={openCommentModal} />
         </div>
       </div>
-      {commentModal && <CommentModal closeModal={closeCommentModal} />}
+      {commentModal && <CommentModal closeModal={closeCommentModal} blogId={blogId} />}
     </div>
   );
 }

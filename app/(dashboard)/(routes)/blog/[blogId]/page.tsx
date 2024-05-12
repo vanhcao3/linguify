@@ -27,7 +27,7 @@ function BlogDetail({ params }: { params: { blogId: string } }) {
 
   return (
     <div className={styles['wrapper']}>
-      <UserInfo name={pseudoData.name} avt={pseudoData.avt} />
+      <UserInfo name={pseudoData.name} avt={pseudoData.avt} blogId={params.blogId} />
       <Content title={pseudoData.title} content={pseudoData.content} />
     </div>
   );

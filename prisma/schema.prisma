@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("MONGODB_URI")
+  url      = env("DATABASE_URL")
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
@@ -24,9 +24,10 @@ model User {
   role          UserRole  @default(USER)
   // accounts      Account[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   Blog      Blog[]
+  Comment   Comment[]
 }
 
 // model Account {
@@ -70,10 +71,22 @@ model User {
 // }
 
 model Blog {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   content   String
-  owner     User     @relation(fields: [id], references: [id])
+  owner     User      @relation(fields: [id], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Comment   Comment[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  owner     String   @db.ObjectId
+  blogId    String   @db.ObjectId
+  user      User     @relation(fields: [owner], references: [id])
+  blog      Blog     @relation(fields: [blogId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

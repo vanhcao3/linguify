@@ -5,10 +5,11 @@
 }
 
 .content {
-  @apply flex flex-col;
+  @apply flex flex-col relative;
   @apply w-[95%] md:w-[90%] lg:w-[55%] xl:w-[45%] lg:h-[100vh] px-10 py-6 lg:ml-auto bg-white rounded-2xl lg:rounded-none;
-  @apply overflow-y-auto;
+  /* @apply overflow-y-auto; */
   @apply animate-floatRightToLeft;
+  overflow-y: overlay;
 }
 
 .close-button {
@@ -29,7 +30,7 @@
 
 .write-comment {
   @apply flex flex-row gap-4;
-  @apply my-12;
+  @apply my-12 w-full;
 }
 
 .pseudoInput {

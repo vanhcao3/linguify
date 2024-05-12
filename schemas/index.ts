@@ -54,3 +54,18 @@ export const RegisterSchema = z
       path: ['confirmPassword'],
     },
   );
+
+const stripHtmlTags = (value: string) => {
+  const doc = new DOMParser().parseFromString(value, 'text/html');
+  const content = doc.body.textContent?.trim();
+
+  return content || '';
+};
+
+export const CommentSchema = z.object({
+  owner: z.any(),
+  blogId: z.any(),
+  content: z.string().refine((value) => stripHtmlTags(value).length > 0, {
+    message: 'Comment is required',
+  }),
+});

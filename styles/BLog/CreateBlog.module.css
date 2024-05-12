@@ -37,7 +37,7 @@
 
 .editor {
   @apply flex flex-col gap-3;
-  @apply h-full w-[80%];
+  @apply h-full w-full;
 }
 
 .editor div:nth-child(1) {
@@ -46,7 +46,7 @@
 
 .editor div:nth-child(2) {
   @apply border-2 border-dashed;
-  @apply w-full mt-2 rounded-lg;
+  @apply w-full mt-2 rounded-lg grow;
 }
 
 .editor div:nth-child(2) > div {
