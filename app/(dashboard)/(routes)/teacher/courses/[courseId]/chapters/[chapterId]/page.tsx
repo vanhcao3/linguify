@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { IconBadge } from '@/components/icon-badge';
 import { ChapterTitleForm } from '@/components/ui/chapters/chapter-title-form';
+import { ChapterDescriptionForm } from '@/components/ui/chapters/chapter-description-form';
 
 const ChapterIdPage = async ({
   params,
@@ -33,8 +34,7 @@ const ChapterIdPage = async ({
   ];
 
   const totalFields = requiredFields.length;
-  const completedFields =
-    requiredFields.filter(Boolean).length;
+  const completedFields = requiredFields.filter(Boolean).length;
   const completionText = `(${completedFields}/${totalFields})`;
 
   return (
@@ -69,6 +69,11 @@ const ChapterIdPage = async ({
             </div>
             <div>
               <ChapterTitleForm
+                initialData={chapter}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+              />
+              <ChapterDescriptionForm
                 initialData={chapter}
                 courseId={params.courseId}
                 chapterId={params.chapterId}

@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import * as z from 'zod';
 import axios from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,52 +12,45 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { descriptionFormSchema } from '@/schemas';
 import { Button } from '@/components/ui/button';
-import { formSchema } from '@/schemas';
+import { Editor } from '@/components/editor';
+import { Preview } from '@/components/preview';
 import { Pencil, ClipboardX } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Chapter } from '@prisma/client';
 
-interface ChapterTitleFormProps {
-  initialData: {
-    title: string;
-  };
+interface ChapterDescriptionFormProps {
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
 
-export const ChapterTitleForm = ({
+export const ChapterDescriptionForm = ({
   initialData,
   courseId,
   chapterId,
-}: ChapterTitleFormProps) => {
+}: ChapterDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const toggleEdit = () =>
-    setIsEditing((current) => !current);
+  const toggleEdit = () => setIsEditing((current) => !current);
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+  const form = useForm<z.infer<typeof descriptionFormSchema>>({
+    resolver: zodResolver(descriptionFormSchema),
+    defaultValues: {
+      description: initialData?.description || '',
+    },
   });
 
   const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (
-    values: z.infer<typeof formSchema>,
+    values: z.infer<typeof descriptionFormSchema>,
   ) => {
     try {
-      const { title } = values;
-      const { title: existingTitle } = initialData;
-
-      if (title === existingTitle) {
-        toast.error('Please make a change');
-        toggleEdit();
-        return;
-      }
-
       await axios.patch(
         `/api/courses/${courseId}/chapters/${chapterId}`,
         values,
@@ -73,7 +66,7 @@ export const ChapterTitleForm = ({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Chapter title
+        Chapter description
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>
@@ -83,13 +76,23 @@ export const ChapterTitleForm = ({
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit title
+              Edit description
             </>
           )}
         </Button>
       </div>
       {!isEditing && (
-        <p className="text-sm mt-2">{initialData.title}</p>
+        <div
+          className={cn(
+            'text-sm mt-2',
+            !initialData.description && 'text-slate-500 italic',
+          )}
+        >
+          {!initialData.description && 'No description'}
+          {initialData.description && (
+            <Preview value={initialData.description} />
+          )}
+        </div>
       )}
       {isEditing && (
         <Form {...form}>
@@ -99,15 +102,11 @@ export const ChapterTitleForm = ({
           >
             <FormField
               control={form.control}
-              name="title"
+              name="description"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="e.g. 'Introduction to IELTS Speaking'"
-                      {...field}
-                    />
+                    <Editor {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
