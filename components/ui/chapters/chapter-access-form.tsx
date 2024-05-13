@@ -11,11 +11,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form';
-import { descriptionFormSchema } from '@/schemas';
+import { chapterAccessFormSchema } from '@/schemas';
 import { Button } from '@/components/ui/button';
 import { Editor } from '@/components/editor';
 import { Preview } from '@/components/preview';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Pencil, ClipboardX, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -23,33 +25,33 @@ import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Chapter } from '@prisma/client';
 
-interface ChapterDescriptionFormProps {
+interface ChapterAccessFormProps {
   initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
 
-export const ChapterDescriptionForm = ({
+export const ChapterAccessForm = ({
   initialData,
   courseId,
   chapterId,
-}: ChapterDescriptionFormProps) => {
+}: ChapterAccessFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const toggleEdit = () => setIsEditing((current) => !current);
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof descriptionFormSchema>>({
-    resolver: zodResolver(descriptionFormSchema),
+  const form = useForm<z.infer<typeof chapterAccessFormSchema>>({
+    resolver: zodResolver(chapterAccessFormSchema),
     defaultValues: {
-      description: initialData?.description || '',
+      isFree: !!initialData?.isFree,
     },
   });
 
   const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (
-    values: z.infer<typeof descriptionFormSchema>,
+    values: z.infer<typeof chapterAccessFormSchema>,
   ) => {
     try {
       setIsUpdating(true);
@@ -75,7 +77,7 @@ export const ChapterDescriptionForm = ({
         </div>
       )}
       <div className="font-medium flex items-center justify-between">
-        Chapter description
+        Access control
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>
@@ -85,21 +87,17 @@ export const ChapterDescriptionForm = ({
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit description
+              Edit access
             </>
           )}
         </Button>
       </div>
       {!isEditing && (
-        <div
-          className={cn(
-            'text-sm mt-2',
-            !initialData.description && 'text-slate-500 italic',
-          )}
-        >
-          {!initialData.description && 'No description'}
-          {initialData.description && (
-            <Preview value={initialData.description} />
+        <div className="text-sm mt-2">
+          {initialData.isFree ? (
+            <>This is a free chapter</>
+          ) : (
+            <>This chapter is not free</>
           )}
         </div>
       )}
@@ -111,13 +109,20 @@ export const ChapterDescriptionForm = ({
           >
             <FormField
               control={form.control}
-              name="description"
+              name="isFree"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                   <FormControl>
-                    <Editor {...field} />
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <div className="space-y-1 leading-none">
+                    <FormDescription>
+                      Is this chapter free?
+                    </FormDescription>
+                  </div>
                 </FormItem>
               )}
             />
