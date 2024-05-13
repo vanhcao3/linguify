@@ -87,3 +87,7 @@ export const priceFormSchema = z.object({
 export const attachmentFormSchema = z.object({
   url: z.string().min(1),
 });
+
+export const chapterAccessFormSchema = z.object({
+  isFree: z.boolean().default(false),
+});
