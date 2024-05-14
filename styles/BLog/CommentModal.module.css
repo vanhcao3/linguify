@@ -67,10 +67,18 @@
 
 .item-content {
   @apply flex flex-col gap-2;
-  @apply px-3 py-2 bg-slate-200 rounded-xl;
 }
 
 .item-name {
   @apply font-semibold;
+}
+
+.item-comment {
+  @apply px-3 py-2 bg-slate-200 rounded-lg;
+}
+
+.item-actions {
+  @apply flex flex-row gap-3;
+  @apply text-xs font-semibold text-gray-400;
 }
 /* End of Comment Item */

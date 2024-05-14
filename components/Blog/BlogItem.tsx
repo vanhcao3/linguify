@@ -1,22 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 
 import styles from '@/styles/BLog/Blog.module.css';
+import { useRouter } from 'next/navigation';
 
-interface IProps {
+interface props {
   data: any;
+  owner: any;
 }
 
-function BlogItem(props: IProps) {
-  const { data } = props;
+function BlogItem({ data, owner }: props) {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/blog/${data.id}`);
+  };
 
   return (
     <div className={styles['item-wrapper']}>
       <div className={styles['item-header']}>
         <div className={styles['author']}>
           <div className={styles['author-avatar']}>
-            <Image src={data.avt} width={25} height={25} alt="" />
+            <Image src={owner.image} width={25} height={25} alt="" />
           </div>
-          <div>{data.name}</div>
+          <div className="font-semibold text-base">{owner.name}</div>
         </div>
         <div className={styles['btn-actions']}>
           <div className={styles['bookmark-btn']}>
@@ -29,8 +36,10 @@ function BlogItem(props: IProps) {
       </div>
       <div className={styles['item-body']}>
         <div className={styles['item-info']}>
-          <div className={styles['info-title']}>{data.title}</div>
-          <div className={styles['info-description']}>{data.description}</div>
+          <div className={styles['info-title']} onClick={handleClick}>
+            {data.title}
+          </div>
+          <div className={styles['info-description']} dangerouslySetInnerHTML={{ __html: data.content }}></div>
         </div>
         {data.image && (
           <div className={styles['thumb']}>

@@ -6,30 +6,32 @@ export async function POST(req: Request) {
   try {
     // const userId = await currentUserId();
 
-    const { content, blogId, owner } = await req.json();
+    const { title, content } = await req.json();
 
     // if (!userId) {
     //   return new NextResponse('Unauthorized', { status: 401 });
     // }
 
+    if (!title) {
+      return new NextResponse('Bad Request: Title is missing', { status: 400 });
+    }
+
     if (!content) {
-      return new NextResponse('Bad Request: Comment is missing', { status: 400 });
+      return new NextResponse('Bad Request: Content is missing', { status: 400 });
     }
 
-    if (!blogId) {
-      return new NextResponse('Bad Request: BlogId is missing', { status: 400 });
-    }
-
-    const comment = await db.comment.create({
+    const blog = await db.blog.create({
       data: {
+        title,
         content,
-        owner,
-        blogId,
+        // owner: userId,
+        owner: '6373f508-458d-42e7-9a29-55f69ca35cca',
       },
     });
-    return NextResponse.json(comment);
+
+    return NextResponse.json(blog);
   } catch (error) {
-    console.log('[addComment]', error);
+    console.log('[createNewBlog]', error);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

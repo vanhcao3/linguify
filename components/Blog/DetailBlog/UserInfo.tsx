@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '@/styles/Blog/DetailBlog.module.css';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -7,9 +9,12 @@ interface props {
   name: string;
   avt: string;
   blogId: string;
+  currentUser?: any;
+  comments?: any[];
+  commentsOwner: any[];
 }
 
-function UserInfo({ name, avt, blogId }: props) {
+function UserInfo({ name, avt, blogId, currentUser, comments, commentsOwner }: props) {
   const [commentModal, setCommentModal] = useState(false);
 
   const openCommentModal = () => setCommentModal(true);
@@ -29,7 +34,15 @@ function UserInfo({ name, avt, blogId }: props) {
           <Image src="/icons/commentIcon.svg" alt="" width={24} height={24} onClick={openCommentModal} />
         </div>
       </div>
-      {commentModal && <CommentModal closeModal={closeCommentModal} blogId={blogId} />}
+      {commentModal && (
+        <CommentModal
+          closeModal={closeCommentModal}
+          blogId={blogId}
+          currentUser={currentUser}
+          comments={comments}
+          commentsOwner={commentsOwner}
+        />
+      )}
     </div>
   );
 }

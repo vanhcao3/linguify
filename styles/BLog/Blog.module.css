@@ -53,6 +53,10 @@
   @apply border border-solid border-gray-300;
 }
 
+.author-avatar > img {
+  @apply object-cover w-full h-full;
+}
+
 .btn-actions {
   @apply flex flex-row items-center gap-2;
 }
@@ -72,7 +76,7 @@
 
 .info-title {
   @apply text-lg font-bold;
-  @apply max-h-[84px] line-clamp-3;
+  @apply max-h-[84px] line-clamp-3 hover:cursor-pointer;
 }
 
 .info-description {

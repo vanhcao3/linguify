@@ -22,13 +22,12 @@
 }
 
 .title {
-  @apply pl-3 py-3;
+  @apply w-full pl-3 py-3;
   @apply text-2xl bg-inherit focus:outline-none focus:bg-slate-200 rounded-lg;
 }
 
-.title:empty:before {
-  content: attr(data-placeholder);
-  @apply text-slate-300 cursor-text;
+.error-title {
+  @apply border-2 border-red-500 border-dashed;
 }
 
 .error-message {
@@ -51,4 +50,8 @@
 
 .editor div:nth-child(2) > div {
   @apply h-full max-w-full;
+}
+
+.error-editor div:nth-child(2) {
+  @apply border-red-500;
 }

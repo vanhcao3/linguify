@@ -1,7 +1,7 @@
 import styles from '@/styles/BLog/CommentModal.module.css';
 
 interface HeadingProps {
-  numComments: number;
+  numComments?: number;
 }
 
 function Heading({ numComments }: HeadingProps) {

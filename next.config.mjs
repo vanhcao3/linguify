@@ -16,6 +16,14 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'p16-sign-sg.tiktokcdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'yt3.ggpht.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'ddragon.leagueoflegends.com',
       },
     ],

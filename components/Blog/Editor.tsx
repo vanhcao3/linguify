@@ -4,15 +4,14 @@ import { forwardRef } from 'react';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
 
-interface IProps {
+interface props {
   value: string;
   onChange: (value: string) => void;
   height?: number;
+  className?: string;
 }
 
-function Editor(props: IProps, ref?: React.ForwardedRef<any>) {
-  const { value, onChange, height } = props;
-
+function Editor({ value, onChange, height, className }: props, ref?: React.ForwardedRef<any>) {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -47,7 +46,7 @@ function Editor(props: IProps, ref?: React.ForwardedRef<any>) {
         value={value}
         onChange={onChange}
         placeholder="Nội dung viết ở đây"
-        className={styles['editor']}
+        className={`${styles['editor']} ${className}`}
         style={{ minHeight: `${height}px` }}
       />
     </div>

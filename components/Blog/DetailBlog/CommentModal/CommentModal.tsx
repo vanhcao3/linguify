@@ -4,7 +4,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import axios from 'axios';
-// import { ObjectId } from 'mongodb';
 // import toast from 'react-hot-toast';
 
 import styles from '@/styles/BLog/CommentModal.module.css';
@@ -13,60 +12,23 @@ import Editor from '../../Editor';
 import Heading from './Heading';
 import CloseButton from './CloseButton';
 import { CommentSchema } from '@/schemas';
-
-const currentUser = {
-  _id: '663b004185120856d291dc85',
-  name: 'Hoàng Thế Anh',
-  nickname: '@theanhhoang',
-  avatar: 'https://avatars.githubusercontent.com/u/139200791?s=400&u=15cb9dcb2b47f557ff086155571e3f645f734f0b&v=4',
-};
-
-const pseudoComments = [
-  {
-    name: 'TikTok China',
-    avatar: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Teemo_0.jpg',
-    content: '<p>hay quá ạ!!!</p>',
-  },
-  {
-    name: 'Zoe',
-    avatar: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zoe_0.jpg',
-    content: '<p>Hello, my name is Zoe!!</p>',
-  },
-  {
-    name: 'Amumu',
-    avatar: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Amumu_0.jpg',
-    content: '<p>Hey, come back ):</p>',
-  },
-  {
-    name: 'Ahri',
-    avatar: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg',
-    content: '<p>hmmm</p>',
-  },
-  {
-    name: 'EVELYNN',
-    avatar: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Evelynn_0.jpg',
-    content: '<p>so biggg!!!</p>',
-  },
-  {
-    name: 'Captain Teemo',
-    avatar: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Teemo_47.jpg',
-    content: '<p>:D</p>',
-  },
-];
+import { useRouter } from 'next/navigation';
 
 interface props {
   closeModal: () => void;
   blogId: string;
+  currentUser: any;
+  comments?: any[];
+  commentsOwner: any[];
 }
 
-function CommentModal({ closeModal, blogId }: props) {
+function CommentModal({ closeModal, blogId, currentUser, comments, commentsOwner }: props) {
+  const route = useRouter();
   const [showEditor, setShowEditor] = useState(false);
   const form = useForm<z.infer<typeof CommentSchema>>({
     resolver: zodResolver(CommentSchema),
     defaultValues: {
-      // owner: new ObjectId(currentUser._id),
-      // blogId: new ObjectId(blogId),
-      owner: currentUser._id,
+      owner: currentUser.id,
       blogId: blogId,
       content: '',
     },
@@ -76,10 +38,12 @@ function CommentModal({ closeModal, blogId }: props) {
     try {
       console.log(data);
 
-      const response = await axios.post('/api/blog/addComment', data);
+      const response = await axios.post(`/api/blog/${blogId}/addComment`, data);
       console.log(response);
       console.log('Bình luận thành công');
       // toast.success('Bình luận thành công');
+      setShowEditor(false);
+      route.refresh();
     } catch (err) {
       console.log('[CommentModal]', err);
 
@@ -93,11 +57,11 @@ function CommentModal({ closeModal, blogId }: props) {
       <div className={styles['content']} onClick={(e) => e.stopPropagation()}>
         <CloseButton onClick={closeModal} />
 
-        <Heading numComments={pseudoComments.length} />
+        <Heading numComments={comments?.length} />
 
         <div className={styles['write-comment']}>
           <div className="rounded-full overflow-hidden h-max w-max shrink-0">
-            <Image src={currentUser.avatar} alt="" width={40} height={40} />
+            <Image src={currentUser.image} alt="" width={40} height={40} />
           </div>
           {!showEditor ? (
             <div className={styles['pseudoInput']} onClick={() => setShowEditor(true)}>
@@ -125,8 +89,14 @@ function CommentModal({ closeModal, blogId }: props) {
         </div>
 
         <div className={styles['comments']}>
-          {pseudoComments.map((comment, index) => (
-            <CommentItem key={index} data={comment} />
+          {comments?.map((comment, index) => (
+            <CommentItem
+              key={index}
+              content={comment.content}
+              commentOwner={commentsOwner[index]}
+              createdAt={comment.createdAt}
+              updatedAt={comment.updatedAt}
+            />
           ))}
         </div>
       </div>
