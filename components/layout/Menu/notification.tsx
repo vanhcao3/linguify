@@ -5,8 +5,8 @@ import styles from '@/styles/layout/menu.module.css';
 import { useRouter } from 'next/navigation';
 
 interface IProps {
-  title: string | null;
-  btnTitle: string | null;
+  title?: string;
+  btnTitle?: string;
   items: Array<any>;
   href?: string;
 }
@@ -21,7 +21,10 @@ function Notification(props: IProps) {
       <div className={styles['body']}>
         {items.map((item, index) => {
           return (
-            <div className={styles['notification-wrapper']} key={index}>
+            <div
+              className={styles['notification-wrapper']}
+              key={index}
+            >
               <div className={styles['notification-image']}>
                 <Image
                   src={item.image}
@@ -34,13 +37,18 @@ function Notification(props: IProps) {
               </div>
               <div className={styles['notification-body']}>
                 <div>{item.content}</div>
-                <div className={styles['createdTime']}>{item.createdTime}</div>
+                <div className={styles['createdTime']}>
+                  {item.createdTime}
+                </div>
               </div>
             </div>
           );
         })}
       </div>
-      <div className={styles['view-all-noti']} onClick={() => router.push('/me/notification')}>
+      <div
+        className={styles['view-all-noti']}
+        onClick={() => router.push('/me/notification')}
+      >
         Xem tất cả thông báo
       </div>
     </div>

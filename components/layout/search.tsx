@@ -3,30 +3,14 @@
 import Image from 'next/image';
 import axios from 'axios';
 import useSWR from 'swr';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useDebounce } from '@/hooks/useDebounce';
 import HeadlessTippy from '@tippyjs/react/headless';
 
 import styles from '@/styles/layout/header.search.module.css';
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-
-// Delay searchValue when typing
-function useDebounce(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
-
-  return debouncedValue;
-}
+const fetcher = (url: string) =>
+  axios.get(url).then((res) => res.data);
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
@@ -45,7 +29,11 @@ function Search() {
   const debounced = useDebounce(searchValue, 800);
 
   const { data, error, isLoading } = useSWR(
-    debounced === '' ? null : `http://localhost:8080/courses?q=${encodeURIComponent(debounced)}`,
+    debounced === ''
+      ? null
+      : `http://localhost:8080/courses?q=${encodeURIComponent(
+          debounced,
+        )}`,
 
     fetcher,
     {
@@ -59,13 +47,25 @@ function Search() {
     <div className={styles['tooltip-wrapper']} tabIndex={-1}>
       {isLoading ? (
         <div className={styles['heading']}>
-          <Image src="/icons/loadingIcon.svg" alt="" width={16} height={16} className={styles['loading-icon']} />
+          <Image
+            src="/icons/loadingIcon.svg"
+            alt=""
+            width={16}
+            height={16}
+            className={styles['loading-icon']}
+          />
           &nbsp;Tìm &apos;{searchValue}&apos;
         </div>
       ) : (
         <div className={styles['heading']}>
-          <Image src="/icons/searchIcon.svg" alt="" width={16} height={16} />
-          &nbsp;&nbsp;&nbsp;Kết quả tìm kiếm cho &apos;{searchValue}&apos;
+          <Image
+            src="/icons/searchIcon.svg"
+            alt=""
+            width={16}
+            height={16}
+          />
+          &nbsp;&nbsp;&nbsp;Kết quả tìm kiếm cho &apos;{searchValue}
+          &apos;
         </div>
       )}
       {data?.length > 0 && (
@@ -74,9 +74,17 @@ function Search() {
           <hr className={styles['hrTag']} />
           <div className={styles['content-wrapper']}>
             {data?.map((course: any) => (
-              <div key={course._id} className={styles['item-wrapper']}>
+              <div
+                key={course._id}
+                className={styles['item-wrapper']}
+              >
                 <div className={styles['item-image']}>
-                  <Image src={course.thumbnail} alt="" width={33} height={33} />
+                  <Image
+                    src={course.thumbnail}
+                    alt=""
+                    width={33}
+                    height={33}
+                  />
                 </div>
                 {course.title}
               </div>
@@ -97,7 +105,12 @@ function Search() {
     >
       <div className={styles['search']}>
         <button className={styles['search-icon']}>
-          <Image src="/icons/searchIcon.svg" width={30} height={32} alt="search" />
+          <Image
+            src="/icons/searchIcon.svg"
+            width={30}
+            height={32}
+            alt="search"
+          />
         </button>
         <input
           ref={inputRef}
@@ -128,7 +141,13 @@ function Search() {
         )}
 
         {isLoading && (
-          <Image src="/icons/loadingIcon.svg" alt="" width={16} height={16} className={styles['loading-icon']} />
+          <Image
+            src="/icons/loadingIcon.svg"
+            alt=""
+            width={16}
+            height={16}
+            className={styles['loading-icon']}
+          />
         )}
       </div>
     </HeadlessTippy>

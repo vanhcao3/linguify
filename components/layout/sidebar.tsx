@@ -44,7 +44,7 @@ const MENU_BTN = [
 
 function Sidebar() {
   const pathName = usePathname();
-
+  if (pathName === '/me/notification') return null;
   return (
     <div className={styles['wrapper']}>
       <div className={styles['menu']}>
@@ -56,11 +56,18 @@ function Sidebar() {
               <Link
                 key={index}
                 href={data.href}
-                className={`${styles['btn-wrapper']} ${styles[data.type]} ${isActive ? styles['active'] : ''}`}
+                className={`${styles['btn-wrapper']} ${
+                  styles[data.type]
+                } ${isActive ? styles['active'] : ''}`}
               >
                 {data.topIcon && (
                   <div className={styles['icon']}>
-                    <Image src={data.topIcon} width={25} height={25} alt={data.title} />
+                    <Image
+                      src={data.topIcon}
+                      width={25}
+                      height={25}
+                      alt={data.title}
+                    />
                   </div>
                 )}
                 {data.title}
@@ -71,11 +78,27 @@ function Sidebar() {
           const items = data.items || [];
 
           return (
-            <button key={index} className={`${styles['btn-wrapper']} ${styles[data.type]}`}>
+            <button
+              key={index}
+              className={`${styles['btn-wrapper']} ${
+                styles[data.type]
+              }`}
+            >
               {data.topIcon && (
-                <Menu title={null} btnTitle={null} type="sidebarMenu" userInfo={null} items={items}>
+                <Menu
+                  title={null}
+                  btnTitle={null}
+                  type="sidebarMenu"
+                  userInfo={null}
+                  items={items}
+                >
                   <span tabIndex={0} className={styles['inner-icon']}>
-                    <Image src={data.topIcon} width={25} height={25} alt={data.title || ''} />
+                    <Image
+                      src={data.topIcon}
+                      width={25}
+                      height={25}
+                      alt={data.title || ''}
+                    />
                   </span>
                 </Menu>
               )}

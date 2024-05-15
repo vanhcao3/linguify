@@ -4,31 +4,46 @@ import Notification from './notification';
 import Avatar from './avatar';
 import SidebarMenu from './sidebarMenu';
 
-interface IProps {
+interface props {
   children: React.ReactNode;
-  title: string | null;
-  btnTitle: string | null;
+  title?: string;
+  btnTitle?: string;
   type: string;
-  userInfo: object | null;
+  userInfo?: object;
   items: Array<any>;
   href?: string;
 }
 
-function Menu(props: IProps) {
-  const { children, type, title, btnTitle, items, userInfo, href } = props;
-
+function Menu({
+  children,
+  type,
+  title,
+  btnTitle,
+  items,
+  userInfo,
+  href,
+}: props) {
   const renderResult = () => {
     if (type === 'course') {
       return (
         <div>
-          <Course title={title} btnTitle={btnTitle} href={href} items={items} />
+          <Course
+            title={title}
+            btnTitle={btnTitle}
+            href={href}
+            items={items}
+          />
         </div>
       );
     }
     if (type === 'notification') {
       return (
         <div>
-          <Notification title={title} btnTitle={btnTitle} items={items} />
+          <Notification
+            title={title}
+            btnTitle={btnTitle}
+            items={items}
+          />
         </div>
       );
     }

@@ -4,8 +4,8 @@ import Header from './header';
 import styles from '@/styles/layout/menu.module.css';
 
 interface IProps {
-  title: string | null;
-  btnTitle: string | null;
+  title?: string;
+  btnTitle?: string;
   items: Array<any>;
   href?: string;
 }
@@ -20,15 +20,33 @@ function Course(props: IProps) {
           return (
             <div className={styles['course-wrapper']} key={index}>
               <div className={styles['course-image']}>
-                <Image src={item.image} width={120} height={67.5} alt={item.title} />
+                <Image
+                  src={item.image}
+                  width={120}
+                  height={67.5}
+                  alt={item.title}
+                />
               </div>
               <div className={styles['course-detail']}>
-                <div className={styles['course-title']}>{item.title}</div>
-                {item.desc && <div className={styles['course-desc']}>{item.desc}</div>}
-                {item.lastComplete && <div className={styles['lastComplete']}>{item.lastComplete}</div>}
+                <div className={styles['course-title']}>
+                  {item.title}
+                </div>
+                {item.desc && (
+                  <div className={styles['course-desc']}>
+                    {item.desc}
+                  </div>
+                )}
+                {item.lastComplete && (
+                  <div className={styles['lastComplete']}>
+                    {item.lastComplete}
+                  </div>
+                )}
                 {item.progress && (
                   <div className={styles['progressBar']}>
-                    <div className={styles['inProgress']} style={{ width: `${item.progress}%` }}></div>
+                    <div
+                      className={styles['inProgress']}
+                      style={{ width: `${item.progress}%` }}
+                    ></div>
                   </div>
                 )}
               </div>

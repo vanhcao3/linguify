@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   images: {
     remotePatterns: [
-      { 
-        hostname: 'utfs.io'
+      {
+        hostname: 'utfs.io',
       },
       {
         protocol: 'https',
@@ -29,6 +28,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'ddragon.leagueoflegends.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
       },
     ],
   },

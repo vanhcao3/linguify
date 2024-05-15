@@ -37,16 +37,20 @@ const USER_MENU = [
   },
 ];
 
-function UserAvatarButton() {
+interface props {
+  user: any;
+}
+
+function UserAvatarButton({ user }: props) {
   return (
-    <Menu title={null} btnTitle={null} type="avatar" userInfo={userInfo} items={USER_MENU}>
+    <Menu type="avatar" userInfo={user} items={USER_MENU}>
       <div>
         <Image
           className={styles['user-avatar']}
-          src="https://avatars.githubusercontent.com/u/139200791?s=400&u=15cb9dcb2b47f557ff086155571e3f645f734f0b&v=4"
+          src={user.image}
           width={32}
           height={32}
-          alt="Thế Có Tâm"
+          alt={user.name}
         />
       </div>
     </Menu>

@@ -1,7 +1,7 @@
 import styles from '@/styles/Dashboard/home.module.css';
 import Menu from '@/components/Dashboard/Menu';
-import { getCategories } from '@/actions/getCategories';
-import { getCourses } from '@/actions/getCourses';
+import { getCategories } from '@/actions/categories';
+import { getCourses } from '@/actions/courses';
 
 export default async function Home() {
   const categories = await getCategories();

@@ -3,17 +3,23 @@ import Content from '@/components/Blog/DetailBlog/Content';
 import UserInfo from '@/components/Blog/DetailBlog/UserInfo';
 import { getBlogById } from '@/data/blog';
 import { getUserById } from '@/data/user';
-import { getComments } from '@/actions/getComment';
+import { getComments } from '@/actions/comment';
 // import { currentUserId } from '@/lib/auth';
 
 const userId = '9b08c3cc-ce75-4f60-ac90-e36c0473f2c2';
 
-async function BlogDetail({ params }: { params: { blogId: string } }) {
+async function BlogDetail({
+  params,
+}: {
+  params: { blogId: string };
+}) {
   // const userId = await currentUserId();
   const currentUser = await getUserById(userId);
   const currentBlog = await getBlogById(params.blogId);
   const comments = await getComments(params.blogId);
-  const commentsOwner = await Promise.all(comments.map((comment) => getUserById(comment.owner)));
+  const commentsOwner = await Promise.all(
+    comments.map((comment) => getUserById(comment.owner)),
+  );
 
   if (currentBlog === null) {
     return <div>CurrentBlog not found</div>;
@@ -34,7 +40,10 @@ async function BlogDetail({ params }: { params: { blogId: string } }) {
         comments={comments}
         commentsOwner={commentsOwner}
       />
-      <Content title={currentBlog.title} content={currentBlog.content} />
+      <Content
+        title={currentBlog.title}
+        content={currentBlog.content}
+      />
     </div>
   );
 }
