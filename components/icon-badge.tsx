@@ -3,27 +3,30 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const backgroundVariants = cva('rounded-full flex items-center justify-center', {
-  variants: {
-    variant: {
-      default: 'bg-sky-100',
-      success: 'bg-emerald-100',
+const backgroundVariants = cva(
+  'rounded-full flex items-center justify-center',
+  {
+    variants: {
+      variant: {
+        default: 'bg-slate-200',
+        success: 'bg-emerald-100',
+      },
+      size: {
+        default: 'p-2',
+        sm: 'p-1',
+      },
     },
-    size: {
-      default: 'p-2',
-      sm: 'p-1',
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
     },
   },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default',
-  },
-});
+);
 
 const iconVariants = cva('', {
   variants: {
     variant: {
-      default: 'text-sky-700',
+      default: 'text-slate-950',
       success: 'text-emerald-700',
     },
     size: {
@@ -37,14 +40,22 @@ const iconVariants = cva('', {
   },
 });
 
-type BackgroundVariantsProps = VariantProps<typeof backgroundVariants>;
+type BackgroundVariantsProps = VariantProps<
+  typeof backgroundVariants
+>;
 type IconVariantsProps = VariantProps<typeof iconVariants>;
 
-interface IconBadgeProps extends BackgroundVariantsProps, IconVariantsProps {
+interface IconBadgeProps
+  extends BackgroundVariantsProps,
+    IconVariantsProps {
   icon: LucideIcon;
 }
 
-export const IconBadge = ({ icon: Icon, variant, size }: IconBadgeProps) => {
+export const IconBadge = ({
+  icon: Icon,
+  variant,
+  size,
+}: IconBadgeProps) => {
   return (
     <div className={cn(backgroundVariants({ variant, size }))}>
       <Icon className={cn(iconVariants({ variant, size }))} />
