@@ -1,21 +1,26 @@
 'use client';
 
 import Image from 'next/image';
-import axios from 'axios';
-import useSWR from 'swr';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDebounce } from '@/hooks/useDebounce';
 import HeadlessTippy from '@tippyjs/react/headless';
 
 import styles from '@/styles/layout/header.search.module.css';
+import { smallSearch } from '@/actions/search';
+import ViewAllSearchButton from './ViewAllSearchButton';
 
-const fetcher = (url: string) =>
-  axios.get(url).then((res) => res.data);
+interface searchResult {
+  category: string;
+  data: any[];
+}
 
 function Search() {
   const [searchValue, setSearchValue] = useState('');
-  // const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState<searchResult[]>(
+    [],
+  );
   const [showResult, setShowResult] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleHideResult = () => {
@@ -28,20 +33,16 @@ function Search() {
 
   const debounced = useDebounce(searchValue, 800);
 
-  const { data, error, isLoading } = useSWR(
-    debounced === ''
-      ? null
-      : `http://localhost:8080/courses?q=${encodeURIComponent(
-          debounced,
-        )}`,
+  useEffect(() => {
+    const searchData = async () => {
+      setIsLoading(true);
+      const data = await smallSearch(debounced);
+      setSearchResult(data);
+      setIsLoading(false);
+    };
 
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+    searchData();
+  }, [debounced]);
 
   const handleRender = () => (
     <div className={styles['tooltip-wrapper']} tabIndex={-1}>
@@ -68,29 +69,50 @@ function Search() {
           &apos;
         </div>
       )}
-      {data?.length > 0 && (
-        <div>
-          <div className={styles['content-title']}>Khoá học</div>
-          <hr className={styles['hrTag']} />
-          <div className={styles['content-wrapper']}>
-            {data?.map((course: any) => (
-              <div
-                key={course._id}
-                className={styles['item-wrapper']}
-              >
-                <div className={styles['item-image']}>
-                  <Image
-                    src={course.thumbnail}
-                    alt=""
-                    width={33}
-                    height={33}
-                  />
+      {searchResult.length === 0 ? (
+        <div>Không có kết quả cho &apos;{searchValue}&apos;</div>
+      ) : searchResult[0].data.length === 0 &&
+        searchResult[1].data.length === 0 ? (
+        <div>Không có kết quả cho &apos;{searchValue}&apos;</div>
+      ) : (
+        searchResult.map((item, index) => {
+          if (item.data.length === 0) return null;
+          return (
+            <div key={index}>
+              <div className="flex flex-row justify-between items-center">
+                <div className={styles['content-title']}>
+                  {item.category}
                 </div>
-                {course.title}
+                <div>
+                  <ViewAllSearchButton />
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
+              <hr className={styles['hrTag']} />
+              <div className={styles['content-wrapper']}>
+                {item.data.map((subItem: any, index: number) => {
+                  if (subItem.imageUrl === null)
+                    subItem.imageUrl = '/images/no-image.png';
+                  return (
+                    <div
+                      key={index}
+                      className={styles['item-wrapper']}
+                    >
+                      <div className={styles['item-image']}>
+                        <Image
+                          src={subItem.imageUrl}
+                          alt=""
+                          width={33}
+                          height={33}
+                        />
+                      </div>
+                      {subItem.title}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })
       )}
     </div>
   );
@@ -99,7 +121,6 @@ function Search() {
     <HeadlessTippy
       interactive
       visible={showResult && !!searchValue}
-      // visible={true}
       render={handleRender}
       onClickOutside={handleHideResult}
     >
@@ -134,7 +155,7 @@ function Search() {
             className={styles['close-button']}
             onClick={() => {
               setSearchValue('');
-              // setSearchResult([]);
+              setSearchResult([]);
               inputRef?.current?.focus();
             }}
           />
