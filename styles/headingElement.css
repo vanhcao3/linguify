@@ -1,0 +1,35 @@
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  /* Thêm các thuộc tính CSS khác tùy ý */
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  /* Thêm các thuộc tính CSS khác tùy ý */
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  /* Thêm các thuộc tính CSS khác tùy ý */
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* Thêm các thuộc tính CSS khác tùy ý */
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  /* Thêm các thuộc tính CSS khác tùy ý */
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: bold;
+  /* Thêm các thuộc tính CSS khác tùy ý */
+}
