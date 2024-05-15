@@ -3,6 +3,7 @@ import Image from 'next/image';
 import * as z from 'zod';
 import axios from 'axios';
 import { chapterVideoFormSchema } from '@/schemas';
+import MuxPlayer from '@mux/mux-player-react';
 import { Button } from '@/components/ui/button';
 import {
   ClipboardX,
@@ -80,7 +81,9 @@ export const ChapterVideoForm = ({
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            TODO: Video player
+            <MuxPlayer
+              playbackId={initialData?.muxData?.playbackId || ''}
+            />
           </div>
         ))}
       {isEditing && (
