@@ -33,3 +33,10 @@ export function calculateTime(createdAt: Date, updatedAt: Date) {
     return `${days}d`;
   }
 }
+
+export function formatMoney(amount: number): string {
+  const formattedAmount = amount
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return formattedAmount;
+}

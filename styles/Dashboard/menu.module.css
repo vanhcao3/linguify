@@ -1,50 +1,55 @@
 .wrapper {
-    @apply flex flex-col gap-4 lg:gap-6;
+  @apply flex flex-col gap-4 lg:gap-6;
 }
 
 .heading {
-    @apply font-bold text-2xl lg:text-4xl;
+  @apply font-bold text-2xl lg:text-4xl;
 }
 
 .items {
-    @apply flex overflow-x-auto overflow-y-hidden w-[100%]  lg:grid lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-7 pb-3 lg:pb-0;
+  @apply flex overflow-x-auto overflow-y-hidden w-[100%]  lg:grid lg:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-7 pb-3 lg:pb-0;
 }
 
 .item-wrapper {
-    @apply flex flex-col gap-3 w-max lg:w-auto;
+  @apply flex flex-col gap-3 w-max lg:w-auto;
+  @apply p-2 hover:bg-white rounded-xl;
 }
 
 .item-image {
-    @apply flex justify-center items-center bg-slate-300 w-[35vw] lg:w-[100%] aspect-video overflow-hidden rounded-lg relative;
+  @apply flex justify-center items-center bg-slate-300 w-[35vw] lg:w-[100%] aspect-video overflow-hidden rounded-lg relative;
 }
 
 .item-image > img {
-    @apply absolute w-full h-full;
+  @apply absolute w-full h-full;
 }
 
 .item-image > a {
-    @apply absolute w-full h-full;
+  @apply absolute w-full h-full;
 }
 
 .overlay {
-    @apply flex justify-center items-center w-full h-full hover:bg-gray-900 hover:bg-opacity-30 hover:transition-all hover:ease-in-out hover:duration-300;
+  @apply flex justify-center items-center w-full h-full hover:bg-gray-900 hover:bg-opacity-30 hover:transition-all hover:ease-in-out hover:duration-300;
 }
 
 .overlay > button {
-    @apply bg-white rounded-full hidden w-1/2 py-2;
-    /* Css cho hiệu ứng trượt lên - chưa làm được nên note lại */
-    /* @apply transition-transform duration-300 transform translate-y-full; */
+  @apply bg-white rounded-full hidden w-1/2 py-2;
+  /* Css cho hiệu ứng trượt lên - chưa làm được nên note lại */
+  /* @apply transition-transform duration-300 transform translate-y-full; */
 }
 
 .overlay:hover button {
-    @apply block translate-y-0;
-    /* @apply translate-y-0 */
+  @apply block translate-y-0;
+  /* @apply translate-y-0 */
 }
 
 .item-title {
-    @apply font-semibold w-[35vw] lg:w-[100%];
+  @apply font-semibold w-[35vw] lg:w-[100%];
 }
 
 .enrollers {
-    @apply flex flex-row text-sm font-normal gap-2;
+  @apply flex flex-row text-sm font-normal gap-2;
+}
+
+.price {
+  @apply font-semibold text-sm text-red-500;
 }

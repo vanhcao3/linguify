@@ -19,10 +19,19 @@ export const LoginForm = () => {
   const searchParams = useSearchParams();
   const urlError =
     searchParams.get('error') === 'OAuthAccountNotLinked' ? 'Email already in use with different provider!' : '';
+<<<<<<< HEAD
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
 
   const [isPending, startTransition] = useTransition();
+=======
+
+  const [showTwoFactor, setShowTwoFactor] = useState(false);
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
+  const [isPending, startTransition] = useTransition();
+
+>>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -37,10 +46,30 @@ export const LoginForm = () => {
 
     startTransition(() => {
       //Server actions from actions/login
+<<<<<<< HEAD
       login(values).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });
+=======
+      login(values)
+        .then((data) => {
+          if (data?.error) {
+            form.reset();
+            setError(data.error);
+          }
+
+          if (data?.success) {
+            form.reset();
+            setSuccess(data.success);
+          }
+
+          if (data?.twoFactor) {
+            setShowTwoFactor(true);
+          }
+        })
+        .catch(() => setError('Something went wrong!'));
+>>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
     });
   };
 
@@ -54,6 +83,7 @@ export const LoginForm = () => {
       <Form {...form}>
         <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-4">
+<<<<<<< HEAD
             <FormField
               control={form.control}
               name="email"
@@ -83,13 +113,69 @@ export const LoginForm = () => {
                 </FormItem>
               )}
             />
+=======
+            {!showTwoFactor && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="example@email.com" disabled={isPending} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="********" type="password" disabled={isPending} />
+                      </FormControl>
+                      <Button size="sm" variant="link" asChild className="px-0 font-normal float-right">
+                        <Link href="/auth/reset">Forgot password?</Link>
+                      </Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
+            {showTwoFactor && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="code"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Enter Code</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="080603" disabled={isPending} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
+>>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
           </div>
           <div className="clear-both">
             <FormSuccess message={success} />
             <FormError message={error || urlError} />
           </div>
           <Button type="submit" className="w-full" disabled={isPending}>
+<<<<<<< HEAD
             Login
+=======
+            {!showTwoFactor ? 'Login' : 'Confirm'}
+>>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
           </Button>
         </form>
       </Form>

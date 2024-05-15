@@ -6,6 +6,7 @@ const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   return;
+
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const path = nextUrl.pathname;
@@ -19,8 +20,8 @@ export default auth((req) => {
   }
 
   if (isAuthRoute) {
-    if (isLoggedIn && path !== DEFAULT_LOGIN_REDIRECT) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+    if (isLoggedIn && path !== DEFAULT_LOGIN_REDIRECT['USER']) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT['USER'], nextUrl));
     }
     return;
   }
