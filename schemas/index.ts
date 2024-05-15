@@ -91,3 +91,7 @@ export const attachmentFormSchema = z.object({
 export const chapterAccessFormSchema = z.object({
   isFree: z.boolean().default(false),
 });
+
+export const chapterVideoFormSchema = z.object({
+  videoUrl: z.string().min(1),
+});

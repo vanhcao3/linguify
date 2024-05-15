@@ -7,6 +7,7 @@ import { IconBadge } from '@/components/icon-badge';
 import { ChapterTitleForm } from '@/components/ui/chapters/chapter-title-form';
 import { ChapterDescriptionForm } from '@/components/ui/chapters/chapter-description-form';
 import { ChapterAccessForm } from '@/components/ui/chapters/chapter-access-form';
+import { ChapterVideoForm } from '@/components/ui/chapters/chapter-video-form';
 
 const ChapterIdPage = async ({
   params,
@@ -98,6 +99,11 @@ const ChapterIdPage = async ({
             <IconBadge icon={Video} />
             <h2 className="text">Add a video</h2>
           </div>
+          <ChapterVideoForm
+            initialData={chapter}
+            chapterId={params.chapterId}
+            courseId={params.courseId}
+          />
         </div>
       </div>
     </div>
