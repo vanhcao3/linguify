@@ -3,7 +3,10 @@ import { db } from '@/lib/db';
 import Mux from '@mux/mux-node';
 import { currentUserId } from '@/lib/auth';
 import { getCourseById } from '@/data/courses';
-import { getChapterById } from '@/data/chapter';
+import {
+  getChapterById,
+  getPublishedChaptersInCourse,
+} from '@/data/chapter';
 import { getMuxDataByChapterId } from '@/data/mux-data';
 
 const { video } = new Mux({
@@ -61,14 +64,10 @@ export async function DELETE(
       },
     });
 
-    const publishedChaptersinCourse = await db.chapter.findMany({
-      where: {
-        courseId: params.courseId,
-        isPublished: true,
-      },
-    });
+    const publishedChaptersInCourse =
+      await getPublishedChaptersInCourse(params.courseId);
 
-    if (!publishedChaptersinCourse.length) {
+    if (!publishedChaptersInCourse?.length) {
       await db.course.update({
         where: {
           id: params.courseId,
