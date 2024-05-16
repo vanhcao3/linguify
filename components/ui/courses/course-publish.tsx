@@ -3,11 +3,11 @@
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import { ConfirmModal } from '@/components/modals/confirm-modal';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
+import { useConfettiStore } from '@/hooks/use-confetti-store';
 interface CoursePublishProps {
   disabled: boolean;
   courseId: string;
@@ -20,6 +20,7 @@ export const CoursePublish = ({
   isPublished,
 }: CoursePublishProps) => {
   const router = useRouter();
+  const confetti = useConfettiStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const onClick = async () => {
@@ -30,7 +31,9 @@ export const CoursePublish = ({
         toast.success('Course unpublished');
       } else {
         await axios.patch(`/api/courses/${courseId}/publish`);
+
         toast.success('Course published');
+        confetti.onOpen();
       }
 
       router.refresh();
