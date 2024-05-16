@@ -2,7 +2,14 @@ import { currentUserId } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { getChapterById } from '@/data/chapter';
 import Link from 'next/link';
-import { ArrowLeft, Eye, LayoutDashboard, Video } from 'lucide-react';
+import {
+  AlertCircle,
+  ArrowLeft,
+  CheckCircleIcon,
+  Eye,
+  LayoutDashboard,
+  Video,
+} from 'lucide-react';
 import { IconBadge } from '@/components/icon-badge';
 import { Banner } from '@/components/course-banner';
 import { ChapterTitleForm } from '@/components/ui/chapters/chapter-title-form';
@@ -10,6 +17,7 @@ import { ChapterDescriptionForm } from '@/components/ui/chapters/chapter-descrip
 import { ChapterAccessForm } from '@/components/ui/chapters/chapter-access-form';
 import { ChapterVideoForm } from '@/components/ui/chapters/chapter-video-form';
 import { ChapterPublish } from '@/components/ui/chapters/chapter-publish';
+import { cn } from '@/lib/utils';
 
 const ChapterIdPage = async ({
   params,
@@ -69,8 +77,18 @@ const ChapterIdPage = async ({
                 <h1 className="text-2xl font-medium">
                   Chapter Creation
                 </h1>
-                <span className="text-s text-slate-500">
+                <span
+                  className={cn(
+                    'flex items-center text-sm text-slate-700 px-2 py-3 border border-slate-200 bg-slate-100 hover:bg-slate-300 rounded-lg transition font-semibold',
+                    completedFields === totalFields && 'bg-green-400',
+                  )}
+                >
                   Complete all fields {completionText}
+                  {completedFields === totalFields ? (
+                    <CheckCircleIcon className="w-4 h-4 ml-2" />
+                  ) : (
+                    <AlertCircle className="w-4 h-4 ml-2" />
+                  )}
                 </span>
               </div>
               <ChapterPublish
