@@ -3,8 +3,10 @@ import { currentUserId } from '@/lib/auth';
 import { getCategories } from '@/data/categories';
 import { redirect } from 'next/navigation';
 import { IconBadge } from '@/components/icon-badge';
+import Link from 'next/link';
 import {
   AlertCircle,
+  ArrowLeft,
   BookOpenText,
   CheckCheckIcon,
   CircleDollarSign,
@@ -69,6 +71,13 @@ const CourseIdPage = async ({
         />
       )}
       <div className="p-6">
+        <Link
+          href={`/teacher/courses`}
+          className="flex items-center text-sm hover:opacity-75 transition mb-6"
+        >
+          <ArrowLeft className="h-4 m-4 mr-2" />
+          Back to course list
+        </Link>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
             <h1 className="text-2xl font-medium">Adding a course</h1>

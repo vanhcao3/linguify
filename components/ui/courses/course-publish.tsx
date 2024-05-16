@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import { ConfirmModal } from '@/components/modals/confirm-modal';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
