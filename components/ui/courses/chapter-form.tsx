@@ -150,7 +150,11 @@ export const ChapterForm = ({
       )}
       {!isCreating && (
         <div className="text-xs  text-muted-foreground mt-4">
-          *You can reorder the chapters
+          <p>*You can reorder by dragging the chapters</p>
+          <p>
+            *You must have at least 1 published chapter before
+            publishing the course
+          </p>
         </div>
       )}
     </div>
