@@ -43,10 +43,15 @@ const ChapterIdPage = async ({
   const isCompleted = requiredFields.every(Boolean);
   return (
     <>
-      {!chapter.isPublished && (
+      {!chapter.isPublished ? (
         <Banner
           variant="warning"
-          label="This chapter is a draft. It will not appear in the chapter list"
+          label="This chapter is a draft. It has not been available to the audience yet"
+        />
+      ) : (
+        <Banner
+          variant="success"
+          label="This chapter has been published. It is now available to the audience"
         />
       )}
       <div className="p-6">
