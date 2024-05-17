@@ -6,27 +6,20 @@ import Image from 'next/image';
 
 import styles from '@/styles/layout/sidebar.module.css';
 import Menu from './Menu/menu';
+import { BarChart, List } from 'lucide-react';
 
-const MENU_BTN = [
-  {
-    topIcon: '/icons/plusIcon.svg',
-    type: 'round',
-    items: [
-      {
-        title: 'Viết blog',
-        href: '/blog/create',
-      },
-      {
-        title: 'Tạo khoá học',
-        href: '/courses/create',
-      },
-    ],
-  },
+const STUDENT_ROUTES = [
   {
     title: 'Trang chủ',
     topIcon: '/icons/homeIcon.svg',
     type: 'square',
     href: '/',
+  },
+  {
+    title: 'Browse',
+    topIcon: '/icons/compassIcon.svg',
+    type: 'square',
+    href: '/search',
   },
   {
     title: 'Lộ trình',
@@ -42,25 +35,49 @@ const MENU_BTN = [
   },
 ];
 
+const TEACHER_ROUTES = [
+  {
+    title: 'Courses',
+    topIcon: '/icons/listIcon.svg',
+    type: 'square',
+    href: '/teacher/courses',
+  },
+  {
+    title: 'Analytics',
+    topIcon: '/icons/analyticsIcon.svg',
+    type: 'square',
+    href: '/teacher/analytics',
+  },
+];
+
 function Sidebar() {
-  const pathName = usePathname();
+  const pathname = usePathname();
+  const isTeacherPage = pathname?.includes('/teacher');
+  const routes = isTeacherPage ? TEACHER_ROUTES : STUDENT_ROUTES;
 
   return (
     <div className={styles['wrapper']}>
       <div className={styles['menu']}>
-        {MENU_BTN.map((data, index) => {
+        {routes.map((data, index) => {
           if (data.href) {
-            const isActive = pathName === data.href;
+            const isActive = pathname === data.href;
 
             return (
               <Link
                 key={index}
                 href={data.href}
-                className={`${styles['btn-wrapper']} ${styles[data.type]} ${isActive ? styles['active'] : ''}`}
+                className={`${styles['btn-wrapper']} ${
+                  styles[data.type]
+                } ${isActive ? styles['active'] : ''}`}
               >
                 {data.topIcon && (
                   <div className={styles['icon']}>
-                    <Image src={data.topIcon} width={25} height={25} alt={data.title} />
+                    <Image
+                      src={data.topIcon}
+                      width={25}
+                      height={25}
+                      alt={data.title}
+                    />
                   </div>
                 )}
                 {data.title}
@@ -68,20 +85,20 @@ function Sidebar() {
             );
           }
 
-          const items = data.items || [];
+          //const items = data.items || [];
 
-          return (
-            <button key={index} className={`${styles['btn-wrapper']} ${styles[data.type]}`}>
-              {data.topIcon && (
-                <Menu title={null} btnTitle={null} type="sidebarMenu" userInfo={null} items={items}>
-                  <span tabIndex={0} className={styles['inner-icon']}>
-                    <Image src={data.topIcon} width={25} height={25} alt={data.title || ''} />
-                  </span>
-                </Menu>
-              )}
-              {data.title}
-            </button>
-          );
+          // return (
+          //   <button key={index} className={`${styles['btn-wrapper']} ${styles[data.type]}`}>
+          //     {data.topIcon && (
+          //       <Menu title={null} btnTitle={null} type="sidebarMenu" userInfo={null} items={items}>
+          //         <span tabIndex={0} className={styles['inner-icon']}>
+          //           <Image src={data.topIcon} width={25} height={25} alt={data.title || ''} />
+          //         </span>
+          //       </Menu>
+          //     )}
+          //     {data.title}
+          //   </button>
+          // );
         })}
       </div>
     </div>

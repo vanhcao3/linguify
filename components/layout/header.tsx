@@ -3,16 +3,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Fragment, Suspense } from 'react';
-import useSWR from 'swr';
-import axios from 'axios';
+
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { Button } from '../ui/button';
 
 import styles from '@/styles/layout/header.module.css';
 import { SearchInput } from './search-input';
 import Menu from './Menu/menu';
 import HeaderModal from '@/components/layout/Modal/headerModal';
 import GoBackButton from '../GoBackButton';
+import { useRouter } from 'next/navigation';
 
 const pseudoMyCourse = [
   {
@@ -99,6 +100,10 @@ function Header() {
   const isNotificationPage = pathName === '/me/notification';
   const isSearchPage = pathName === '/search';
 
+  const isTeacherPage = pathName?.startsWith('/teacher');
+  const isStudentPage = pathName?.startsWith('chapter');
+  const router = useRouter();
+
   const [headerModal, setHeaderModal] = useState(false);
 
   // const fetcher = (url: string) => axios.get(url).then((res) => res.data);
@@ -171,25 +176,18 @@ function Header() {
             </button>
 
             {/* myCourses btn */}
-            {isMyCoursePage ? (
-              <div className={styles['myCourses-active']}>
-                Khoá học của tôi
-              </div>
+            {isTeacherPage || isStudentPage ? (
+              <Link href="/">
+                <Button size="sm" variant="outline">
+                  Exit teacher mode
+                </Button>
+              </Link>
             ) : (
-              <Menu
-                title="Khoá học của tôi"
-                btnTitle="Xem tất cả"
-                href="/me/myCourses"
-                type="course"
-                items={pseudoMyCourse}
-                userInfo={null}
-              >
-                <div>
-                  <button className="font-semibold">
-                    Khoá học của tôi
-                  </button>
-                </div>
-              </Menu>
+              <Link href="/teacher/courses">
+                <Button size="sm" variant="outline">
+                  Teacher mode
+                </Button>
+              </Link>
             )}
 
             {/* Notification btn  */}
