@@ -1,0 +1,8 @@
+.wrapper {
+    @apply flex flex-col pl-5 lg:pr-10 pt-3 w-[100%];
+}
+
+.content {
+    @apply flex flex-col gap-10;
+    @apply pl-4 mt-[70px] pb-[74px] lg:px-11 max-w-[100vw];
+}

@@ -119,6 +119,9 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  Blog      Blog[]
+  Comment   Comment[]
 }
 model Account {
   id                String      @id @default(cuid())
@@ -174,4 +177,26 @@ model TwoFactorConfirmation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Blog {
+  id        String    @id @default(uuid()) @map("_id")
+  title     String
+  content   String
+  owner     String
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [owner], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(uuid()) @map("_id")
+  content   String
+  owner     String
+  blogId    String
+  user      User     @relation(fields: [owner], references: [id])
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
