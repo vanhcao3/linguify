@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import styles from '@/styles/layout/header.module.css';
-import Search from './search';
+import {SearchInput} from './search-input';
 import Menu from './Menu/menu';
 import HeaderModal from '@/components/layout/Modal/headerModal';
 import GoBackButton from '../GoBackButton';
@@ -95,6 +95,7 @@ function Header() {
   const isHomePage = pathName === '/';
   const isMyCoursePage = pathName === '/me/myCourses';
   const isNotificationPage = pathName === '/me/notification';
+  const isSearchPage = pathName === '/search';
 
   const [headerModal, setHeaderModal] = useState(false);
 
@@ -128,7 +129,7 @@ function Header() {
       </div>
 
       <div className={styles['search-bar']}>
-        <Search />
+        {isSearchPage && <SearchInput />}
       </div>
 
       <div className={styles['actions']}>
