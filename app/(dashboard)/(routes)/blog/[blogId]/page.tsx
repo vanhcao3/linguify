@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 import styles from '@/styles/Blog/DetailBlog.module.css';
 import Content from '@/components/Blog/DetailBlog/Content';
 import UserInfo from '@/components/Blog/DetailBlog/UserInfo';
@@ -6,27 +8,26 @@ import { getUserById } from '@/data/user';
 import { getComments } from '@/actions/comment';
 import { currentUserId } from '@/lib/auth';
 
-async function BlogDetail({
-  params,
-}: {
+interface props {
   params: { blogId: string };
-}) {
+}
+
+async function BlogDetail({ params }: props) {
   const userId = await currentUserId();
+  if (!userId) return redirect('/');
+
   const currentUser = await getUserById(userId);
+
   const currentBlog = await getBlogById(params.blogId);
+  if (!currentBlog) return redirect('/');
   const comments = await getComments(params.blogId);
   const commentsOwner = await Promise.all(
     comments.map((comment) => getUserById(comment.owner)),
   );
 
-  if (currentBlog === null) {
-    return <div>CurrentBlog not found</div>;
-  }
   const owner = await getUserById(currentBlog.owner);
 
-  if (owner === null) {
-    return <div>User not found</div>;
-  }
+  if (!owner) return redirect('/');
 
   return (
     <div className={styles['wrapper']}>

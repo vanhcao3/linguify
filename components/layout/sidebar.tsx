@@ -85,13 +85,7 @@ function Sidebar() {
               }`}
             >
               {data.topIcon && (
-                <Menu
-                  title={null}
-                  btnTitle={null}
-                  type="sidebarMenu"
-                  userInfo={null}
-                  items={items}
-                >
+                <Menu type="sidebarMenu" items={items}>
                   <span tabIndex={0} className={styles['inner-icon']}>
                     <Image
                       src={data.topIcon}

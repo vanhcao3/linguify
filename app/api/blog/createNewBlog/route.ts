@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { currentUserId } from '@/lib/auth';
 
 export async function POST(req: Request) {
   try {
-    const { title, content, owner } = await req.json();
+    const owner = await currentUserId();
+    const { title, content } = await req.json();
 
     if (!title) {
       return new NextResponse('Bad Request: Title is missing', {

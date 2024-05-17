@@ -6,7 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useSearchParams } from 'next/navigation';
 import { LoginSchema } from '@/schemas';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '../button';
 import Link from 'next/link';
@@ -18,20 +25,15 @@ import { login } from '@/actions/login';
 export const LoginForm = () => {
   const searchParams = useSearchParams();
   const urlError =
-    searchParams.get('error') === 'OAuthAccountNotLinked' ? 'Email already in use with different provider!' : '';
-<<<<<<< HEAD
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
-
-  const [isPending, startTransition] = useTransition();
-=======
+    searchParams.get('error') === 'OAuthAccountNotLinked'
+      ? 'Email already in use with different provider!'
+      : '';
 
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>('');
   const [success, setSuccess] = useState<string | undefined>('');
   const [isPending, startTransition] = useTransition();
 
->>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -46,12 +48,6 @@ export const LoginForm = () => {
 
     startTransition(() => {
       //Server actions from actions/login
-<<<<<<< HEAD
-      login(values).then((data) => {
-        setError(data?.error);
-        setSuccess(data?.success);
-      });
-=======
       login(values)
         .then((data) => {
           if (data?.error) {
@@ -69,7 +65,6 @@ export const LoginForm = () => {
           }
         })
         .catch(() => setError('Something went wrong!'));
->>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
     });
   };
 
@@ -81,39 +76,11 @@ export const LoginForm = () => {
       showSocial
     >
       <Form {...form}>
-        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="space-y-6"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           <div className="space-y-4">
-<<<<<<< HEAD
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="example@email.com" disabled={isPending} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="********" type="password" disabled={isPending} />
-                  </FormControl>
-                  <Button size="sm" variant="link" asChild className="px-0 font-normal float-right">
-                    <Link href="/auth/reset">Forgot password?</Link>
-                  </Button>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-=======
             {!showTwoFactor && (
               <>
                 <FormField
@@ -123,7 +90,11 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="example@email.com" disabled={isPending} />
+                        <Input
+                          {...field}
+                          placeholder="example@email.com"
+                          disabled={isPending}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -136,10 +107,22 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="********" type="password" disabled={isPending} />
+                        <Input
+                          {...field}
+                          placeholder="********"
+                          type="password"
+                          disabled={isPending}
+                        />
                       </FormControl>
-                      <Button size="sm" variant="link" asChild className="px-0 font-normal float-right">
-                        <Link href="/auth/reset">Forgot password?</Link>
+                      <Button
+                        size="sm"
+                        variant="link"
+                        asChild
+                        className="px-0 font-normal float-right"
+                      >
+                        <Link href="/auth/reset">
+                          Forgot password?
+                        </Link>
                       </Button>
                       <FormMessage />
                     </FormItem>
@@ -156,7 +139,11 @@ export const LoginForm = () => {
                     <FormItem>
                       <FormLabel>Enter Code</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="080603" disabled={isPending} />
+                        <Input
+                          {...field}
+                          placeholder="080603"
+                          disabled={isPending}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -164,18 +151,17 @@ export const LoginForm = () => {
                 />
               </>
             )}
->>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
           </div>
           <div className="clear-both">
             <FormSuccess message={success} />
             <FormError message={error || urlError} />
           </div>
-          <Button type="submit" className="w-full" disabled={isPending}>
-<<<<<<< HEAD
-            Login
-=======
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isPending}
+          >
             {!showTwoFactor ? 'Login' : 'Confirm'}
->>>>>>> b782b003483d1af986dcac5a2d7b4ba8164f7462
           </Button>
         </form>
       </Form>

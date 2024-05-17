@@ -24,19 +24,15 @@ function CreateBlog() {
 
   const onSubmit = async (data: z.infer<typeof NewBlogSchema>) => {
     try {
-      console.log(data);
-
       const response = await axios.post(
-        '/api/blog/createNewBlog',
+        '/api/blog/[blogId]/createNewBlog',
         data,
       );
       console.log(response);
-      console.log('Xuất bản bài viết thành công!');
       toast.success('Xuất bản bài viết thành công!');
       router.push('/');
     } catch (error) {
       console.log('[CreateBlog]', error);
-      console.log('Xuất bản bài viết thất bại');
       toast.error('Xuất bản bài viết thất bại');
     }
   };

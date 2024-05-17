@@ -8,6 +8,7 @@ import Sidebar from '@/components/layout/sidebar';
 import { currentUserId } from '@/lib/auth';
 import { getUserById } from '@/data/user';
 import { getUserCourses } from '@/actions/userCourse';
+import { redirect } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,12 +23,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const userId = await currentUserId();
-  let user = undefined;
-  let courses = undefined;
-  if (userId) {
-    user = await getUserById(userId);
-    courses = await getUserCourses(userId);
-  }
+  const courses = await getUserCourses(userId);
+
+  if (!userId) return redirect('/');
+  if (!courses) return redirect('/');
+
+  const user = await getUserById(userId);
 
   return (
     <div className={styles['wrapper']}>
