@@ -8,13 +8,16 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import styles from '@/styles/layout/header.search.module.css';
 import { smallSearch } from '@/actions/search';
 import ViewAllSearchButton from './ViewAllSearchButton';
+import { usePathname } from 'next/navigation';
 
 interface searchResult {
   category: string;
   data: any[];
+  type: string;
 }
 
 function Search() {
+  const pathName = usePathname();
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState<searchResult[]>(
     [],
@@ -84,7 +87,7 @@ function Search() {
                   {item.category}
                 </div>
                 <div>
-                  <ViewAllSearchButton />
+                  <ViewAllSearchButton type={item.type} />
                 </div>
               </div>
               <hr className={styles['hrTag']} />
@@ -116,6 +119,8 @@ function Search() {
       )}
     </div>
   );
+
+  if (pathName.startsWith('/search/')) return null;
 
   return (
     <HeadlessTippy

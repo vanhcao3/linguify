@@ -33,7 +33,7 @@
 
 .item-wrapper {
   @apply flex flex-row items-center gap-3;
-  @apply p-3 py-2 hover:bg-slate-100 cursor-pointer rounded-lg;
+  @apply p-3 py-2 hover:bg-red-100 border-2 border-transparent hover:border-red-300 border-dotted cursor-pointer rounded-lg;
 }
 
 .item-image {

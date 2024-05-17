@@ -23,6 +23,10 @@
   @apply rounded-full overflow-hidden;
 }
 
+.user-info-image > img {
+  @apply w-full object-fill;
+}
+
 .section2 {
   @apply flex flex-row justify-center items-center gap-[50px];
 }

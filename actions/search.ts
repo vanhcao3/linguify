@@ -28,10 +28,24 @@ export const smallSearch = async (searchValue: string) => {
     {
       category: 'Khoá học',
       data: courses,
+      type: 'course',
     },
     {
       category: 'Bài viết',
       data: blogData,
+      type: 'blog',
     },
   ];
+};
+
+export const searchAll = async (searchValue: string) => {
+  if (searchValue === '') {
+    return [];
+  }
+
+  const courses = await db.course.findMany({
+    where: { title: { contains: searchValue, mode: 'insensitive' } },
+  });
+
+  return courses;
 };

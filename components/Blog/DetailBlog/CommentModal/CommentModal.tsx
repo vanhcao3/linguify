@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import axios from 'axios';
-// import toast from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import styles from '@/styles/BLog/CommentModal.module.css';
 import CommentItem from '../CommentItem';
@@ -22,7 +22,13 @@ interface props {
   commentsOwner: any[];
 }
 
-function CommentModal({ closeModal, blogId, currentUser, comments, commentsOwner }: props) {
+function CommentModal({
+  closeModal,
+  blogId,
+  currentUser,
+  comments,
+  commentsOwner,
+}: props) {
   const route = useRouter();
   const [showEditor, setShowEditor] = useState(false);
   const form = useForm<z.infer<typeof CommentSchema>>({
@@ -38,49 +44,77 @@ function CommentModal({ closeModal, blogId, currentUser, comments, commentsOwner
     try {
       console.log(data);
 
-      const response = await axios.post(`/api/blog/${blogId}/addComment`, data);
+      const response = await axios.post(
+        `/api/blog/${blogId}/addComment`,
+        data,
+      );
       console.log(response);
-      console.log('Bình luận thành công');
-      // toast.success('Bình luận thành công');
+      toast.success('Bình luận thành công');
       setShowEditor(false);
       route.refresh();
     } catch (err) {
       console.log('[CommentModal]', err);
-
-      console.log('Bình luận thất bại');
-      // toast.error('Bình luận thất bại');
+      toast.error('Bình luận thất bại');
     }
   };
 
   return (
     <div className={styles['wrapper']} onClick={closeModal}>
-      <div className={styles['content']} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles['content']}
+        onClick={(e) => e.stopPropagation()}
+      >
         <CloseButton onClick={closeModal} />
 
         <Heading numComments={comments?.length} />
 
         <div className={styles['write-comment']}>
-          <div className="rounded-full overflow-hidden h-max w-max shrink-0">
-            <Image src={currentUser.image} alt="" width={40} height={40} />
+          <div className={styles['user-image']}>
+            <Image
+              src={currentUser.image}
+              alt=""
+              width={40}
+              height={40}
+            />
           </div>
           {!showEditor ? (
-            <div className={styles['pseudoInput']} onClick={() => setShowEditor(true)}>
+            <div
+              className={styles['pseudoInput']}
+              onClick={() => setShowEditor(true)}
+            >
               Viết bình luận của bạn...
             </div>
           ) : (
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-[90%]">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-[90%]"
+            >
               <Controller
                 name="content"
                 control={form.control}
                 rules={{ required: true }}
-                render={({ field }) => <Editor value={field.value} onChange={field.onChange} height={200} />}
+                render={({ field }) => (
+                  <Editor
+                    value={field.value}
+                    onChange={field.onChange}
+                    height={200}
+                  />
+                )}
               />
-              <p className="text-sm text-red-500 mt-2">{form.formState.errors.content?.message}</p>
+              <p className="text-sm text-red-500 mt-2">
+                {form.formState.errors.content?.message}
+              </p>
               <div className={styles['form-button']}>
-                <button type="button" onClick={() => setShowEditor(false)}>
+                <button
+                  type="button"
+                  onClick={() => setShowEditor(false)}
+                >
                   Huỷ
                 </button>
-                <button type="submit" className={styles['submit-button']}>
+                <button
+                  type="submit"
+                  className={styles['submit-button']}
+                >
                   Bình luận
                 </button>
               </div>

@@ -4,16 +4,14 @@ import UserInfo from '@/components/Blog/DetailBlog/UserInfo';
 import { getBlogById } from '@/data/blog';
 import { getUserById } from '@/data/user';
 import { getComments } from '@/actions/comment';
-// import { currentUserId } from '@/lib/auth';
-
-const userId = '9b08c3cc-ce75-4f60-ac90-e36c0473f2c2';
+import { currentUserId } from '@/lib/auth';
 
 async function BlogDetail({
   params,
 }: {
   params: { blogId: string };
 }) {
-  // const userId = await currentUserId();
+  const userId = await currentUserId();
   const currentUser = await getUserById(userId);
   const currentBlog = await getBlogById(params.blogId);
   const comments = await getComments(params.blogId);

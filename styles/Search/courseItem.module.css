@@ -1,0 +1,17 @@
+.wrapper {
+  @apply flex flex-row gap-4;
+  @apply w-[80%] h-[160px] px-3 py-2 border-2 border-dashed rounded-xl hover:bg-orange-100 hover:border-orange-400 overflow-hidden;
+}
+
+.image {
+  @apply flex justify-center items-center;
+  @apply w-[280px] shrink-0 rounded-lg overflow-hidden;
+}
+
+.image > img {
+  @apply w-full object-fill;
+}
+
+.detail {
+  @apply flex flex-col justify-between gap-3;
+}

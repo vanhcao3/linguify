@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-// import toast from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
@@ -26,26 +26,42 @@ function CreateBlog() {
     try {
       console.log(data);
 
-      const response = await axios.post('/api/blog/createNewBlog', data);
+      const response = await axios.post(
+        '/api/blog/createNewBlog',
+        data,
+      );
       console.log(response);
       console.log('Xuất bản bài viết thành công!');
-      // toast.success('Xuất bản bài viết thành công!');
-      // router.push('/');
+      toast.success('Xuất bản bài viết thành công!');
+      router.push('/');
     } catch (error) {
       console.log('[CreateBlog]', error);
       console.log('Xuất bản bài viết thất bại');
-      // toast.error('Xuất bản bài viết thất bại');
+      toast.error('Xuất bản bài viết thất bại');
     }
   };
 
   return (
     <div className={styles['wrapper']}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={styles['form-wrapper']}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={styles['form-wrapper']}
+      >
         <div className={styles['section1']}>
-          <TitleInput name="title" control={form.control} errorMessage={form.formState.errors.title?.message} />
-          <button className={styles['submit-button']}>Xuất bản</button>
+          <TitleInput
+            name="title"
+            control={form.control}
+            errorMessage={form.formState.errors.title?.message}
+          />
+          <button className={styles['submit-button']}>
+            Xuất bản
+          </button>
         </div>
-        <ContentInput name="content" control={form.control} errorMessage={form.formState.errors.content?.message} />
+        <ContentInput
+          name="content"
+          control={form.control}
+          errorMessage={form.formState.errors.content?.message}
+        />
       </form>
     </div>
   );

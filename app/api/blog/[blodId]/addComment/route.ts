@@ -1,31 +1,35 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-// import { currentUserId } from '@/lib/auth';
+import { currentUserId } from '@/lib/auth';
 
 export async function POST(req: Request) {
   try {
-    // const userId = await currentUserId();
+    const userId =
+      (await currentUserId()) ||
+      'd8d73f2a-47df-4ec2-8521-ccda0ebb9ae6';
 
-    const { content, blogId, owner } = await req.json();
-    console.log(req.url);
+    const { content, blogId } = await req.json();
 
-    // if (!userId) {
-    //   return new NextResponse('Unauthorized', { status: 401 });
-    // }
+    if (!userId) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
 
     if (!content) {
-      return new NextResponse('Bad Request: Comment is missing', { status: 400 });
+      return new NextResponse('Bad Request: Comment is missing', {
+        status: 400,
+      });
     }
 
     if (!blogId) {
-      return new NextResponse('Bad Request: BlogId is missing', { status: 400 });
+      return new NextResponse('Bad Request: BlogId is missing', {
+        status: 400,
+      });
     }
 
     const comment = await db.comment.create({
       data: {
         content,
-        owner,
-        // owner:userId;
+        owner: userId,
         blogId,
       },
     });
