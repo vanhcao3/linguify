@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { stripHtmlTags } from '@/lib/utils';
 
 export const NewPasswordSchema = z
   .object({
@@ -94,4 +95,21 @@ export const chapterAccessFormSchema = z.object({
 
 export const chapterVideoFormSchema = z.object({
   videoUrl: z.string().min(1),
+});
+
+export const CommentSchema = z.object({
+  owner: z.string(),
+  blogId: z.string(),
+  content: z.string().refine((value) => stripHtmlTags(value).length > 0, {
+    message: 'Comment is required',
+  }),
+});
+
+export const NewBlogSchema = z.object({
+  title: z.string().min(1, {
+    message: 'Tiêu đề không được để trống',
+  }),
+  content: z.string().refine((value) => stripHtmlTags(value).length > 0, {
+    message: 'Nội dung không được để trống',
+  }),
 });

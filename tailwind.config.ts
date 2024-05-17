@@ -1,12 +1,17 @@
 import type { Config } from 'tailwindcss';
-
+import defaultTheme from 'tailwindcss/defaultTheme';
 import { withUt } from 'uploadthing/tw';
 
 const config = withUt({
   darkMode: ['class'],
-  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
+  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}',
+  './styles/**/*.{ts,tsx}' ],
   prefix: '',
   theme: {
+    screens: {
+      xs: '475px',
+      ...defaultTheme.screens,
+    },
     container: {
       center: true,
       padding: '2rem',
@@ -56,22 +61,26 @@ const config = withUt({
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        floatLeftToRight: 'floatLeftToRight 0.5s ease-out',
+        floatRightToLeft: 'floatRightToLeft 0.5s ease-out',
+        fadeIn: 'fadeIn 0.5s ease-out',
+        fadeOut: 'fadeOut 0.5s ease-out',
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config);
 
 export default config;

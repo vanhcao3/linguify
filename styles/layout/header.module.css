@@ -1,0 +1,72 @@
+.wrapper {
+  @apply flex flex-row w-full h-[66px] mx-0 px-1 md:px-7 justify-between items-center z-20;
+  @apply sticky top-0 left-0;
+  @apply bg-slate-100 border-b-[1px];
+}
+
+/* Logo */
+.logo {
+  @apply flex flex-row items-center lg:gap-3;
+  @apply mr-2 lg:mr-0;
+}
+
+.menu-icon {
+  @apply lg:hidden;
+}
+
+.logo-icon {
+  @apply hidden lg:flex lg:justify-between lg:items-center gap-4;
+}
+
+.logo-icon > a {
+  @apply w-10 h-10;
+  @apply border border-solid border-slate-400 rounded-xl;
+}
+/* End of Logo */
+
+/* search bar */
+.search-bar {
+  @apply hidden md:block;
+}
+
+/* actions */
+.actions {
+  @apply flex flex-row items-center justify-end gap-2 ml-auto lg:ml-0;
+}
+.search-icon {
+  @apply md:hidden;
+}
+/* End css for search icon in actions */
+
+/* My Courses */
+.myCourses-active {
+  @apply text-red-500 font-semibold;
+}
+
+.user-courses {
+  @apply hidden;
+  /* unhide content when screen is bigger than 1024px*/
+  @apply lg:block hover:bg-slate-100 w-max font-semibold text-sm;
+}
+/* End css for my courses icon in actions */
+
+.noti-icon {
+  @apply w-[30px] ml-4;
+}
+/* End css for notification icon in actions */
+
+.user-avatar {
+  @apply hidden;
+  /* unhide content when screen is bigger than 1024px*/
+  @apply lg:block lg:cursor-pointer lg:rounded-full lg:object-cover ml-2;
+  @apply lg:w-[32px] lg:h-[32px];
+}
+
+.log-in {
+  @apply font-semibold text-sm mr-4;
+}
+
+.register {
+  @apply px-4 py-2 rounded-full bg-orange-500 text-white text-sm font-semibold hover:bg-orange-400;
+}
+/* End css for avatar icon in actions */

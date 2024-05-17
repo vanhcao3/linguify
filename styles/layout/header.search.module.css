@@ -1,0 +1,54 @@
+.search {
+  @apply flex h-[40px] w-[420px] border-2 border-solid border-gray-300 rounded-full px-2 items-center gap-2 focus-within:border-gray-600;
+}
+.input {
+  @apply bg-transparent w-full outline-none;
+}
+.search-icon {
+  @apply cursor-auto;
+}
+
+/* ToolTip */
+.tooltip-wrapper {
+  @apply flex flex-col gap-3;
+  @apply w-[420px] px-6 py-3 bg-white rounded-lg;
+}
+
+.heading {
+  @apply inline-flex;
+  @apply text-gray-500;
+}
+
+.content-wrapper {
+  @apply flex flex-col gap-2;
+}
+
+.content-title {
+  @apply font-semibold;
+}
+
+.hrTag {
+  @apply my-2;
+}
+
+.item-wrapper {
+  @apply flex flex-row items-center gap-3;
+}
+
+.item-image {
+  @apply w-[33px] h-[33px] overflow-hidden rounded-full;
+}
+
+.item-image > img {
+  @apply w-full h-full object-cover;
+}
+/* End of ToolTip */
+
+.close-button {
+  @apply p-[1px];
+  @apply bg-white hover:bg-slate-200 active:bg-slate-300 rounded-full cursor-pointer;
+}
+
+.loading-icon {
+  @apply animate-spin;
+}

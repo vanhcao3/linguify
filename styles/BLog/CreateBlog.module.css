@@ -1,0 +1,57 @@
+.wrapper {
+  @apply flex justify-center items-center;
+  @apply px-10 py-7;
+}
+
+.form-wrapper {
+  @apply flex flex-col gap-3;
+  @apply w-[80%];
+}
+
+.section1 {
+  @apply flex flex-row justify-between items-center;
+}
+
+.section1 > button {
+  @apply w-max px-3 py-2 bg-orange-200 hover:bg-orange-300 active:bg-orange-400;
+  @apply border-[3px] border-dashed rounded-2xl border-slate-400 hover:border-slate-500 active:border-slate-600;
+}
+
+.title-wrapper {
+  @apply w-[80%];
+}
+
+.title {
+  @apply w-full pl-3 py-3;
+  @apply text-2xl bg-inherit focus:outline-none focus:bg-slate-200 rounded-lg;
+}
+
+.error-title {
+  @apply border-2 border-red-500 border-dashed;
+}
+
+.error-message {
+  @apply text-red-500 text-xs;
+}
+
+.editor {
+  @apply flex flex-col gap-3;
+  @apply h-full w-full;
+}
+
+.editor div:nth-child(1) {
+  border: none;
+}
+
+.editor div:nth-child(2) {
+  @apply border-2 border-dashed;
+  @apply w-full mt-2 rounded-lg grow;
+}
+
+.editor div:nth-child(2) > div {
+  @apply h-full max-w-full;
+}
+
+.error-editor div:nth-child(2) {
+  @apply border-red-500;
+}
