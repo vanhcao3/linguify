@@ -9,9 +9,10 @@ import UserAvatarButton from './UserAvatarButton';
 
 interface props {
   user: any;
+  courses: any;
 }
 
-function Actions({ user }: props) {
+function Actions({ user, courses }: props) {
   const pathName = usePathname();
   const currentUser = !!user;
 
@@ -38,7 +39,7 @@ function Actions({ user }: props) {
               Khoá học của tôi
             </div>
           ) : (
-            <MyCourseButton />
+            <MyCourseButton courses={courses} />
           )}
 
           {/* Notification btn  */}

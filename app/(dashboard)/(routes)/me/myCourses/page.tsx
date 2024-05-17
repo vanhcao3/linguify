@@ -1,5 +1,7 @@
 import Item from '@/components/Me/CourseItem';
 import styles from '@/styles/Me/MyCourses.module.css';
+import { currentUserId } from '@/lib/auth';
+import { getUserCourses } from '@/actions/userCourse';
 
 const pseudoMyCourse = [
   {
@@ -34,18 +36,25 @@ const pseudoMyCourse = [
   },
 ];
 
-function MyCourses() {
+async function MyCourses() {
+  const userId = await currentUserId();
+  let courses = undefined;
+  if (userId) {
+    courses = await getUserCourses(userId);
+  }
   return (
     <div className={styles['wrapper']}>
       <div className={styles['section1']}>
-        <div className={styles['section1-title']}>Khoá học của tôi</div>
+        <div className={styles['section1-title']}>
+          Khoá học của tôi
+        </div>
         <div>bạn đã hoàn thành khác nhiều khoá học</div>
       </div>
       <div className={styles['section2']}>
-        {pseudoMyCourse.map((course, index) => {
+        {courses?.map((course, index) => {
           return <Item key={index} data={course} empty={false} />;
         })}
-        <Item data={null} empty={true} />
+        <Item empty={true} />
       </div>
     </div>
   );

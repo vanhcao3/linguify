@@ -4,9 +4,7 @@ import { currentUserId } from '@/lib/auth';
 
 export async function POST(req: Request) {
   try {
-    const userId =
-      (await currentUserId()) ||
-      'd8d73f2a-47df-4ec2-8521-ccda0ebb9ae6';
+    const userId = await currentUserId();
 
     const { content, blogId } = await req.json();
 

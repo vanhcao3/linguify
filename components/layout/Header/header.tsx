@@ -7,9 +7,10 @@ import Actions from './Actions';
 
 interface props {
   user: any;
+  courses: any;
 }
 
-function Header({ user }: props) {
+function Header({ user, courses }: props) {
   return (
     <div className={styles['wrapper']}>
       <Logo />
@@ -18,7 +19,7 @@ function Header({ user }: props) {
         <Search />
       </div>
 
-      <Actions user={user} />
+      <Actions user={user} courses={courses} />
     </div>
   );
 }

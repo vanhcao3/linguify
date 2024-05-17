@@ -2,8 +2,8 @@ import styles from '@/styles/layout/menu.module.css';
 import Link from 'next/link';
 
 interface IProps {
-  title: string | null;
-  btnTitle: string | null;
+  title?: string;
+  btnTitle?: string;
   href?: string;
 }
 

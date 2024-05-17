@@ -7,6 +7,7 @@ import Footer from '@/components/layout/footer';
 import Sidebar from '@/components/layout/sidebar';
 import { currentUserId } from '@/lib/auth';
 import { getUserById } from '@/data/user';
+import { getUserCourses } from '@/actions/userCourse';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,13 +23,15 @@ export default async function RootLayout({
 }>) {
   const userId = await currentUserId();
   let user = undefined;
+  let courses = undefined;
   if (userId) {
     user = await getUserById(userId);
+    courses = await getUserCourses(userId);
   }
 
   return (
     <div className={styles['wrapper']}>
-      <Header user={user} />
+      <Header user={user} courses={courses} />
 
       <div className={styles['body']}>
         <Sidebar />

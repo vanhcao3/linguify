@@ -40,3 +40,23 @@ export function formatMoney(amount: number): string {
     .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   return formattedAmount;
 }
+
+export function calculateTimeCourse(time: Date) {
+  const now = new Date();
+  const diffInMs = now.getTime() - time.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  const diffInMonths = Math.floor(diffInDays / 30.4375); // Assuming 30.4375 days per month
+  const diffInYears = Math.floor(diffInDays / 365.25); // Accounting for leap years
+
+  let timeCourseText = '';
+
+  if (diffInYears > 0) {
+    timeCourseText = `Học cách đây ${diffInYears} năm trước`;
+  } else if (diffInMonths > 0) {
+    timeCourseText = `Học cách đây ${diffInMonths} tháng trước`;
+  } else {
+    timeCourseText = `Học cách đây ${diffInDays} ngày trước`;
+  }
+
+  return timeCourseText;
+}

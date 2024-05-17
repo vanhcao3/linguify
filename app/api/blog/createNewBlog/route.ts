@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { currentUserId } from '@/lib/auth';
 
 export async function POST(req: Request) {
   try {
@@ -14,6 +13,12 @@ export async function POST(req: Request) {
 
     if (!content) {
       return new NextResponse('Bad Request: Content is missing', {
+        status: 400,
+      });
+    }
+
+    if (!owner) {
+      return new NextResponse('Bad Request: Owner is missing', {
         status: 400,
       });
     }

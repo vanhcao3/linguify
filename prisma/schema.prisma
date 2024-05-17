@@ -105,6 +105,7 @@ model Course {
   purchases   Purchase[]
   createAt    DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  UserCourse  UserCourse[]
 
   @@index([categoryId])
 }
@@ -190,7 +191,7 @@ model TwoFactorConfirmation {
 }
 
 model Blog {
-  id        String    @id @default(uuid()) @map("_id")
+  id        String    @id @default(uuid())
   title     String
   content   String
   owner     String
@@ -201,7 +202,7 @@ model Blog {
 }
 
 model Comment {
-  id        String   @id @default(uuid()) @map("_id")
+  id        String   @id @default(uuid())
   content   String
   owner     String
   blogId    String
@@ -209,4 +210,17 @@ model Comment {
   blog      Blog     @relation(fields: [blogId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model UserCourse {
+  id          String  @id @default(uuid())
+  userId      String
+  courseId    String
+  course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([courseId])
 }

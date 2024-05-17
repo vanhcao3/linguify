@@ -20,8 +20,8 @@
 
 /* Item */
 .item-wrapper {
-  @apply flex flex-col gap-1 w-max lg:w-auto;
-  @apply mb-6;
+  @apply flex flex-col gap-4 w-max lg:w-auto;
+  @apply px-3 py-2 mb-6 border-[3px] border-transparent hover:border-blue-400 border-dashed rounded-xl overflow-hidden;
 }
 
 .item-image {

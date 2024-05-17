@@ -37,16 +37,16 @@
 
 .course-image {
   @apply flex justify-center items-center;
-  @apply rounded-lg overflow-hidden cursor-pointer;
+  @apply w-[120px] h-[68px] rounded-lg overflow-hidden cursor-pointer;
   @apply flex-shrink-0;
 }
 
 .course-image > img {
-  @apply object-fill;
+  @apply w-full h-full object-fill;
 }
 
 .course-title {
-  @apply font-semibold cursor-pointer;
+  @apply h-[24px] line-clamp-1 font-semibold cursor-pointer;
 }
 
 .course-desc {
