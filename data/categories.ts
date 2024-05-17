@@ -9,6 +9,6 @@ export const getCategories = async () => {
     });
     return categories;
   } catch {
-    return null;
+    return [];
   }
 };

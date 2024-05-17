@@ -16,11 +16,7 @@ import { formSchema } from '@/schemas';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ChapterList } from '@/components/ui/courses/chapter-list';
-import {
-  Loader2,
-  ClipboardX,
-  PlusCircle,
-} from 'lucide-react';
+import { Loader2, ClipboardX, PlusCircle } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -54,14 +50,9 @@ export const ChapterForm = ({
 
   const { isSubmitting, isValid } = form.formState;
 
-  const onSubmit = async (
-    values: z.infer<typeof formSchema>,
-  ) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post(
-        `/api/courses/${courseId}/chapters`,
-        values,
-      );
+      await axios.post(`/api/courses/${courseId}/chapters`, values);
       toast.success('Chapter created');
       toggleCreating();
       router.refresh();
@@ -75,12 +66,9 @@ export const ChapterForm = ({
   ) => {
     try {
       setIsUpdating(true);
-      await axios.put(
-        `/api/courses/${courseId}/chapters/reorder`,
-        {
-          list: updateData,
-        },
-      );
+      await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
+        list: updateData,
+      });
       toast.success('Chapters reordered');
       router.refresh();
     } catch {
@@ -91,9 +79,7 @@ export const ChapterForm = ({
   };
 
   const onEdit = (id: string) => {
-    router.push(
-      `/teacher/courses/${courseId}/chapters/${id}`,
-    );
+    router.push(`/teacher/courses/${courseId}/chapters/${id}`);
   };
 
   return (
@@ -133,7 +119,7 @@ export const ChapterForm = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Introductrion'"
+                      placeholder="e.g. 'Introduction'"
                       {...field}
                     />
                   </FormControl>
@@ -141,10 +127,7 @@ export const ChapterForm = ({
                 </FormItem>
               )}
             />
-            <Button
-              type="submit"
-              disabled={!isValid || isSubmitting}
-            >
+            <Button type="submit" disabled={!isValid || isSubmitting}>
               Create
             </Button>
           </form>
@@ -154,8 +137,7 @@ export const ChapterForm = ({
         <div
           className={cn(
             'text-sm mt-2',
-            !initialData.chapters.length &&
-              'text-slate-500 italic',
+            !initialData.chapters.length && 'text-slate-500 italic',
           )}
         >
           {!initialData.chapters.length && 'No chapters'}
@@ -168,7 +150,11 @@ export const ChapterForm = ({
       )}
       {!isCreating && (
         <div className="text-xs  text-muted-foreground mt-4">
-          *You can reorder the chapters
+          <p>*You can reorder by dragging the chapters</p>
+          <p>
+            *You must have at least 1 published chapter before
+            publishing the course
+          </p>
         </div>
       )}
     </div>

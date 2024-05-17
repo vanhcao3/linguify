@@ -44,10 +44,7 @@ export const ChapterList = ({
     if (!result.destination) return;
 
     const items = Array.from(chapters);
-    const [reorderItem] = items.splice(
-      result.source.index,
-      1,
-    );
+    const [reorderItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderItem);
 
     const startIndex = Math.min(
@@ -58,17 +55,12 @@ export const ChapterList = ({
       result.source.index,
       result.destination.index,
     );
-    const updatedChapters = items.slice(
-      startIndex,
-      endIndex + 1,
-    );
+    const updatedChapters = items.slice(startIndex, endIndex + 1);
     setChapters(items);
 
     const updateData = updatedChapters.map((chapter) => ({
       id: chapter.id,
-      position: items.findIndex(
-        (item) => item.id === chapter.id,
-      ),
+      position: items.findIndex((item) => item.id === chapter.id),
     }));
 
     onReorder(updateData);
@@ -82,10 +74,7 @@ export const ChapterList = ({
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chapters">
         {(provided) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
+          <div {...provided.droppableProps} ref={provided.innerRef}>
             {chapters.map((chapter, index) => (
               <Draggable
                 key={chapter.id}
@@ -114,19 +103,14 @@ export const ChapterList = ({
                     </div>
                     {chapter.title}
                     <div className="ml-auto pr-2 flex items-center gap-x-2">
-                      {chapter.isFree && (
-                        <Badge>Free</Badge>
-                      )}
+                      {chapter.isFree && <Badge>Free</Badge>}
                       <Badge
                         className={cn(
                           'bg-slate-500',
-                          chapter.isPublished &&
-                            'bg-sky-700',
+                          chapter.isPublished && 'bg-sky-700',
                         )}
                       >
-                        {chapter.isPublished
-                          ? 'Published'
-                          : 'Draft'}
+                        {chapter.isPublished ? 'Published' : 'Draft'}
                       </Badge>
                       <Pencil
                         onClick={() => onEdit(chapter.id)}
