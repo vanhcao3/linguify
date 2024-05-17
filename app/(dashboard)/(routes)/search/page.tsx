@@ -8,7 +8,7 @@ const SearchPage = async () => {
 
   return (
     <>
-      <div className='px-6 pt-6 md:hidden md:mb-0 block'>
+      <div className="px-6 pt-6 md:hidden md:mb-0 block">
         <Suspense>
           <SearchInput />
         </Suspense>
