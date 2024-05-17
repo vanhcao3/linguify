@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import styles from '@/styles/layout/header.module.css';
-import {SearchInput} from './search-input';
+import { SearchInput } from './search-input';
 import Menu from './Menu/menu';
 import HeaderModal from '@/components/layout/Modal/headerModal';
 import GoBackButton from '../GoBackButton';
@@ -43,12 +43,14 @@ const pseudoMyCourse = [
 
 const pseudoNotification = [
   {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
+    image:
+      'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
     content: 'Chào mừng bạn!!!',
     createdTime: '25 ngày trước',
   },
   {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
+    image:
+      'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
     content: 'Hãy học ngay thôi nào!!!',
     createdTime: '5 ngày trước',
   },
@@ -115,13 +117,32 @@ function Header() {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['logo']}>
-        <button className={styles['menu-icon']} onClick={openHeaderModal}>
-          <Image src="/icons/menuIcon.svg" width={30} height={30} alt="menuIcon" />
+        <button
+          className={styles['menu-icon']}
+          onClick={openHeaderModal}
+        >
+          <Image
+            src="/icons/menuIcon.svg"
+            width={30}
+            height={30}
+            alt="menuIcon"
+          />
         </button>
-        {headerModal && <HeaderModal userInfo={userInfo} currentUser={currentUser} closeModal={closeHeaderModal} />}
+        {headerModal && (
+          <HeaderModal
+            userInfo={userInfo}
+            currentUser={currentUser}
+            closeModal={closeHeaderModal}
+          />
+        )}
         <div className={styles['logo-icon']}>
           <Link href="/">
-            <Image src="/images/dino-logo.png" width={38} height={38} alt="logo" />
+            <Image
+              src="/images/dino-logo.png"
+              width={38}
+              height={38}
+              alt="logo"
+            />
           </Link>
           {isHomePage && <h4>This is logo-heading</h4>}
         </div>
@@ -129,7 +150,11 @@ function Header() {
       </div>
 
       <div className={styles['search-bar']}>
-        {isSearchPage && <SearchInput />}
+        {isSearchPage && (
+          <Suspense>
+            <SearchInput />
+          </Suspense>
+        )}
       </div>
 
       <div className={styles['actions']}>
@@ -137,12 +162,19 @@ function Header() {
           <Fragment>
             {/* Search btn when screen is small */}
             <button className={styles['search-icon']}>
-              <Image src="/icons/searchIcon.svg" width={32} height={32} alt="search-icon" />
+              <Image
+                src="/icons/searchIcon.svg"
+                width={32}
+                height={32}
+                alt="search-icon"
+              />
             </button>
 
             {/* myCourses btn */}
             {isMyCoursePage ? (
-              <div className={styles['myCourses-active']}>Khoá học của tôi</div>
+              <div className={styles['myCourses-active']}>
+                Khoá học của tôi
+              </div>
             ) : (
               <Menu
                 title="Khoá học của tôi"
@@ -153,14 +185,21 @@ function Header() {
                 userInfo={null}
               >
                 <div>
-                  <button className="font-semibold">Khoá học của tôi</button>
+                  <button className="font-semibold">
+                    Khoá học của tôi
+                  </button>
                 </div>
               </Menu>
             )}
 
             {/* Notification btn  */}
             {isNotificationPage ? (
-              <Image src="/icons/activeBellIcon.svg" alt="" width={30} height={30} />
+              <Image
+                src="/icons/activeBellIcon.svg"
+                alt=""
+                width={30}
+                height={30}
+              />
             ) : (
               <Menu
                 title="Thông Báo"
@@ -170,13 +209,24 @@ function Header() {
                 userInfo={null}
               >
                 <button className={styles['noti-icon']}>
-                  <Image src="/icons/bellIcon.svg" width={30} height={30} alt="bellIcon" />
+                  <Image
+                    src="/icons/bellIcon.svg"
+                    width={30}
+                    height={30}
+                    alt="bellIcon"
+                  />
                 </button>
               </Menu>
             )}
 
             {/* User avatar */}
-            <Menu title={null} btnTitle={null} type="avatar" userInfo={userInfo} items={USER_MENU}>
+            <Menu
+              title={null}
+              btnTitle={null}
+              type="avatar"
+              userInfo={userInfo}
+              items={USER_MENU}
+            >
               <div>
                 <Image
                   className={styles['user-avatar']}
@@ -190,10 +240,16 @@ function Header() {
           </Fragment>
         ) : (
           <Fragment>
-            <button className={styles['log-in']} onClick={() => alert('clicked Login Btn')}>
+            <button
+              className={styles['log-in']}
+              onClick={() => alert('clicked Login Btn')}
+            >
               Đăng nhập
             </button>
-            <button className={styles['register']} onClick={() => alert('clicked register Btn')}>
+            <button
+              className={styles['register']}
+              onClick={() => alert('clicked register Btn')}
+            >
               Đăng ký
             </button>
           </Fragment>
