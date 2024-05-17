@@ -1,0 +1,44 @@
+.wrapper {
+  @apply flex justify-center items-center;
+  @apply py-5;
+}
+
+.content {
+  @apply w-[85%] sm:w-[75%] md:w-[65%] lg:w-[55%] xl:w-[50%] border border-solid shadow-lg rounded-xl;
+  @apply min-h-[500px];
+}
+
+.header {
+  @apply flex flex-row justify-between items-center;
+  @apply px-5 py-3;
+  @apply border-b border-solid;
+}
+
+.header-title {
+  @apply font-semibold text-lg;
+}
+
+.header-button {
+  @apply text-orange-500 text-sm;
+}
+
+.body {
+  @apply flex flex-col gap-4;
+  @apply px-3 py-3;
+}
+
+/* Item */
+.item-wrapper {
+  @apply flex flex-row gap-4 items-center;
+  @apply px-3 py-2 hover:bg-slate-200 cursor-pointer rounded-lg;
+}
+
+.item-image {
+  @apply w-[42px] h-[42px] rounded-full overflow-hidden shrink-0;
+}
+
+.created-time {
+  @apply mt-2;
+  @apply text-orange-400 text-xs;
+}
+/* End of Item */
