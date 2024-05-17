@@ -95,9 +95,9 @@ export const ChapterAccessForm = ({
       {!isEditing && (
         <div className="text-sm mt-2">
           {initialData.isFree ? (
-            <>This is a free chapter</>
+            <>This chapter is public</>
           ) : (
-            <>This chapter is not free</>
+            <>This chapter is private</>
           )}
         </div>
       )}
@@ -120,7 +120,7 @@ export const ChapterAccessForm = ({
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormDescription>
-                      Is this chapter free?
+                      Is this chapter public?
                     </FormDescription>
                   </div>
                 </FormItem>

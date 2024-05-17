@@ -25,3 +25,19 @@ export const getCourseById = async (id: string, userId?: string) => {
     return null;
   }
 };
+
+export const getCoursesByUserId = async (userId: string) => {
+  try {
+    const courses = await db.course.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createAt: 'desc',
+      },
+    });
+    return courses;
+  } catch {
+    return [];
+  }
+};
