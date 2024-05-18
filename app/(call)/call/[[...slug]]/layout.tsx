@@ -1,5 +1,7 @@
+
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { currentUser } from "@/lib/auth";
 
 export default async function CallLayout({
                                            children,
@@ -11,7 +13,7 @@ export default async function CallLayout({
   }
 }) {
 
-  const user = await getCurrentUser();
+  const user = await currentUser();
   const unAuthorizedUserName = cookies().get("username");
 
   if (!user && !unAuthorizedUserName) {

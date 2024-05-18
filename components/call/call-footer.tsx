@@ -9,11 +9,11 @@ import {
   VideoOnIcon,
   HangUpIcon,
   ShareScreenIcon,
-} from '@100mslive/react-icons';
+} from "@100mslive/react-icons";
 import { useParams } from 'next/navigation';
 import Cookies from "js-cookie";
-import { extractId } from '../../lib/extract-id';
-import useClipboard from '../../hooks/use-copy';
+import { extractId } from '@/lib/extract-id';
+import useClipboard from '@/hooks/use-copy';
 import { Icons } from '../ui/calls/icons';
 import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';

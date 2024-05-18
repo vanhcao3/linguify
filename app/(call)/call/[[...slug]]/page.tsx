@@ -1,14 +1,14 @@
 "use client";
 import { selectIsConnectedToRoom, useHMSActions, useHMSStore } from "@100mslive/react-sdk";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import React from "react";
-import CallFooter from '../../../../components/call/call-footer';
-import Conference from "~/components/call/conference";
+import CallFooter from "@/components/call/call-footer";
+import Conference from "@/components/call/conference";
 import { useParams, useRouter } from "next/navigation";
-import { getSession } from "next-auth/react";
-import { type RoomCodeResponse } from "~/types/types";
-import { extractId } from "~/lib/extract-id";
-import { useToast } from "~/components/ui/use-toast";
+import {type RoomCodeResponse} from "@/types/types";
+import { extractId } from "@/lib/extract-id";
+import { useToast } from "@/components/ui/use-toast";
+import { currentUser } from "@/lib/auth";
 
 
 export default function CallPage(){
@@ -47,10 +47,10 @@ export default function CallPage(){
         const codeResponse: RoomCodeResponse = await roomCodeResponse.json() as RoomCodeResponse;
         const roomCode = codeResponse.code;
         const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode })
-        const session = await getSession();
+        const session = await currentUser();
 
-        if(session && session.user.name){
-          const userName = session.user.name;
+        if(session && session.name){
+          const userName = session.name;
           await hmsActions.join({ userName, authToken });
         } else if(!session && unAuthUsername){
           await hmsActions.join({ userName: unAuthUsername, authToken });
