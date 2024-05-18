@@ -7,7 +7,7 @@ import Conference from "@/components/call/conference";
 import { useParams, useRouter } from "next/navigation";
 import {type RoomCodeResponse} from "@/types/types";
 import { extractId } from "@/lib/extract-id";
-import { useToast } from "@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import { getSession } from 'next-auth/react';
 
 
@@ -17,11 +17,9 @@ export default function CallPage(){
   const router = useRouter()
   const isConnected = useHMSStore(selectIsConnectedToRoom);
   const hmsActions = useHMSActions();
-  const { toast } = useToast()
   const actions = useHMSActions();
   const roomName = Cookies.get("room-name");
   const roomId = Cookies.get("room-id");
-  console.log("roomid: " + roomId);
   const unAuthUsername = Cookies.get("username");
 
   const joinCall = React.useCallback(async () => {
@@ -49,7 +47,6 @@ export default function CallPage(){
 
         const roomCode = codeResponse.code;
         const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode })
-        console.log(authToken);
         const session = await getSession();
         if(session && session.user && session.user.name){
           const userName = session.user.name;
@@ -59,11 +56,7 @@ export default function CallPage(){
         }
         else {
           console.error("Session or user name is not defined");
-          toast({
-            title: "Something went wrong.",
-            description: "This call cannot joined. Please try again.",
-            variant: "destructive",
-          });
+          toast.error("This call cannot joined. Please try again.");
           router.replace("/calls");
         }
       } else {
@@ -72,11 +65,7 @@ export default function CallPage(){
 
     } catch (error) {
       console.error(error)
-      toast({
-        title: "Something went wrong.",
-        description: "This call cannot be joined. Please try again.",
-        variant: "destructive",
-      })
+      toast.error("This call cannot be joined. Please try again.")
       router.replace("/calls");
     }
 
@@ -96,11 +85,7 @@ export default function CallPage(){
     })
 
     if(!response.ok){
-      toast({
-        title: "Something went wrong.",
-        description: "Your call cannot be left. Please try again.",
-        variant: "destructive",
-      })
+      toast.error( "Your call cannot be left. Please try again.")
     }
 
     await actions.leave();

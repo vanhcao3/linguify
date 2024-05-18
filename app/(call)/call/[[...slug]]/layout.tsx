@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 import { cookies } from "next/headers";
 import { currentUser } from '@/lib/auth';
 
@@ -11,10 +11,9 @@ export default async function CallLayout({
     slug: string
   }
 }) {
-
   const user = await currentUser();
   const unAuthorizedUserName = cookies().get("username");
-
+  console.log(unAuthorizedUserName);
   if (!user && !unAuthorizedUserName) {
     redirect(`/preview/${params.slug}`)
   }

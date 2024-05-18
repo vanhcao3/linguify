@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-"use client";
+'use client';
 import * as React from 'react';
 import { useAVToggle, useHMSActions } from '@100mslive/react-sdk';
 import {
@@ -9,18 +9,18 @@ import {
   VideoOnIcon,
   HangUpIcon,
   ShareScreenIcon,
-} from "@100mslive/react-icons";
+} from '@100mslive/react-icons';
 import { useParams } from 'next/navigation';
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 import { extractId } from '@/lib/extract-id';
 import useClipboard from '@/hooks/use-copy';
 import { Icons } from '../ui/calls/icons';
 import { Button } from '../ui/button';
-import { useToast } from '../ui/use-toast';
+import toast from 'react-hot-toast';
 import RejoinCall from './rejoin-call';
 
 
-export default function CallFooter () {
+export default function CallFooter() {
 
   const {
     isLocalAudioEnabled,
@@ -29,11 +29,10 @@ export default function CallFooter () {
     toggleVideo,
   } = useAVToggle();
   const actions = useHMSActions();
-  const { toast } = useToast()
   const [isScreenShareEnabled, setIsScreenShareEnabled] = React.useState(false);
   const params = useParams();
-  const roomId = Cookies.get("room-id");
-  const roomName = Cookies.get("room-name");
+  const roomId = Cookies.get('room-id');
+  const roomName = Cookies.get('room-name');
   const { isCopied, copyToClipboard } = useClipboard();
 
   const [showRejoinPopup, setShowRejoinPopup] = React.useState(false);
@@ -41,36 +40,31 @@ export default function CallFooter () {
   React.useEffect(() => {
 
     async function enableScreenShare() {
-      if(isScreenShareEnabled){
+      if (isScreenShareEnabled) {
         try {
           await actions.setScreenShareEnabled(true);
         } catch (error) {
-          return toast({
-            title: "Something went wrong.",
-            description: "Your screen cannot be shared. Please try again.",
-            variant: "destructive",
-          })
+          return toast.error(
+            'Your screen cannot be shared. Please try again.',
+          );
         }
       } else {
         try {
           await actions.setScreenShareEnabled(false);
         } catch (error) {
-          return toast({
-            title: "Something went wrong.",
-            description: "There is an issue disabling screen share. Please try again.",
-            variant: "destructive",
-          })
+          return toast.error('There is an issue disabling screen share. Please try again.',
+          );
         }
       }
     }
 
     void enableScreenShare();
 
-  }, [actions, isScreenShareEnabled, toast])
+  }, [actions, isScreenShareEnabled, toast]);
 
   return (
     <footer className={`w-full rounded-lg flex items-center mt-auto justify-center sm:justify-start px-5 py-8`}>
-      <div className='w-full flex justify-center gap-3'>
+      <div className="w-full flex justify-center gap-3">
         <Button
           size="sm"
           variant="ghost"
@@ -79,8 +73,8 @@ export default function CallFooter () {
         >
           {
             isLocalAudioEnabled ?
-              <MicOnIcon color="white" width={20} height={20}/>
-              : <MicOffIcon color="white" width={20} height={20}/>
+              <MicOnIcon color="white" width={20} height={20} />
+              : <MicOffIcon color="white" width={20} height={20} />
           }
         </Button>
         <Button
@@ -91,44 +85,40 @@ export default function CallFooter () {
         >
           {
             isLocalVideoEnabled ?
-              <VideoOnIcon color="white" width={20} height={20}/>
-              : <VideoOffIcon color="white" width={20} height={20}/>
+              <VideoOnIcon color="white" width={20} height={20} />
+              : <VideoOffIcon color="white" width={20} height={20} />
           }
         </Button>
         <Button
           size="sm"
           variant="ghost"
-          onClick={()=> setIsScreenShareEnabled(!isScreenShareEnabled)}
+          onClick={() => setIsScreenShareEnabled(!isScreenShareEnabled)}
           className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800 max-w-14"
         >
-          <ShareScreenIcon color="white" width={20} height={20}/>
+          <ShareScreenIcon color="white" width={20} height={20} />
         </Button>
         <Button
           size="sm"
           variant="ghost"
-          onClick={async() =>{
+          onClick={async () => {
             await copyToClipboard(window.location.href);
-            if(isCopied){
-              toast({
-                title: 'Copied to clipboard',
-                description: 'The invite link has been copied to your clipboard.',
-                variant: 'default'
-              });
+            if (isCopied) {
+              toast.success('The invite link has been copied to your clipboard.');
             }
           }}
           className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800 max-w-14"
         >
-          <Icons.invite color="white" width={20} height={20}/>
+          <Icons.invite color="white" width={20} height={20} />
         </Button>
         <Button
           size="sm"
           variant="ghost"
           onClick={() => {
-            setShowRejoinPopup(true)
+            setShowRejoinPopup(true);
           }}
           className="rounded-full flex justify-center py-6 bg-red-500 max-w-14"
         >
-          <HangUpIcon color='white' width={25} height={25} />
+          <HangUpIcon color="white" width={25} height={25} />
         </Button>
       </div>
       {

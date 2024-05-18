@@ -1,19 +1,19 @@
 "use client";
-import { selectPeers, useHMSStore } from "@100mslive/react-sdk";
+import { selectLocalPeer, useHMSStore } from "@100mslive/react-sdk";
 import React from "react";
 import Peer from '../ui/calls/peer';
 import { Icons } from "../ui/calls/icons";
 
-export default function Conference() {
-  const peers = useHMSStore(selectPeers);
-  console.log(peers);
+export default function LocalConference() {
+  const peer = useHMSStore(selectLocalPeer);
+  console.log(peer);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (peers.length > 0) {
+    if (peer) {
       setLoading(false);
     }
-  }, [peers]);
+  }, [peer]);
 
   return (
     <div className="w-full conference pt-4">
@@ -26,7 +26,7 @@ export default function Conference() {
 
         </div>
       ) : (
-        peers.map((peer) => <Peer key={peer.id} peer={peer} />)
+        <Peer key={peer!.id} peer={peer!} />
       )}
     </div>
   );

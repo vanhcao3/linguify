@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       return new Response("Not Found", { status: 404 })
     }
 
-    let role = "broadcaster";
+    let role = "host";
     if (userId) {
       const participant = await db.participant.findUnique({
         where: { id: userId },
@@ -59,13 +59,11 @@ export async function POST(req: Request) {
         'Content-Type': 'application/json'
       },
     });
-    console.log(response);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const { code }: RoomCode = await response.json() as RoomCode;
-    console.log(code);
     return new Response(JSON.stringify({ code }));
 
   } catch (error) {

@@ -31,9 +31,7 @@ export async function POST(req: Request) {
 
     const json: CallCreateBody = await req.json() as CallCreateBody;
     const body = callCreateSchema.parse(json)
-    console.log(1);
     const roomId = await createRoom(body.callName);
-    console.log(2);
     const existingCall = await db.call.findUnique({
       where: { id: roomId },
     });

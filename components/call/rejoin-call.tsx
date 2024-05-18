@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Button } from "../ui/button";
 import { useRouter } from 'next/navigation';
-import { useToast } from "../ui/use-toast";
+import toast from 'react-hot-toast';
 import { useHMSActions } from "@100mslive/react-sdk";
 import * as React from 'react';
 
@@ -16,7 +16,6 @@ export default  function RejoinCall({
 }){
 
   const router = useRouter();
-  const { toast } = useToast();
   const actions = useHMSActions();
   const [secondsLeft, setSecondsLeft] = React.useState(60); // 10 seconds countdown
 
@@ -33,11 +32,7 @@ export default  function RejoinCall({
     });
 
     if(!response.ok){
-      toast({
-        title: "Something went wrong.",
-        description: "Your call cannot be left. Please try again.",
-        variant: "destructive",
-      });
+      toast.error( "Your call cannot be left. Please try again.");
     }
 
     await actions.leave();

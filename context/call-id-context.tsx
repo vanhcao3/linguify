@@ -27,6 +27,5 @@ export const useCallId = (): CallIdValues => {
   if (!context) {
     throw new Error('useCallId must be used within a CallIdProvider');
   }
-  console.log(context);
   return context;
 };

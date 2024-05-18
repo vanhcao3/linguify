@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 "use client"
 import React, { useState } from 'react'
 import { Icons } from '../ui/calls/icons';
@@ -12,7 +11,7 @@ import useClipboard from '@/hooks/use-copy';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { DialogDescription } from '@radix-ui/react-dialog';
-import { useToast } from '../ui/use-toast';
+import toast from 'react-hot-toast';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { currentUser } from '@/lib/auth';
@@ -29,7 +28,6 @@ export default function InviteParticipantsDialog (card: CardProps)  {
   } = useForm<FormData>({
     resolver: zodResolver(inviteSchema)
   });
-  const { toast } = useToast()
   const { callId } = useCallId();
   const { isCopied, copyToClipboard } = useClipboard();
 
@@ -63,95 +61,82 @@ export default function InviteParticipantsDialog (card: CardProps)  {
         }
 
         setIsLoading(false);
-        return toast({
-          title: 'Invite sent',
-          description: 'Your invite has been sent successfully',
-          variant: 'default'
-        });
+        return toast.success('Your invite has been sent successfully'
+        );
 
       } catch (error) {
         setIsLoading(false);
-        return toast({
-          title: 'Error sending invite',
-          description: 'There was an error sending your invite. Please try again later.',
-          variant: 'destructive'
-        });
+        return toast.error('There was an error sending your invite. Please try again later.');
       }
     }
   }
 
-
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <div className='p-0 flex w-fit h-fit'>
-          <CardShell card={card}/>
+return (
+  <Dialog>
+    <DialogTrigger asChild>
+      <div className='p-0 flex w-fit h-fit'>
+        <CardShell card={card}/>
+      </div>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader className='mb-4'>
+        <DialogTitle className='text-xl'>Invite participants</DialogTitle>
+        <DialogDescription className='text-sm text-muted-foreground'>
+          Copy the link below and invite participants to this call.
+        </DialogDescription>
+      </DialogHeader>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='flex flex-col md:flex-row justify-between items-end'>
+          <div className='w-full space-y-1'>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              {...register('email')}
+              type="email"
+              id="email"
+              placeholder="Email address"
+              className='w-full'
+            />
+          </div>
+          <Button
+            type="submit"
+            className='rounded-md font-normal mt-2 md:mt-0 md:ml-2 w-full md:w-fit whitespace-nowrap'
+            size='lg'
+          >
+            {isLoading && <Icons.spinner width="16" height="16" className='mr-3' color="#fff"/>}
+            Send invite
+          </Button>
         </div>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader className='mb-4'>
-          <DialogTitle className='text-xl'>Invite participants</DialogTitle>
-          <DialogDescription className='text-sm text-muted-foreground'>
-            Copy the link below and invite participants to this call.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex flex-col md:flex-row justify-between items-end'>
-            <div className='w-full space-y-1'>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                {...register('email')}
-                type="email"
-                id="email"
-                placeholder="Email address"
-                className='w-full'
-              />
-            </div>
-            <Button
-              type="submit"
-              className='rounded-md font-normal mt-2 md:mt-0 md:ml-2 w-full md:w-fit whitespace-nowrap'
-              size='lg'
-            >
-              {isLoading && <Icons.spinner width="16" height="16" className='mr-3' color="#fff"/>}
-              Send invite
-            </Button>
+        {errors.email && typeof errors.email.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.email.message}</p>}
+      </form>
+      <div className='bg-slate-200 w-full h-[1px] my-4'></div>
+      <DialogFooter className='w-full'>
+        <div className='w-full flex flex-col md:flex-row justify-between items-end mb-2'>
+          <div className='w-full space-y-1'>
+            <Label htmlFor="link">Link</Label>
+            <Input
+              disabled
+              placeholder={`localhost:3000/call/${callId}`}
+              required
+              id="link"
+              className='w-full'
+            />
           </div>
-          {errors.email && typeof errors.email.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.email.message}</p>}
-        </form>
-        <div className='bg-slate-200 w-full h-[1px] my-4'></div>
-        <DialogFooter className='w-full'>
-          <div className='w-full flex flex-col md:flex-row justify-between items-end mb-2'>
-            <div className='w-full space-y-1'>
-              <Label htmlFor="link">Link</Label>
-              <Input
-                disabled
-                placeholder={`localhost:3000/call/${callId}`}
-                required
-                id="link"
-                className='w-full'
-              />
-            </div>
-            <Button
-              variant='secondary'
-              size='lg'
-              className="rounded-md font-normal flex mt-2 md:mt-0 md:ml-2 ml-auto w-full md:w-fit"
-              onClick={async() =>{
-                await copyToClipboard(`localhost:3000/call/${callId}`);
-                if(isCopied){
-                  toast({
-                    title: 'Copied to clipboard',
-                    description: 'The invite link has been copied to your clipboard.',
-                    variant: 'default'
-                  });
-                }
-              }}
-            >
-              Copy
-            </Button>
-          </div>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  )
+          <Button
+            variant='secondary'
+            size='lg'
+            className="rounded-md font-normal flex mt-2 md:mt-0 md:ml-2 ml-auto w-full md:w-fit"
+            onClick={async() =>{
+              await copyToClipboard(`localhost:3000/call/${callId}`);
+              if(isCopied){
+                toast.success('The invite link has been copied to your clipboard.');
+              }
+            }}
+          >
+            Copy
+          </Button>
+        </div>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+)
 }
-

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 "use client"
 import React from 'react'
 import CardShell, { type CardProps } from '../layout/call-shell'
 import { useRouter } from 'next/navigation'
 import { useCallId } from '@/context/call-id-context';
-import { useToast } from '../ui/use-toast';
+import toast from 'react-hot-toast';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +28,6 @@ import useClipboard from '@/hooks/use-copy';
 
 export default function CreateCallCard (card: CardProps)  {
 
-  const { toast } = useToast()
   const router = useRouter()
   const { callId } = useCallId();
   const [isCallLoading, setIsCallLoading] = React.useState(false);
@@ -57,11 +55,7 @@ export default function CreateCallCard (card: CardProps)  {
 
       setIsCallLoading(false);
 
-      toast({
-        title: "Something went wrong.",
-        description: "Your call cannot be created. Please try again.",
-        variant: "destructive",
-      })
+      toast.error("Your call cannot be created. Please try again.")
 
     }
 
@@ -133,11 +127,8 @@ export default function CreateCallCard (card: CardProps)  {
               onClick={async() =>{
                 await copyToClipboard(`localhost:3000/call/${callId}`);
                 if(isCopied){
-                  toast({
-                    title: 'Copied to clipboard',
-                    description: 'The invite link has been copied to your clipboard.',
-                    variant: 'default'
-                  });
+                  toast.success('The invite link has been copied to your clipboard.'
+                  );
                 }
               }}
             >

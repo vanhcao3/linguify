@@ -11,7 +11,7 @@ import { extractId } from '@/lib/extract-id';
 import { Icons } from '../ui/calls/icons';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
-import { useToast } from '../ui/use-toast';
+import toast from 'react-hot-toast';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
@@ -20,8 +20,6 @@ type FormData = z.infer<typeof joinCallFormSchema>
 
 export default function JoinCallDialog (card: CardProps)  {
   const [isJoinCallLoading, setIsJoinCallLoading] = useState(false);
-
-  const { toast } = useToast()
   const router = useRouter()
 
   const {
@@ -53,15 +51,11 @@ export default function JoinCallDialog (card: CardProps)  {
 
     if (!response?.ok) {
       setIsJoinCallLoading(false);
-      return toast({
-        title: "Something went wrong.",
-        description: "This call cannot be joined. Please try again.",
-        variant: "destructive",
-      })
+      return toast.error("This call cannot be joined. Please try again.")
     }
 
     setIsJoinCallLoading(false);
-    router.push(`/call/${callName}`)
+    router.push(`/preview/${callName}`)
   }
 
   return (
@@ -99,7 +93,6 @@ export default function JoinCallDialog (card: CardProps)  {
               id='meeting-link'
             />
           </div>
-          {errors.meetingLink && typeof errors.meetingLink.message === 'string' && <p className='mt-2 mb-4 text-sm text-red-500'>{errors.meetingLink.message}</p>}
           <DialogFooter className='flex flex-col-reverse md:flex-row pt-8'>
             <Button
               type='submit'

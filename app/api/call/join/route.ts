@@ -21,7 +21,6 @@ export async function POST(req: Request) {
 
   try {
     const user = await currentUser()
-
     let userId, userName, userEmail;
     if (user) {
       if (user && user.id && user.name && user.email) {
@@ -33,7 +32,6 @@ export async function POST(req: Request) {
 
     const json: JoinCallBody = await req.json() as JoinCallBody;
     const body = joinCallSchema.parse(json)
-
     const call = await db.call.findFirst({
       where: { status: 'created', name: body.callName },
     });
@@ -58,7 +56,7 @@ export async function POST(req: Request) {
           userId: userId || null,
           email: userEmail || null,
           name: body.username || userName || "Guest",
-          role: "guest",
+          role: "host",
           status: 'joined',
           callId: call.id,
           startTime: new Date()
