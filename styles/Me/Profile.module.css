@@ -1,0 +1,66 @@
+.wrapper {
+  @apply flex flex-col;
+  @apply w-full -mt-[66px] px-[45px] md:px-[75px] lg:px-[150px] pb-5;
+  @apply min-h-[1000px];
+}
+
+.body {
+  @apply flex flex-row justify-between;
+  @apply w-full mt-[100px] px-5;
+}
+
+.section1 {
+  @apply flex flex-col gap-4;
+  @apply w-[40%];
+}
+
+.section2 {
+  @apply flex flex-col gap-4;
+  @apply w-[58%] h-max px-3 py-2 border-2 border-gray-300 rounded-xl shadow-md;
+}
+
+/* Header */
+.header-wrapper {
+  @apply flex items-center  relative  w-[100%];
+  @apply flex-col;
+}
+
+.cover-image {
+  @apply flex items-center justify-center;
+  @apply w-full rounded-b-2xl overflow-hidden;
+}
+
+.cover-image > img {
+  @apply w-full h-full object-cover;
+}
+
+.header-detail {
+  @apply flex flex-row gap-4;
+  @apply absolute left-[60px] -bottom-[70px];
+}
+
+.avatar-image {
+  @apply flex justify-center items-center;
+  @apply w-[100px] md:w-[140px] lg:w-[170px] h-[100px] md:h-[140px] lg:h-[170px] bg-slate-100 rounded-full overflow-hidden;
+}
+
+.avatar-image > img {
+  @apply w-[92%] h-[92%] bg-white rounded-full  object-cover;
+}
+/* End of Header */
+
+/* Course Item */
+.course-item-wrapper {
+  @apply flex flex-row gap-3;
+  @apply px-3 py-2 hover:bg-slate-200 rounded-lg;
+}
+
+.course-item-image {
+  @apply flex justify-center items-center shrink-0;
+  @apply w-[228px] h-[128px] rounded-xl overflow-hidden;
+}
+
+.course-item-image > img {
+  @apply w-full h-full object-cover;
+}
+/* End of Course Item */

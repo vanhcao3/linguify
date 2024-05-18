@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex flex-col gap-10 px-8 py-7;
+  @apply flex flex-col gap-10 px-[20px] md:px-[50px] lg:px-[100px] py-7;
 }
 
 /* Section 1 */
@@ -15,6 +15,7 @@
 /* Section 2 */
 .section2 {
   @apply flex flex-col xs:grid xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5;
+  @apply px-[5px] md:px-[20px] lg:px-[50px];
 }
 /* End of Section 2 */
 
@@ -71,8 +72,8 @@
 /* Empty Item */
 .empty-item-wrapper {
   @apply flex flex-col justify-center items-center gap-2 relative;
-  @apply w-[80vw] xs:w-[40vw] lg:w-full aspect-video rounded-lg;
-  @apply border-4 border-dashed border-gray-300 hover:border-orange-500 cursor-pointer;
+  @apply w-[80vw] xs:w-[40vw] lg:w-full mx-3 my-2 aspect-video rounded-lg;
+  @apply border-[4px] border-dashed border-gray-300 hover:border-orange-500 cursor-pointer;
   &:hover .plus-icon {
     @apply bg-orange-500;
   }
