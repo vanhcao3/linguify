@@ -1,9 +1,16 @@
 export const STUDENT_MENU = [
   {
-    title: 'Đăng nhập',
-    icon: '/icons/fadeLoginIcon.svg',
+    title: 'Dashboard',
+    hrTag: false,
+    icon: '/icons/fadeHomeIcon.svg',
+    href: '/',
+    visible: true,
+  },
+  {
+    title: 'Browse',
     hrTag: true,
-    href: `/sign-in`,
+    icon: '/icons/bookOpenIcon.svg',
+    href: '/search',
     visible: true,
   },
   {
@@ -20,22 +27,15 @@ export const STUDENT_MENU = [
     visible: true,
   },
   {
-    title: 'Trang chủ',
-    hrTag: false,
-    icon: '/icons/fadeHomeIcon.svg',
-    href: '/',
-    visible: true,
-  },
-  {
     title: 'Lộ trình',
-    hrTag: false,
+    hrTag: true,
     icon: '/icons/fadeRoadIcon.svg',
     href: '/learningPath',
     visible: true,
   },
   {
     title: 'Blog',
-    hrTag: true,
+    hrTag: false,
     icon: '/icons/fadeBlogIcon.svg',
     href: '/blog?page=1',
     visible: true,
@@ -62,7 +62,7 @@ export const STUDENT_MENU = [
     title: 'Đăng xuất',
     hrTag: false,
     icon: '/icons/fadeLogoutIcon.svg',
-    href: '/sign-out',
+    href: '/auth/sign-out',
     visible: true,
   },
 ];
