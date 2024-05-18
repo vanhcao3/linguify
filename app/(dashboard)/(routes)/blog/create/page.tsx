@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
 import TitleInput from '@/components/Blog/CreateBlog/TitleInput';
@@ -13,7 +13,7 @@ import ContentInput from '@/components/Blog/CreateBlog/ContentInput';
 import { NewBlogSchema } from '@/schemas';
 
 const CreateBlog = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const form = useForm<z.infer<typeof NewBlogSchema>>({
     resolver: zodResolver(NewBlogSchema),
     defaultValues: {
@@ -25,12 +25,12 @@ const CreateBlog = () => {
   const onSubmit = async (data: z.infer<typeof NewBlogSchema>) => {
     try {
       const response = await axios.post(
-        '/api/blog/[blogId]/createNewBlog',
+        '/api/blog/createNewBlog',
         data,
       );
       console.log(response);
       toast.success('Xuất bản bài viết thành công!');
-      // router.push('/');
+      router.push('/blog?page=1');
     } catch (error) {
       console.log('[CreateBlog]', error);
       toast.error('Xuất bản bài viết thất bại');

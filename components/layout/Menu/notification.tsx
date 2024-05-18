@@ -1,23 +1,35 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 import Header from './header';
 import styles from '@/styles/layout/menu.module.css';
-import { useRouter } from 'next/navigation';
+import { calculateTime } from '@/lib/utils';
+import { readAllNotifications } from '@/actions/notifications';
 
-interface IProps {
+interface props {
   title?: string;
   btnTitle?: string;
   items: Array<any>;
   href?: string;
 }
 
-function Notification(props: IProps) {
-  const { title, btnTitle, items, href } = props;
+function Notification({ title, btnTitle, items }: props) {
   const router = useRouter();
+
+  const handleClick = () => {
+    readAllNotifications();
+    toast.success('Đánh dấu thành công!');
+    router.refresh();
+  };
 
   return (
     <div className={styles['menu-list']}>
-      <Header title={title} btnTitle={btnTitle} href={href} />
+      <Header
+        title={title}
+        btnTitle={btnTitle}
+        onClick={handleClick}
+      />
       <div className={styles['body']}>
         {items.map((item, index) => {
           const itemImage = item.image
@@ -37,11 +49,18 @@ function Notification(props: IProps) {
                 />
               </div>
               <div className={styles['notification-body']}>
-                <div>{item.content}</div>
-                <div className={styles['createdTime']}>
-                  {item.createdTime}
+                <div className={styles['notification-message']}>
+                  {item.message}
                 </div>
+                {item.updatedAt && (
+                  <div className={styles['createdTime']}>
+                    {`${calculateTime(item.updatedAt)}`}
+                  </div>
+                )}
               </div>
+              {!item.isRead && (
+                <div className="w-2 h-2 rounded-full bg-blue-300"></div>
+              )}
             </div>
           );
         })}

@@ -10,9 +10,10 @@ import UserAvatarButton from './UserAvatarButton';
 interface props {
   user: any;
   courses: any;
+  notifications: any;
 }
 
-function Actions({ user, courses }: props) {
+function Actions({ user, courses, notifications }: props) {
   const pathName = usePathname();
   const currentUser = !!user;
 
@@ -51,7 +52,7 @@ function Actions({ user, courses }: props) {
               height={30}
             />
           ) : (
-            <NotificationButton />
+            <NotificationButton notifications={notifications} />
           )}
 
           {/* User avatar */}

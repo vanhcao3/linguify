@@ -19,7 +19,7 @@ export const smallSearch = async (searchValue: string) => {
   const blogData = blogs.map((blog) => {
     return {
       title: blog.title,
-      imageUrl: 'no-image.png',
+      imageUrl: '/images/no-image.png',
       blogId: blog.id,
     };
   });

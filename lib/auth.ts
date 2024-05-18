@@ -15,5 +15,6 @@ export const currentRole = async () => {
 export const currentUserId = async () => {
   const session = await auth();
 
-  return session?.user?.id;
+  // return session?.user?.id;
+  return 'clw00yifr00037rn9w0ybiu0u';
 };

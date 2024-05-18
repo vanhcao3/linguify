@@ -3,6 +3,13 @@
 import { db } from '../lib/db';
 
 export async function getCourses(categoryId: string) {
-  const courses = await db.course.findMany({ where: { categoryId } });
-  return courses;
+  try {
+    const courses = await db.course.findMany({
+      where: { categoryId },
+    });
+    return courses;
+  } catch (error) {
+    console.log('[actions/courses]', error);
+    return null;
+  }
 }

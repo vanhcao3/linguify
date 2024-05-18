@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Header from './header';
 import styles from '@/styles/layout/menu.module.css';
-import { calculateTimeCourse } from '@/lib/utils';
+import { calculateTime } from '@/lib/utils';
 
 interface props {
   title?: string;
@@ -41,7 +41,7 @@ function Course({ title, btnTitle, items, href }: props) {
                 )}
                 {item.updatedAt && (
                   <div className={styles['lastComplete']}>
-                    {calculateTimeCourse(item.updatedAt)}
+                    {`Học cách  đây ${calculateTime(item.updatedAt)}`}
                   </div>
                 )}
                 {item.progress !== 0 ? (

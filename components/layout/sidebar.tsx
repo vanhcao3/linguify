@@ -44,7 +44,8 @@ const MENU_BTN = [
 
 function Sidebar() {
   const pathName = usePathname();
-  if (pathName === '/me/notification') return null;
+  const mePathRegex = /^\/me/;
+  if (mePathRegex.test(pathName)) return null;
   return (
     <div className={styles['wrapper']}>
       <div className={styles['menu']}>

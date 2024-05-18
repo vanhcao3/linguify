@@ -1,79 +1,24 @@
-import Item from '@/components/Me/NotificationItem';
+import { redirect } from 'next/navigation';
+
 import styles from '@/styles/Me/Notification.module.css';
+import Item from '@/components/Me/NotificationItem';
+import Header from '@/components/Me/NotificationHeader';
+import { currentUserId } from '@/lib/auth';
+import { getNotifications } from '@/actions/notifications';
 
-const pseudoNotification = [
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Chào mừng bạn!!!',
-    createdTime: '25 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-  {
-    image: 'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
-  },
-];
+async function Notification() {
+  const userId = await currentUserId();
+  if (!userId) return redirect('/');
 
-function Notification() {
+  const notifications = await getNotifications();
+  if (!notifications) return redirect('/');
+
   return (
     <div className={styles['wrapper']}>
       <div className={styles['content']}>
-        <div className={styles['header']}>
-          <div className={styles['header-title']}>Thông báo</div>
-          <div className={styles['header-button']}>Đánh dấu là đã đọc</div>
-        </div>
+        <Header />
         <div className={styles['body']}>
-          {pseudoNotification.map((item, index) => {
+          {notifications.map((item, index) => {
             return <Item key={index} data={item} />;
           })}
         </div>

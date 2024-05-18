@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import styles from '@/styles/Me/MyCourses.module.css';
-import { calculateTimeCourse } from '@/lib/utils';
+import { calculateTime } from '@/lib/utils';
 
 interface props {
   data?: any;
@@ -81,7 +81,7 @@ function Menu({ data, empty }: props) {
       )}
       {data.updatedAt && (
         <div className={styles['last-complete']}>
-          {calculateTimeCourse(data.updatedAt)}
+          {`Học cách đây ${calculateTime(data.updatedAt)}`}
         </div>
       )}
       {data.progress !== 0 ? (

@@ -12,7 +12,10 @@ export function stripHtmlTags(value: string) {
   return content || '';
 }
 
-export function calculateTime(createdAt: Date, updatedAt: Date) {
+export function calculateTimeComment(
+  createdAt: Date,
+  updatedAt: Date,
+) {
   if (createdAt.getTime() !== updatedAt.getTime()) {
     return 'Edited';
   }
@@ -41,21 +44,21 @@ export function formatMoney(amount: number): string {
   return formattedAmount;
 }
 
-export function calculateTimeCourse(time: Date) {
+export function calculateTime(time: Date) {
   const now = new Date();
   const diffInMs = now.getTime() - time.getTime();
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-  const diffInMonths = Math.floor(diffInDays / 30.4375); // Assuming 30.4375 days per month
-  const diffInYears = Math.floor(diffInDays / 365.25); // Accounting for leap years
+  const diffInMonths = Math.floor(diffInDays / 30.4375);
+  const diffInYears = Math.floor(diffInDays / 365.25);
 
   let timeCourseText = '';
 
   if (diffInYears > 0) {
-    timeCourseText = `Học cách đây ${diffInYears} năm trước`;
+    timeCourseText = `${diffInYears} năm trước`;
   } else if (diffInMonths > 0) {
-    timeCourseText = `Học cách đây ${diffInMonths} tháng trước`;
+    timeCourseText = `${diffInMonths} tháng trước`;
   } else {
-    timeCourseText = `Học cách đây ${diffInDays} ngày trước`;
+    timeCourseText = `${diffInDays} ngày trước`;
   }
 
   return timeCourseText;

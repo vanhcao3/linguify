@@ -19,6 +19,7 @@ function UserAvatarButton({ user }: props) {
     {
       title: 'Viết blog',
       hrTag: false,
+      href: '/blog/create',
     },
     {
       title: 'Bài viết của tôi',

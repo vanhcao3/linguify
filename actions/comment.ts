@@ -3,6 +3,11 @@
 import { db } from '../lib/db';
 
 export const getComments = async (blogId: string) => {
-  const comments = await db.comment.findMany({ where: { blogId } });
-  return comments;
+  try {
+    const comments = await db.comment.findMany({ where: { blogId } });
+    return comments;
+  } catch (error) {
+    console.log('[actions/comments]', error);
+    return null;
+  }
 };

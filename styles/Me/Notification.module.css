@@ -19,7 +19,8 @@
 }
 
 .header-button {
-  @apply text-orange-500 text-sm;
+  @apply p-2 rounded-lg hover:bg-purple-100 active:bg-purple-200 cursor-pointer;
+  @apply text-orange-500 text-sm select-none;
 }
 
 .body {
@@ -29,12 +30,22 @@
 
 /* Item */
 .item-wrapper {
-  @apply flex flex-row gap-4 items-center;
-  @apply px-3 py-2 hover:bg-slate-200 cursor-pointer rounded-lg;
+  @apply flex flex-row items-center gap-4;
+  @apply px-3 py-2 hover:bg-green-100 cursor-pointer rounded-xl;
 }
 
 .item-image {
-  @apply w-[42px] h-[42px] rounded-full overflow-hidden shrink-0;
+  @apply flex items-center justify-center;
+  @apply w-[70px] h-[70px] rounded-full overflow-hidden shrink-0;
+}
+
+.item-image > img {
+  @apply w-full h-full object-cover;
+}
+
+.item-content {
+  @apply flex flex-col overflow-hidden;
+  @apply max-w-[450px];
 }
 
 .created-time {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import styles from '@/styles/BLog/CommentModal.module.css';
-import { calculateTime } from '@/lib/utils';
+import { calculateTimeComment } from '@/lib/utils';
 
 interface props {
   content: string;
@@ -33,7 +33,7 @@ function CommentItem({
           className={styles['item-comment']}
         ></div>
         <div className={styles['item-actions']}>
-          <div>{calculateTime(createdAt, updatedAt)}</div>
+          <div>{calculateTimeComment(createdAt, updatedAt)}</div>
           <div>Like</div>
           <div>Reply</div>
         </div>

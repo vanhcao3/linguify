@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { redirect } from 'next/navigation';
 
 import styles from '@/styles/layout/layout.module.css';
 import Header from '@/components/layout/Header/header';
@@ -8,7 +9,7 @@ import Sidebar from '@/components/layout/sidebar';
 import { currentUserId } from '@/lib/auth';
 import { getUserById } from '@/data/user';
 import { getUserCourses } from '@/actions/userCourse';
-import { redirect } from 'next/navigation';
+import { getNotifications } from '@/actions/notifications';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,16 +24,24 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const userId = await currentUserId();
-  const courses = await getUserCourses(userId);
-
   if (!userId) return redirect('/');
+
+  const courses = await getUserCourses(userId);
   if (!courses) return redirect('/');
 
+  const notifications = await getNotifications();
+  if (!notifications) return redirect('/');
+
   const user = await getUserById(userId);
+  if (!user) return redirect('/');
 
   return (
     <div className={styles['wrapper']}>
-      <Header user={user} courses={courses} />
+      <Header
+        user={user}
+        courses={courses}
+        notifications={notifications}
+      />
 
       <div className={styles['body']}>
         <Sidebar />

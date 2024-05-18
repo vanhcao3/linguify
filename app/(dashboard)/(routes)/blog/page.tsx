@@ -5,6 +5,7 @@ import NoBlog from '@/components/Blog/NoBlog';
 import BlogItem from '@/components/Blog/BlogItem';
 import { getBlogs } from '@/actions/blogs';
 import { getUserById } from '@/data/user';
+import { redirect } from 'next/navigation';
 
 interface props {
   searchParams?: { page?: string };
@@ -18,6 +19,9 @@ async function Blog({ searchParams }: props) {
   // End Pagination
 
   const data = await getBlogs();
+  if (!data) {
+    redirect('/');
+  }
   const blogOwners = await Promise.all(
     data.map((blog: any) => getUserById(blog.owner)),
   );
@@ -31,10 +35,7 @@ async function Blog({ searchParams }: props) {
       ) : (
         <div className={styles['content']}>
           <div className={styles['section1']}>
-            {/* {pseudoData.slice(perPage * (page - 1), perPage * (page - 1) + perPage).map((item, index) => {
-            return <BlogItem key={index} data={item} />;
-          })} */}
-            {/* Data from server */}
+            {/* Blogs data from server */}
             {data
               ?.slice(
                 perPage * (page - 1),

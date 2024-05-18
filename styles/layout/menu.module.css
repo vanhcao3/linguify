@@ -8,11 +8,7 @@
 }
 
 .header-btn {
-  @apply ml-auto;
-}
-
-.header-btn a {
-  @apply w-max px-2 py-1 rounded-lg hover:bg-white active:bg-orange-100;
+  @apply w-max px-2 ml-auto py-1 rounded-lg hover:bg-white active:bg-orange-100 cursor-pointer;
   @apply text-red-600 text-sm;
 }
 /* End of Header */
@@ -68,12 +64,13 @@
 
 /* Notification */
 .notification-wrapper {
-  @apply flex flex-row mx-2 px-3 py-2 rounded-lg cursor-pointer;
-  @apply hover:bg-slate-100;
+  @apply flex flex-row justify-between items-center gap-2;
+  @apply mx-2 px-3 py-2 rounded-lg cursor-pointer;
+  @apply hover:bg-slate-100 overflow-hidden;
 }
 
 .notification-image {
-  @apply w-11 h-11 rounded-full overflow-hidden;
+  @apply w-11 h-11 rounded-full overflow-hidden shrink-0;
 }
 
 .notification-image > img {
@@ -81,7 +78,12 @@
 }
 
 .notification-body {
-  @apply flex flex-col px-2;
+  @apply flex flex-col;
+  @apply w-[280px];
+}
+
+.notification-message {
+  @apply max-w-[270px] text-sm text-gray-600 h-[40px] line-clamp-2;
 }
 
 .createdTime {
