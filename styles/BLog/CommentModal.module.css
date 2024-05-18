@@ -1,0 +1,84 @@
+.wrapper {
+  @apply flex justify-center lg:block;
+  @apply fixed top-0 left-0 w-full h-full py-9 lg:py-0 bg-black bg-opacity-30 z-50;
+  @apply animate-fadeIn;
+}
+
+.content {
+  @apply flex flex-col relative;
+  @apply w-[95%] md:w-[90%] lg:w-[55%] xl:w-[45%] lg:h-[100vh] px-10 py-6 lg:ml-auto bg-white rounded-2xl lg:rounded-none;
+  /* @apply overflow-y-auto; */
+  @apply animate-floatRightToLeft;
+  overflow-y: overlay;
+}
+
+.close-button {
+  @apply ml-auto hover:cursor-pointer;
+}
+
+.heading {
+  @apply flex flex-col gap-2;
+}
+
+.count-comments {
+  @apply font-semibold text-xl;
+}
+
+.help {
+  @apply text-xs text-gray-500 italic;
+}
+
+.write-comment {
+  @apply flex flex-row gap-4;
+  @apply my-12 w-full;
+}
+
+.pseudoInput {
+  @apply w-full text-gray-400 border-b hover:cursor-text;
+}
+
+.form-button {
+  @apply flex items-center gap-4;
+  @apply mt-4;
+}
+
+.submit-button {
+  @apply rounded-full bg-orange-300 hover:bg-orange-400 active:bg-orange-500;
+  @apply px-4 py-2 text-white font-semibold;
+}
+
+.comments {
+  @apply flex flex-col gap-4;
+}
+
+/* Comment Item */
+.item-wrapper {
+  @apply flex flex-row gap-4;
+}
+
+.item-image {
+  @apply flex justify-center items-center;
+  @apply w-[40px] h-[40px] rounded-full overflow-hidden;
+}
+
+.item-image > img {
+  @apply object-cover w-full h-full;
+}
+
+.item-content {
+  @apply flex flex-col gap-2;
+}
+
+.item-name {
+  @apply font-semibold;
+}
+
+.item-comment {
+  @apply px-3 py-2 bg-slate-200 rounded-lg;
+}
+
+.item-actions {
+  @apply flex flex-row gap-3;
+  @apply text-xs font-semibold text-gray-400;
+}
+/* End of Comment Item */

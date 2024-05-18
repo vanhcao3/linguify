@@ -1,6 +1,6 @@
 //Array of routes that are available without the need of login
 export const publicRoutes = [
-  '/',
+  '/landing-page',
   '/auth/new-verification',
   '/api/uploadthing',
 ];
@@ -16,7 +16,4 @@ export const authRoutes = [
 //Api routes prefix that should always be accessible to perform sign in sign out functionalities
 export const apiAuthPrefix = '/api/auth';
 //Default path after logging in
-export const DEFAULT_LOGIN_REDIRECT = {
-  USER: '/teacher/courses',
-  ADMIN: '/admin',
-};
+export const DEFAULT_LOGIN_REDIRECT = '/';

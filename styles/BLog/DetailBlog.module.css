@@ -1,0 +1,44 @@
+.wrapper {
+  @apply flex flex-col md:flex-row gap-4;
+  @apply px-6 py-5;
+  @apply relative;
+}
+
+/* User Info */
+.user-info-wrapper {
+  @apply flex justify-center;
+  @apply w-full md:w-[25%];
+}
+
+.user-info-content {
+  @apply w-max h-max;
+  @apply sticky top-[80px];
+}
+
+.section1 {
+  @apply flex flex-row items-center gap-3;
+}
+
+.user-info-image {
+  @apply rounded-full overflow-hidden;
+}
+
+.section2 {
+  @apply flex flex-row justify-center items-center gap-[50px];
+}
+
+.section2 > img {
+  @apply hover:brightness-50 cursor-pointer;
+}
+/* End of User Info */
+
+/* Content */
+.content-wrapper {
+  @apply flex flex-col gap-[70px];
+  @apply w-[100%] lg:w-[70%] xl:w-[60%];
+}
+
+.content-title {
+  @apply font-bold text-4xl;
+}
+/* End of Content */

@@ -1,0 +1,148 @@
+.wrapper {
+  @apply flex flex-col;
+  @apply px-10 pt-6 mb-6;
+}
+
+.heading {
+  @apply flex flex-col gap-4;
+  @apply mb-14;
+}
+
+.heading-title {
+  @apply text-3xl font-bold;
+}
+
+.heading-description {
+  @apply text-sm;
+}
+
+.content {
+  @apply flex flex-col-reverse lg:flex-row gap-8;
+  @apply w-full;
+}
+
+.create-first-blog {
+  @apply inline-flex underline;
+  @apply text-orange-600;
+}
+
+/* Section 1 */
+.section1 {
+  @apply flex flex-col gap-4 w-full lg:w-[75%] xl:w-[60%];
+}
+
+/* Item */
+.item-wrapper {
+  @apply flex flex-col gap-4;
+  @apply px-4 py-4;
+  @apply border-2 border-solid border-gray-300 rounded-lg overflow-hidden shadow;
+}
+
+.item-header {
+  @apply flex flex-row items-center justify-between;
+}
+
+.author {
+  @apply flex flex-row items-center gap-2;
+  @apply text-xs;
+}
+
+.author-avatar {
+  @apply flex justify-center items-center;
+  @apply w-8 h-8 rounded-full overflow-hidden;
+  @apply border border-solid border-gray-300;
+}
+
+.author-avatar > img {
+  @apply object-cover w-full h-full;
+}
+
+.btn-actions {
+  @apply flex flex-row items-center gap-2;
+}
+
+.bookmark-btn,
+.dots-btn {
+  @apply cursor-pointer;
+}
+
+.item-body {
+  @apply flex flex-col-reverse md:flex-row gap-8;
+}
+
+.item-info {
+  @apply flex flex-col gap-4;
+}
+
+.info-title {
+  @apply text-lg font-bold;
+  @apply max-h-[84px] line-clamp-3 hover:cursor-pointer;
+}
+
+.info-description {
+  @apply h-[48px];
+  @apply text-[15px] line-clamp-2;
+}
+
+.thumb {
+  @apply w-[200px] h-[120px];
+  @apply flex justify-center items-center;
+  @apply rounded-lg overflow-hidden shrink-0;
+}
+
+.thumb > img {
+  @apply w-full h-full object-cover;
+}
+/* End of Item */
+
+/* Pagination */
+.pagination-wrapper {
+  @apply flex justify-center items-center;
+  @apply w-full mt-6;
+}
+
+.pagination {
+  @apply flex flex-row items-center justify-center gap-4;
+  @apply w-max;
+  @apply bg-slate-200;
+  @apply border border-solid border-gray-400 rounded-lg overflow-hidden;
+}
+
+.pagination > a {
+  @apply hover:bg-slate-300;
+}
+
+.button-disabled {
+  @apply text-gray-400 px-2;
+}
+
+.pagination-button {
+  @apply px-2;
+}
+
+.page-number {
+  @apply flex justify-center items-center;
+  @apply w-[30px];
+}
+
+.active-pagination {
+  @apply text-white;
+  @apply bg-gray-400;
+  @apply cursor-default;
+}
+/* End of Pagination */
+
+/* End of Section 1 */
+
+/* Section 2 */
+.section2 {
+  @apply flex flex-col gap-8 shrink-0;
+  @apply lg:sticky lg:top-[70px] lg:left-0 lg:z-[10] h-max;
+}
+
+.section2-header {
+  @apply pt-4;
+  /* @apply sticky top-0; */
+  @apply uppercase font-semibold text-gray-500;
+}
+/* End of Section 2 */

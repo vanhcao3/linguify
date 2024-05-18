@@ -26,6 +26,7 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([userId, courseId])
   @@index([courseId])
 }
 
@@ -125,10 +126,13 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
   Call                  Call[]
   Participant           Participant[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Blog      Blog[]
+  Comment   Comment[]
 }
 
 model Account {
@@ -218,4 +222,25 @@ model Participant {
   status    String
   startTime DateTime?
   endTime   DateTime?
+}
+model Blog {
+  id        String    @id @default(uuid()) @map("_id")
+  title     String
+  content   String
+  owner     String
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [owner], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(uuid()) @map("_id")
+  content   String
+  owner     String
+  blogId    String
+  user      User     @relation(fields: [owner], references: [id])
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
