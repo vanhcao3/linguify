@@ -24,6 +24,7 @@ export default function RootLayout({
   const pathName = usePathname();
   const isNotificationPage = pathName === '/me/notification';
 
+
   return (
     // <html lang="en">
     //   <body className={inter.className + ' ' + styles['wrapper']}>
@@ -37,7 +38,7 @@ export default function RootLayout({
     //   </body>
     // </html>
     <div className={styles['wrapper']}>
-      <Header />
+      <Header currentUser={true}/>
 
       <div className={styles['body']}>
         {!isNotificationPage && <Sidebar />}
