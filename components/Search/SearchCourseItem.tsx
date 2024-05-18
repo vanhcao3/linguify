@@ -9,13 +9,11 @@ interface props {
 }
 
 function SearchCourseItem({ title, imageUrl, description }: props) {
-  if (imageUrl === null) {
-    imageUrl = '/images/no-image.png';
-  }
+  const itemImage = imageUrl ? imageUrl : '/images/no-image.png';
   return (
     <div className={styles['wrapper']}>
       <div className={styles['image']}>
-        <Image src={imageUrl} alt="" width={280} height={158} />
+        <Image src={itemImage} alt="" width={280} height={158} />
       </div>
       <div className={styles['detail']}>
         <div className="font-semibold text-2xl line-clamp-2">

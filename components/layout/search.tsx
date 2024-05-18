@@ -93,8 +93,9 @@ function Search() {
               <hr className={styles['hrTag']} />
               <div className={styles['content-wrapper']}>
                 {item.data.map((subItem: any, index: number) => {
-                  if (subItem.imageUrl === null)
-                    subItem.imageUrl = '/images/no-image.png';
+                  const subItemImage = subItem.imageUrl
+                    ? subItem.imageUrl
+                    : '/images/no-image.png';
                   return (
                     <div
                       key={index}
@@ -102,7 +103,7 @@ function Search() {
                     >
                       <div className={styles['item-image']}>
                         <Image
-                          src={subItem.imageUrl}
+                          src={subItemImage}
                           alt=""
                           width={33}
                           height={33}

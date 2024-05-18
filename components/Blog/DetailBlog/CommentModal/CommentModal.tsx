@@ -29,6 +29,9 @@ function CommentModal({
   comments,
   commentsOwner,
 }: props) {
+  const userImage = currentUser.image
+    ? currentUser.image
+    : '/images/no-image.png';
   const route = useRouter();
   const [showEditor, setShowEditor] = useState(false);
   const form = useForm<z.infer<typeof CommentSchema>>({
@@ -70,12 +73,7 @@ function CommentModal({
 
         <div className={styles['write-comment']}>
           <div className={styles['user-image']}>
-            <Image
-              src={currentUser.image}
-              alt=""
-              width={40}
-              height={40}
-            />
+            <Image src={userImage} alt="" width={40} height={40} />
           </div>
           {!showEditor ? (
             <div

@@ -20,6 +20,9 @@ function Notification(props: IProps) {
       <Header title={title} btnTitle={btnTitle} href={href} />
       <div className={styles['body']}>
         {items.map((item, index) => {
+          const itemImage = item.image
+            ? item.image
+            : '/images/no-image.png';
           return (
             <div
               className={styles['notification-wrapper']}
@@ -27,12 +30,10 @@ function Notification(props: IProps) {
             >
               <div className={styles['notification-image']}>
                 <Image
-                  src={item.image}
+                  src={itemImage}
                   width={40}
                   height={40}
                   alt="logo"
-                  // layout="responsive"
-                  // objectFit="cover"
                 />
               </div>
               <div className={styles['notification-body']}>

@@ -1,6 +1,12 @@
 import { Controller } from 'react-hook-form';
-import Editor from '../Editor';
+import dynamic from 'next/dynamic';
+
+// import Editor from '../Editor';
 import styles from '@/styles/Blog/CreateBlog.module.css';
+
+const BlogEditor = dynamic(() => import('../Editor'), {
+  ssr: false,
+});
 
 interface props {
   name: string;
@@ -15,7 +21,7 @@ function ContentInput({ name, control, errorMessage }: props) {
         name={name}
         control={control}
         render={({ field }) => (
-          <Editor
+          <BlogEditor
             value={field.value}
             onChange={field.onChange}
             height={400}

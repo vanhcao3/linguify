@@ -17,14 +17,14 @@ function Course({ title, btnTitle, items, href }: props) {
       <Header title={title} btnTitle={btnTitle} href={href} />
       <div className={styles['body']}>
         {items.map((item, index) => {
-          if (item.imageUrl === null) {
-            item.imageUrl = '/images/no-image.png';
-          }
+          const itemImage = item.imageUrl
+            ? item.imageUrl
+            : '/images/no-image.png';
           return (
             <div className={styles['course-wrapper']} key={index}>
               <div className={styles['course-image']}>
                 <Image
-                  src={item.imageUrl}
+                  src={itemImage}
                   width={120}
                   height={67.5}
                   alt={item.title}

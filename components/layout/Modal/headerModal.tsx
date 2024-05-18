@@ -2,7 +2,7 @@ import styles from '@/styles/layout/headerModal.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface IProps {
+interface props {
   userInfo: {
     avt: string;
     name: string;
@@ -12,9 +12,13 @@ interface IProps {
   closeModal: () => void;
 }
 
-function headerModal(props: IProps) {
-  const { userInfo, currentUser, closeModal } = props;
-
+function headerModal({ userInfo, currentUser, closeModal }: props) {
+  const userImage = userInfo.avt
+    ? userInfo.avt
+    : '/images/no-image.png';
+  const profileHref = userInfo.nickname
+    ? `/me/${userInfo.nickname}`
+    : '/';
   const MENU = [
     {
       title: 'Đăng nhập',
@@ -27,13 +31,14 @@ function headerModal(props: IProps) {
       title: 'Trang cá nhân',
       icon: '/icons/user.svg',
       hrTag: false,
-      href: `/me/${userInfo.nickname}`,
+      href: profileHref,
       visible: currentUser,
     },
     {
       title: 'Khoá học của tôi',
       hrTag: false,
       icon: '/icons/bookOpenIcon.svg',
+      href: 'me/myCourses',
       visible: currentUser,
     },
     {
@@ -93,28 +98,47 @@ function headerModal(props: IProps) {
 
   return (
     <div className={styles['wrapper']} onClick={closeModal}>
-      <div className={styles['content']} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles['content']}
+        onClick={(e) => e.stopPropagation()}
+      >
         {currentUser && (
           <div className={styles['section1']}>
             <div className={styles['avt']}>
-              <Image src={userInfo.avt} alt="" width={40} height={40} />
+              <Image src={userImage} alt="" width={40} height={40} />
             </div>
             <div className={styles['name']}>{userInfo.name}</div>
           </div>
         )}
         {currentUser && <hr className={styles['hrTag']} />}
         <div className={styles['section2']}>
-          {MENU.map((item, index) => (
-            <div key={index}>
-              {item.visible && (
-                <Link href={item.href || '/'} className={styles['item']} onClick={closeModal}>
-                  <Image src={item.icon || '/images/no-image.png'} alt="" width={24} height={24} />
-                  {item.title}
-                </Link>
-              )}
-              {item.hrTag && item.visible && <hr className={styles['hrTag']} />}
-            </div>
-          ))}
+          {MENU.map((item, index) => {
+            const itemIcon = item.icon
+              ? item.icon
+              : '/images/no-image.png';
+            return (
+              <div key={index}>
+                {item.visible && (
+                  <Link
+                    href={item.href || '/'}
+                    className={styles['item']}
+                    onClick={closeModal}
+                  >
+                    <Image
+                      src={itemIcon}
+                      alt=""
+                      width={24}
+                      height={24}
+                    />
+                    {item.title}
+                  </Link>
+                )}
+                {item.hrTag && item.visible && (
+                  <hr className={styles['hrTag']} />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

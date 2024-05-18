@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import styles from '@/styles/Search/search.module.css';
-import { SearchValueContext } from '../layout';
+// import { SearchValueContext } from '../layout';
 import { searchAll } from '@/actions/search';
 import { useDebounce } from '@/hooks/useDebounce';
 import SearchCourseItem from '@/components/Search/SearchCourseItem';
@@ -36,21 +36,21 @@ interface SearchCourseProps {
 
 function SearchCourse() {
   const pathname = usePathname();
-  const searchValue = useContext(SearchValueContext);
+  // const searchValue = useContext<string>(SearchValueContext);
   const [searchCourses, setSearchCourses] = useState<
     SearchCourseProps[]
   >([]);
 
-  const debouncedSearchValue = useDebounce(searchValue, 800);
+  // const debouncedSearchValue = useDebounce(searchValue, 800);
 
-  useEffect(() => {
-    const getBlogs = async () => {
-      const courses = await searchAll(debouncedSearchValue);
-      setSearchCourses(courses);
-    };
+  // useEffect(() => {
+  //   const getBlogs = async () => {
+  //     const courses = await searchAll(debouncedSearchValue);
+  //     setSearchCourses(courses);
+  //   };
 
-    getBlogs();
-  }, [debouncedSearchValue]);
+  //   getBlogs();
+  // }, [debouncedSearchValue]);
 
   return (
     <div className="flex flex-col gap-6">

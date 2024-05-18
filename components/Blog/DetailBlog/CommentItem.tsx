@@ -10,15 +10,28 @@ interface props {
   updatedAt: Date;
 }
 
-function CommentItem({ content, commentOwner, createdAt, updatedAt }: props) {
+function CommentItem({
+  content,
+  commentOwner,
+  createdAt,
+  updatedAt,
+}: props) {
+  const ownerImage = commentOwner.image
+    ? commentOwner.image
+    : '/images/no-image.png';
   return (
     <div className={styles['item-wrapper']}>
       <div className={styles['item-image']}>
-        <Image src={commentOwner?.image || '/images/no-image.png'} alt="" width={40} height={40} />
+        <Image src={ownerImage} alt="" width={40} height={40} />
       </div>
       <div className={styles['item-content']}>
-        <div className={styles['item-name']}>{commentOwner?.name}</div>
-        <div dangerouslySetInnerHTML={{ __html: content }} className={styles['item-comment']}></div>
+        <div className={styles['item-name']}>
+          {commentOwner?.name}
+        </div>
+        <div
+          dangerouslySetInnerHTML={{ __html: content }}
+          className={styles['item-comment']}
+        ></div>
         <div className={styles['item-actions']}>
           <div>{calculateTime(createdAt, updatedAt)}</div>
           <div>Like</div>

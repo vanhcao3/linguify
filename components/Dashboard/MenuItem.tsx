@@ -12,12 +12,13 @@ interface props {
 }
 
 function MenuItem({ title, imageUrl, price }: props) {
+  const srcImage = imageUrl ? imageUrl : '/images/no-image.png';
   return (
     <div className={styles['item-wrapper']}>
       {imageUrl && (
         <div className={styles['item-image']}>
           <Image
-            src={imageUrl}
+            src={srcImage}
             alt={title}
             width={240}
             height={135}

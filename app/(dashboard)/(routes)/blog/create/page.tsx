@@ -5,15 +5,15 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
 import TitleInput from '@/components/Blog/CreateBlog/TitleInput';
 import ContentInput from '@/components/Blog/CreateBlog/ContentInput';
 import { NewBlogSchema } from '@/schemas';
 
-function CreateBlog() {
-  const router = useRouter();
+const CreateBlog = () => {
+  // const router = useRouter();
   const form = useForm<z.infer<typeof NewBlogSchema>>({
     resolver: zodResolver(NewBlogSchema),
     defaultValues: {
@@ -30,7 +30,7 @@ function CreateBlog() {
       );
       console.log(response);
       toast.success('Xuất bản bài viết thành công!');
-      router.push('/');
+      // router.push('/');
     } catch (error) {
       console.log('[CreateBlog]', error);
       toast.error('Xuất bản bài viết thất bại');
@@ -61,6 +61,6 @@ function CreateBlog() {
       </form>
     </div>
   );
-}
+};
 
 export default CreateBlog;
