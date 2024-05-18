@@ -1,6 +1,6 @@
 export const STUDENT_ROUTES = [
   {
-    title: 'Trang chủ',
+    title: 'Dashboard',
     topIcon: '/icons/homeIcon.svg',
     type: 'square',
     href: '/',
@@ -12,13 +12,7 @@ export const STUDENT_ROUTES = [
     href: '/search',
   },
   {
-    title: 'Lộ trình',
-    topIcon: '/icons/roadIcon.svg',
-    type: 'square',
-    href: '/learningPath',
-  },
-  {
-    title: 'Bài viết',
+    title: 'Posts',
     topIcon: '/icons/blogIcon.svg',
     type: 'square',
     href: '/blog?page=1',
@@ -37,5 +31,5 @@ export const TEACHER_ROUTES = [
     topIcon: '/icons/analyticsIcon.svg',
     type: 'square',
     href: '/teacher/analytics',
-  }
+  },
 ];
