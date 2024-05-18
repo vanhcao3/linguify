@@ -1,14 +1,12 @@
 import { type Metadata } from "next";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { Icons } from "@/components/ui/calls/icons";
-import { formatDate } from "@/lib/date";
 import JoinCallDialog from "@/components/call/join-call-dialog";
 import InviteParticipantsDialog from "@/components/call/invite-participants-dialog";
-import { type CardProps } from "@/components/layout/card-shell";
+import { type CardProps } from "@/components/layout/call-shell";
 import CreateCallCard from "@/components/call/create-call-card";
 import { Button } from "@/components/ui/button";
-import { currentUser } from '../../../lib/auth';
+import { currentUser } from '@/lib/auth';
 
 const cardsData: CardProps[] = [
   {
@@ -46,7 +44,6 @@ export default async function CallsPage(){
       <section className="container max-w-[1400px] space-y-6 mb-8 md:mb-12 lg:mb-16 mx-auto">
         <div className="flex flex-col items-center gap-4 text-center">
           <div>
-            <Badge variant="secondary">{formatDate(new Date())}</Badge>
             <h1 className="mt-4 text-4xl md:text-5xl lg:text-[50px] font-semibold leading-none px-4 md:px-8">
               {`Welcome ${user?.name as string}`}
             </h1>
@@ -54,7 +51,7 @@ export default async function CallsPage(){
         </div>
       </section>
       <section className="space-y-6 mx-auto">
-        <div className="w-full max-w-[1200px] text-center mx-auto">
+        <div className="w-full text-center mx-auto">
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 place-items-center lg:gap-5 px-4 md:px-8">
             <CreateCallCard {...cardsData[0] as CardProps} />
             <JoinCallDialog {...cardsData[1] as CardProps} />

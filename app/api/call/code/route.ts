@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       return new Response("Not Found", { status: 404 })
     }
 
-    let role = "guest";
+    let role = "broadcaster";
     if (userId) {
       const participant = await db.participant.findUnique({
         where: { id: userId },
@@ -52,19 +52,20 @@ export async function POST(req: Request) {
     const roomId = call.id;
 
     const token = await generateManagementToken();
-    const response = await fetch(`${process.env.TOKEN_ENDPOINT}/room-codes/room/${roomId}/role/${role}`, {
+    const response = await fetch(`https://api.100ms.live/v2/room-codes/room/${roomId}/role/${role}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     });
-
+    console.log(response);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const { code }: RoomCode = await response.json() as RoomCode;
+    console.log(code);
     return new Response(JSON.stringify({ code }));
 
   } catch (error) {

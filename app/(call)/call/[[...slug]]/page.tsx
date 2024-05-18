@@ -8,7 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import {type RoomCodeResponse} from "@/types/types";
 import { extractId } from "@/lib/extract-id";
 import { useToast } from "@/components/ui/use-toast";
-import { currentUser } from "@/lib/auth";
+import { getSession } from 'next-auth/react';
 
 
 export default function CallPage(){
@@ -21,6 +21,7 @@ export default function CallPage(){
   const actions = useHMSActions();
   const roomName = Cookies.get("room-name");
   const roomId = Cookies.get("room-id");
+  console.log("roomid: " + roomId);
   const unAuthUsername = Cookies.get("username");
 
   const joinCall = React.useCallback(async () => {
@@ -45,12 +46,13 @@ export default function CallPage(){
 
         // use room code to fetch auth token
         const codeResponse: RoomCodeResponse = await roomCodeResponse.json() as RoomCodeResponse;
+
         const roomCode = codeResponse.code;
         const authToken = await hmsActions.getAuthTokenByRoomCode({ roomCode })
-        const session = await currentUser();
-
-        if(session && session.name){
-          const userName = session.name;
+        console.log(authToken);
+        const session = await getSession();
+        if(session && session.user && session.user.name){
+          const userName = session.user.name;
           await hmsActions.join({ userName, authToken });
         } else if(!session && unAuthUsername){
           await hmsActions.join({ userName: unAuthUsername, authToken });
@@ -120,9 +122,9 @@ export default function CallPage(){
 
 
   return(
-    <section className="flex flex-col w-full h-screen overflow-hidden bg-neutral-950 text-gray-200">
+    <div className="flex flex-col w-full h-full bg-neutral-950 text-gray-200">
       <Conference/>
       <CallFooter/>
-    </section>
+    </div>
   )
 }

@@ -1,7 +1,6 @@
-
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { currentUser } from "@/lib/auth";
+import { currentUser } from '@/lib/auth';
 
 export default async function CallLayout({
                                            children,
@@ -21,7 +20,7 @@ export default async function CallLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col">
       <main className="flex-1 w-screen flex items-center">
         {children}
       </main>

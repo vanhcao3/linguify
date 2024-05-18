@@ -3,11 +3,11 @@
 import React, { useState } from 'react'
 import CardShell, { type CardProps } from '../layout/call-shell';
 import { useRouter } from 'next/navigation';
-import { joinCallFormSchema } from '../../schemas/call';
+import { joinCallFormSchema } from '@/schemas/call';
 import { type z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { extractId } from '../../lib/extract-id';
+import { extractId } from '@/lib/extract-id';
 import { Icons } from '../ui/calls/icons';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
@@ -67,9 +67,9 @@ export default function JoinCallDialog (card: CardProps)  {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className='p-0 flex w-fit h-fit'>
+        <div className='p-0 flex w-fit h-fit'>
           <CardShell card={card}/>
-        </Button>
+        </div>
       </DialogTrigger>
       <DialogContent className='flex flex-col gap-4'>
         <DialogHeader>

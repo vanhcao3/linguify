@@ -69,13 +69,13 @@ export default function CallFooter () {
   }, [actions, isScreenShareEnabled, toast])
 
   return (
-    <footer className={`rounded-lg flex items-center mt-auto justify-center sm:justify-start px-5 py-8`}>
-      <div className='grid grid-cols-5 gap-3'>
+    <footer className={`w-full rounded-lg flex items-center mt-auto justify-center sm:justify-start px-5 py-8`}>
+      <div className='w-full flex justify-center gap-3'>
         <Button
           size="sm"
           variant="ghost"
           onClick={toggleAudio}
-          className="rounded-full flex justify-center items-center bg-neutral-800 py-6 px-4"
+          className="rounded-full flex justify-center items-center bg-neutral-800 py-6 px-4 max-w-14"
         >
           {
             isLocalAudioEnabled ?
@@ -87,7 +87,7 @@ export default function CallFooter () {
           size="sm"
           variant="ghost"
           onClick={toggleVideo}
-          className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800"
+          className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800 max-w-14"
         >
           {
             isLocalVideoEnabled ?
@@ -99,7 +99,7 @@ export default function CallFooter () {
           size="sm"
           variant="ghost"
           onClick={()=> setIsScreenShareEnabled(!isScreenShareEnabled)}
-          className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800"
+          className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800 max-w-14"
         >
           <ShareScreenIcon color="white" width={20} height={20}/>
         </Button>
@@ -116,7 +116,7 @@ export default function CallFooter () {
               });
             }
           }}
-          className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800"
+          className="rounded-full flex justify-center items-center py-6 px-4 bg-neutral-800 max-w-14"
         >
           <Icons.invite color="white" width={20} height={20}/>
         </Button>
@@ -126,7 +126,7 @@ export default function CallFooter () {
           onClick={() => {
             setShowRejoinPopup(true)
           }}
-          className="rounded-full flex justify-center py-6 bg-red-500"
+          className="rounded-full flex justify-center py-6 bg-red-500 max-w-14"
         >
           <HangUpIcon color='white' width={25} height={25} />
         </Button>

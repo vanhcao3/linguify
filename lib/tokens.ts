@@ -95,7 +95,6 @@ const payload : Payload= {
 
 
 export const generateManagementToken = (): Promise<string> => {
-
   return new Promise((resolve, reject) => {
     jwt.sign(
       payload,

@@ -20,7 +20,6 @@ export async function POST(req: Request) {
 
   try {
     const user = await currentUser()
-
     if (!user) {
       return new Response("Unauthorized", { status: 403 })
     }
@@ -29,10 +28,12 @@ export async function POST(req: Request) {
       throw new Error('You must be logged in to create a call');
     }
 
+
     const json: CallCreateBody = await req.json() as CallCreateBody;
     const body = callCreateSchema.parse(json)
-
+    console.log(1);
     const roomId = await createRoom(body.callName);
+    console.log(2);
     const existingCall = await db.call.findUnique({
       where: { id: roomId },
     });
@@ -93,10 +94,8 @@ export async function POST(req: Request) {
 }
 
 async function createRoom(name: string){
-
   const managementToken = await generateManagementToken();
-
-  const response = await fetch(`${process.env.TOKEN_ENDPOINT}/rooms`, {
+  const response = await fetch(`https://api.100ms.live/v2/rooms`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${managementToken}`,
@@ -108,7 +107,6 @@ async function createRoom(name: string){
       region: 'us'
     })
   });
-
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
