@@ -1,11 +1,16 @@
 import type { Config } from 'tailwindcss';
-
-import { withUt } from 'uploadthing/tw';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import { withUt } from 'uploadthing/tw';
 
 const config = withUt({
   darkMode: ['class'],
-  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+    './styles/**/*.{ts,tsx}',
+  ],
   prefix: '',
   theme: {
     screens: {

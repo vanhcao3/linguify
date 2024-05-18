@@ -19,3 +19,19 @@ export const getChapterById = async (
     return null;
   }
 };
+
+export const getPublishedChaptersInCourse = async (
+  courseId: string,
+) => {
+  try {
+    const publishedChaptersInCourse = await db.chapter.findMany({
+      where: {
+        courseId: courseId,
+        isPublished: true,
+      },
+    });
+    return publishedChaptersInCourse;
+  } catch {
+    return null;
+  }
+};

@@ -93,6 +93,10 @@ export const chapterAccessFormSchema = z.object({
   isFree: z.boolean().default(false),
 });
 
+export const chapterVideoFormSchema = z.object({
+  videoUrl: z.string().min(1),
+});
+
 export const CommentSchema = z.object({
   owner: z.string(),
   blogId: z.string(),
