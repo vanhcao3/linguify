@@ -63,9 +63,11 @@ const userInfo = {
   nickname: '@theanhhoang',
 };
 
-const currentUser = true;
+interface HeaderProps {
+  currentUser: boolean;
+}
 
-function Header() {
+function Header({ currentUser }: HeaderProps) {
   const USER_MENU = [
     {
       title: 'Trang cá nhân',
@@ -101,7 +103,7 @@ function Header() {
   const isSearchPage = pathName === '/search';
 
   const isTeacherPage = pathName?.startsWith('/teacher');
-  const isStudentPage = pathName?.startsWith('chapter');
+  const isStudentPage = pathName?.startsWith('/courses');
   const router = useRouter();
 
   const [headerModal, setHeaderModal] = useState(false);
@@ -136,8 +138,8 @@ function Header() {
         {headerModal && (
           <HeaderModal
             userInfo={userInfo}
-            currentUser={currentUser}
             closeModal={closeHeaderModal}
+            currentUser={currentUser}
           />
         )}
         <div className={styles['logo-icon']}>
