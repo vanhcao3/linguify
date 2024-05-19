@@ -14,7 +14,7 @@ function CommentItem({ content, commentOwner, createdAt, updatedAt }: props) {
   return (
     <div className={styles['item-wrapper']}>
       <div className={styles['item-image']}>
-        <Image src={commentOwner?.image || '/images/no-image.png'} alt="" width={40} height={40} />
+        <Image src={commentOwner?.image ? commentOwner?.image:'/images/no-avatar.png'} alt="" width={40} height={40} />
       </div>
       <div className={styles['item-content']}>
         <div className={styles['item-name']}>{commentOwner?.name}</div>

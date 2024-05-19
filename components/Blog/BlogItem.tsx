@@ -15,22 +15,34 @@ function BlogItem({ data, owner }: props) {
   const handleClick = () => {
     router.push(`/blog/${data.id}`);
   };
-
+  const ownerImage = owner.image
+    ? owner.image
+    : '/images/no-avatar.png';
   return (
     <div className={styles['item-wrapper']}>
       <div className={styles['item-header']}>
         <div className={styles['author']}>
           <div className={styles['author-avatar']}>
-            <Image src={owner.image} width={25} height={25} alt="" />
+            <Image src={ownerImage} width={25} height={25} alt="" />
           </div>
           <div className="font-semibold text-base">{owner.name}</div>
         </div>
         <div className={styles['btn-actions']}>
           <div className={styles['bookmark-btn']}>
-            <Image src="/icons/bookmarkIcon.svg" alt="" width={24} height={20} />
+            <Image
+              src="/icons/bookmarkIcon.svg"
+              alt=""
+              width={24}
+              height={20}
+            />
           </div>
           <div className={styles['dots-btn']}>
-            <Image src="/icons/dotsIcon.svg" alt="" width={24} height={24} />
+            <Image
+              src="/icons/dotsIcon.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
           </div>
         </div>
       </div>
@@ -39,7 +51,10 @@ function BlogItem({ data, owner }: props) {
           <div className={styles['info-title']} onClick={handleClick}>
             {data.title}
           </div>
-          <div className={styles['info-description']} dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          <div
+            className={styles['info-description']}
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          ></div>
         </div>
         {data.image && (
           <div className={styles['thumb']}>

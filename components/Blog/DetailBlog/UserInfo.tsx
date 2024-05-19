@@ -1,21 +1,27 @@
 'use client';
 
-import styles from '@/styles/Blog/DetailBlog.module.css';
-import Image from 'next/image';
 import { useState } from 'react';
-import CommentModal from './CommentModal/CommentModal';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+import styles from '@/styles/Blog/DetailBlog.module.css';
+// import CommentModal from './CommentModal/CommentModal';
+const CommentModal = dynamic(() => import('./CommentModal/CommentModal'));
+
 
 interface props {
   name: string;
   avt: string;
   blogId: string;
-  currentUser?: any;
-  comments?: any[];
+  currentUser: any;
+  comments: any[];
   commentsOwner: any[];
 }
 
 function UserInfo({ name, avt, blogId, currentUser, comments, commentsOwner }: props) {
   const [commentModal, setCommentModal] = useState(false);
+  console.log(blogId, currentUser, comments, commentsOwner);
+  
 
   const openCommentModal = () => setCommentModal(true);
   const closeCommentModal = () => setCommentModal(false);
@@ -24,7 +30,7 @@ function UserInfo({ name, avt, blogId, currentUser, comments, commentsOwner }: p
       <div className={styles['user-info-content']}>
         <div className={styles['section1']}>
           <div className={styles['user-info-image']}>
-            <Image src={avt} alt="" width={40} height={40} />
+            <Image src={avt} alt="avatar" width={50} height={50} />
           </div>
           <div>{name}</div>
         </div>
