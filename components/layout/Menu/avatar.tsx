@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import styles from '@/styles/layout/menu.module.css';
 import Link from 'next/link';
+import { useCurrentUser } from '@/hooks/use-current-user';
 
 interface IProps {
     items: Array<any>;
-    userInfo: any | null;
 }
 
 function Avatar(props: IProps) {
-    const { items, userInfo } = props;
+    const { items } = props;
+
+    const currentUser = useCurrentUser();
 
     return (
         <div className={styles['user-menu-list']}>
@@ -16,36 +18,32 @@ function Avatar(props: IProps) {
                 <div className={styles['userInfo-wrapper']}>
                     <div className={styles['userInfo-avt']}>
                         <Image
-                            src={userInfo?.avt ? userInfo.avt : '/no-image.png'}
-                            width={50}
-                            height={50}
-                            alt={userInfo?.name ? userInfo.name : 'theanh'}
+                            src={currentUser?.image ? currentUser.image : '/images/no-avatar.png'}
+                            width={60}
+                            height={80}
+                            alt={currentUser?.name ? currentUser.name : 'Anonymous'}
                         />
                     </div>
                     <div className={styles['userInfo-content']}>
-                        <div className={styles['userInfo-name']}>{userInfo.name}</div>
-                        <div className={styles['userInfo-nickname']}>{userInfo.nickname}</div>
+                        <div className={styles['userInfo-name']}>{currentUser?.name}</div>
+                        <div className={styles['userInfo-nickname']}>{currentUser?.name}</div>
                     </div>
                 </div>
                 <hr className={styles.hrTag} />
-                {items.map((item, index) => {
-                    if (item.href) {
-                        return (
-                            <div key={index} className={styles['item-wrapper']}>
-                                <Link href={item.href} className={styles['item-title']}>
-                                    {item.title}
-                                </Link>
-                                {item.hrTag && <hr className={styles['hrTag']} />}
-                            </div>
-                        );
-                    }
-                    return (
-                        <div className={styles['item-wrapper']} key={index}>
+                {items.map((item, index) => (
+                    <div key={index} className={styles['item-wrapper']}>
+                        {item.href ? (
+                            <Link href={item.href} className={styles['item-title']}>
+                                {item.title}
+                            </Link>
+                        ) : item.onClick ? (
+                            <div className={styles['item-title']}><button onClick={item.onClick}>{item.title}</button></div>
+                        ) : (
                             <div className={styles['item-title']}>{item.title}</div>
-                            {item.hrTag && <hr className={styles['hrTag']} />}
-                        </div>
-                    );
-                })}
+                        )}
+                        {item.hrTag && <hr className={styles['hrTag']} />}
+                    </div>
+                ))}
             </div>
         </div>
     );
