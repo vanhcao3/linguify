@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 import styles from '@/styles/Blog/DetailBlog.module.css';
+import { addFavoriteBlog, removeFavoriteBlog } from '@/actions/blogs';
 // import CommentModal from './CommentModal/CommentModal';
 const CommentModal = dynamic(
   () => import('./CommentModal/CommentModal'),
@@ -29,10 +32,31 @@ function UserInfo({
   commentsOwner,
   isFavorite,
 }: props) {
+  const router = useRouter();
   const [commentModal, setCommentModal] = useState(false);
 
   const openCommentModal = () => setCommentModal(true);
   const closeCommentModal = () => setCommentModal(false);
+  const handleAddFavorite = async () => {
+    try {
+      const res = await addFavoriteBlog(blogId, currentUser.id);
+      toast.success('Đã thêm vào danh sách yêu thích');
+      router.refresh();
+    } catch (error) {
+      console.log('[UserInfo]', error);
+      toast.error('Đã có lỗi xảy ra');
+    }
+  };
+  const handleRemoveFavorite = async () => {
+    try {
+      const res = await removeFavoriteBlog(blogId, currentUser.id);
+      toast.success('Đã huỷ yêu thích bài viết');
+      router.refresh();
+    } catch (error) {
+      console.log('[UserInfo]', error);
+      toast.error('Đã có lỗi xảy ra');
+    }
+  };
   return (
     <div className={styles['user-info-wrapper']}>
       <div className={styles['user-info-content']}>
@@ -50,6 +74,7 @@ function UserInfo({
               alt=""
               width={24}
               height={24}
+              onClick={handleRemoveFavorite}
             />
           ) : (
             <Image
@@ -57,6 +82,7 @@ function UserInfo({
               alt=""
               width={24}
               height={24}
+              onClick={handleAddFavorite}
             />
           )}
           <Image

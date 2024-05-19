@@ -29,3 +29,39 @@ export const isFavoriteBlog = async (
     return false;
   }
 };
+
+export const addFavoriteBlog = async (
+  blogId: string,
+  userId: string,
+) => {
+  try {
+    const favorite = await db.favoriteBlog.create({
+      data: {
+        blogId,
+        userId,
+      },
+    });
+    return favorite;
+  } catch (error) {
+    console.log('[actions/blogs]', error);
+    return null;
+  }
+};
+
+export const removeFavoriteBlog = async (
+  blogId: string,
+  userId: string,
+) => {
+  try {
+    const favorite = await db.favoriteBlog.deleteMany({
+      where: {
+        blogId,
+        userId,
+      },
+    });
+    return favorite;
+  } catch (error) {
+    console.log('[actions/blogs]', error);
+    return null;
+  }
+};
