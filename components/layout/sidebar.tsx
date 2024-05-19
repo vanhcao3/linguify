@@ -44,21 +44,6 @@ function Sidebar() {
               </Link>
             );
           }
-
-          //const items = data.items || [];
-
-          // return (
-          //   <button key={index} className={`${styles['btn-wrapper']} ${styles[data.type]}`}>
-          //     {data.topIcon && (
-          //       <Menu title={null} btnTitle={null} type="sidebarMenu" userInfo={null} items={items}>
-          //         <span tabIndex={0} className={styles['inner-icon']}>
-          //           <Image src={data.topIcon} width={25} height={25} alt={data.title || ''} />
-          //         </span>
-          //       </Menu>
-          //     )}
-          //     {data.title}
-          //   </button>
-          // );
         })}
       </div>
     </div>

@@ -28,7 +28,6 @@ export const CourseNavbarRoutes = () => {
           </Button>
         </Link>
       )}
-      <UserCircle />
     </div>
   );
 };

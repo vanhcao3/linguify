@@ -60,7 +60,7 @@ export const CourseProgressButton = ({
       className="w-full md:w-auto"
       onClick={onClick}
     >
-      {isCompleted ? 'Not completed' : 'Completed'}
+      {isCompleted ? 'Mark not completed' : 'Mark completed'}
       <Icon className="h-4 w-4 ml-2" />
     </Button>
   );

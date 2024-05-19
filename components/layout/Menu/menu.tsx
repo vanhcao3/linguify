@@ -3,19 +3,19 @@ import Course from './course';
 import Notification from './notification';
 import Avatar from './avatar';
 import SidebarMenu from './sidebarMenu';
+import { User, UserRole } from '@prisma/client';
 
 interface IProps {
   children: React.ReactNode;
   title: string | null;
   btnTitle: string | null;
   type: string;
-  userInfo: object | null;
   items: Array<any>;
   href?: string;
 }
 
 function Menu(props: IProps) {
-  const { children, type, title, btnTitle, items, userInfo, href } = props;
+  const { children, type, title, btnTitle, items, href } = props;
 
   const renderResult = () => {
     if (type === 'course') {
@@ -35,7 +35,7 @@ function Menu(props: IProps) {
     if (type === 'avatar') {
       return (
         <div>
-          <Avatar userInfo={userInfo} items={items} />
+          <Avatar items={items} />
         </div>
       );
     }
