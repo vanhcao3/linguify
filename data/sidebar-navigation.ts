@@ -15,7 +15,7 @@ export const STUDENT_ROUTES = [
     title: 'Posts',
     topIcon: '/icons/blogIcon.svg',
     type: 'square',
-    href: '/blog?page=1',
+    href: '/blog',
   },
 ];
 
