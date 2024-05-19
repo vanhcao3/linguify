@@ -14,7 +14,7 @@ import { DialogDescription } from '@radix-ui/react-dialog';
 import toast from 'react-hot-toast';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { currentUser } from '@/lib/auth';
+import { getSession } from 'next-auth/react';
 
 type FormData = z.infer<typeof inviteSchema>
 
@@ -34,7 +34,8 @@ export default function InviteParticipantsDialog (card: CardProps)  {
 
   async function onSubmit(data: FormData){
     setIsLoading(true);
-    const user = await currentUser();
+    const session = await getSession();
+    const user = session!.user;
 
     if (user) {
       const recipientUsername = data.email.split('@')[0];

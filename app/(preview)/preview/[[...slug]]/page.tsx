@@ -58,7 +58,7 @@ export default function CallPreviewPage(){
     }
 
   }
-  
+
   return(
     <section className="w-full max-w-7xl flex justify-center items-center sm:-mt-20 mx-auto">
       <div className="mx-auto flex flex-col gap-8 w-[330px] sm:w-[370px]">
@@ -76,7 +76,6 @@ export default function CallPreviewPage(){
             placeholder="Enter your name"
             type="text"
           />
-          {errors.name && typeof errors.name.message === 'string' && <p className='mt-2 text-sm text-red-500'>{errors.name.message}</p>}
           <Button
             size="lg"
             type="submit"
