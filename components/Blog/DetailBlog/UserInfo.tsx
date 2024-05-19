@@ -6,8 +6,9 @@ import dynamic from 'next/dynamic';
 
 import styles from '@/styles/Blog/DetailBlog.module.css';
 // import CommentModal from './CommentModal/CommentModal';
-const CommentModal = dynamic(() => import('./CommentModal/CommentModal'));
-
+const CommentModal = dynamic(
+  () => import('./CommentModal/CommentModal'),
+);
 
 interface props {
   name: string;
@@ -16,12 +17,19 @@ interface props {
   currentUser: any;
   comments: any[];
   commentsOwner: any[];
+  isFavorite: boolean;
 }
 
-function UserInfo({ name, avt, blogId, currentUser, comments, commentsOwner }: props) {
+function UserInfo({
+  name,
+  avt,
+  blogId,
+  currentUser,
+  comments,
+  commentsOwner,
+  isFavorite,
+}: props) {
   const [commentModal, setCommentModal] = useState(false);
-  console.log(blogId, currentUser, comments, commentsOwner);
-  
 
   const openCommentModal = () => setCommentModal(true);
   const closeCommentModal = () => setCommentModal(false);
@@ -36,8 +44,28 @@ function UserInfo({ name, avt, blogId, currentUser, comments, commentsOwner }: p
         </div>
         <hr className="my-3" />
         <div className={styles['section2']}>
-          <Image src="/icons/heartIcon.svg" alt="" width={24} height={24} />
-          <Image src="/icons/commentIcon.svg" alt="" width={24} height={24} onClick={openCommentModal} />
+          {isFavorite ? (
+            <Image
+              src="/icons/solidHeartIcon.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
+          ) : (
+            <Image
+              src="/icons/heartIcon.svg"
+              alt=""
+              width={24}
+              height={24}
+            />
+          )}
+          <Image
+            src="/icons/commentIcon.svg"
+            alt=""
+            width={24}
+            height={24}
+            onClick={openCommentModal}
+          />
         </div>
       </div>
       {commentModal && (

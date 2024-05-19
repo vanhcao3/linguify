@@ -132,6 +132,7 @@ model User {
   Blog         Blog[]
   Comment      Comment[]
   Notification Notification[]
+  FavoriteBlog FavoriteBlog[]
 }
 
 model Account {
@@ -193,14 +194,15 @@ model TwoFactorConfirmation {
 }
 
 model Blog {
-  id        String    @id @default(uuid())
-  title     String
-  content   String
-  owner     String
-  comments  Comment[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  user      User      @relation(fields: [owner], references: [id])
+  id           String         @id @default(uuid())
+  title        String
+  content      String
+  owner        String
+  comments     Comment[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         User           @relation(fields: [owner], references: [id])
+  FavoriteBlog FavoriteBlog[]
 }
 
 model Comment {
@@ -222,4 +224,14 @@ model Notification {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
+}
+
+model FavoriteBlog {
+  id        String   @id @default(uuid())
+  userId    String
+  blogId    String
+  user      User     @relation(fields: [userId], references: [id])
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -17,9 +17,11 @@ async function BlogDetail({ params }: props) {
   if (!userId) return redirect('/');
 
   const currentUser = await getUserById(userId);
+  if (!currentUser) return redirect('/');
 
   const currentBlog = await getBlogById(params.blogId);
   if (!currentBlog) return redirect('/');
+
   const comments = await getComments(params.blogId);
   if (!comments) return redirect('/');
 
@@ -30,15 +32,18 @@ async function BlogDetail({ params }: props) {
   const owner = await getUserById(currentBlog.owner);
   if (!owner) return redirect('/');
 
+  const isFavorite = true;
+
   return (
     <div className={styles['wrapper']}>
       <UserInfo
         name={owner.name || 'Not found'}
-        avt={owner.image? owner.image : '/images/no-avatar.png'}
+        avt={owner.image ? owner.image : '/images/no-avatar.png'}
         blogId={params.blogId}
         currentUser={currentUser}
         comments={comments}
         commentsOwner={commentsOwner}
+        isFavorite={isFavorite}
       />
       <Content
         title={currentBlog.title}
