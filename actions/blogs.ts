@@ -11,3 +11,21 @@ export const getBlogs = async () => {
     return null;
   }
 };
+
+export const isFavoriteBlog = async (
+  blogId: string,
+  userId: string,
+) => {
+  try {
+    const favorite = await db.favoriteBlog.findFirst({
+      where: {
+        blogId,
+        userId,
+      },
+    });
+    return favorite ? true : false;
+  } catch (error) {
+    console.log('[actions/blogs]', error);
+    return false;
+  }
+};

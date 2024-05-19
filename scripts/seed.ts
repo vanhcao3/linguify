@@ -3,15 +3,11 @@ const database = new PrismaClient();
 
 async function main() {
   try {
-    await database.user.createMany({
+    await database.favoriteBlog.createMany({
       data: [
         {
-          name: 'Hoàng Thế Anh',
-          email: 'hoangtheanh@gmail.com',
-        },
-        {
-          name: 'Thế Có Tâm',
-          email: 'thecotam@gmail.com',
+          userId: 'clwdlhgsg00002a9tclvpc0ca',
+          blogId: '876851a8-2f8f-4b55-beb2-62ef36669bab',
         },
       ],
     });

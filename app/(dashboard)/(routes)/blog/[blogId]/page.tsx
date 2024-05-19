@@ -7,6 +7,7 @@ import { getBlogById } from '@/data/blog';
 import { getUserById } from '@/data/user';
 import { getComments } from '@/actions/comment';
 import { currentUserId } from '@/lib/auth';
+import { isFavoriteBlog } from '@/actions/blogs';
 
 interface props {
   params: { blogId: string };
@@ -32,7 +33,7 @@ async function BlogDetail({ params }: props) {
   const owner = await getUserById(currentBlog.owner);
   if (!owner) return redirect('/');
 
-  const isFavorite = true;
+  const isFavorite = await isFavoriteBlog(params.blogId, userId);
 
   return (
     <div className={styles['wrapper']}>
