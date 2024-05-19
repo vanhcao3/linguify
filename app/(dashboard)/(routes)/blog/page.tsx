@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 import styles from '@/styles/BLog/Blog.module.css';
 import Pagiantion from '@/components/Blog/Pagination';
 import Header from '@/components/Blog/Header';
@@ -5,7 +7,8 @@ import NoBlog from '@/components/Blog/NoBlog';
 import BlogItem from '@/components/Blog/BlogItem';
 import { getBlogs } from '@/actions/blogs';
 import { getUserById } from '@/data/user';
-import { redirect } from 'next/navigation';
+import { isFavoriteBlog } from '@/actions/blogs';
+import { currentUserId } from '@/lib/auth';
 
 interface props {
   searchParams?: { page?: string };
@@ -24,6 +27,13 @@ async function Blog({ searchParams }: props) {
   }
   const blogOwners = await Promise.all(
     data.map((blog: any) => getUserById(blog.owner)),
+  );
+
+  const userId = await currentUserId();
+  if (!userId) return redirect('/');
+
+  const favoriteBlogs = await Promise.all(
+    data.map((blog: any) => isFavoriteBlog(blog.id, userId)),
   );
 
   return (
@@ -50,6 +60,8 @@ async function Blog({ searchParams }: props) {
                     key={index}
                     data={item}
                     owner={blogOwners[index]}
+                    isFavoriteBlog={favoriteBlogs[index]}
+                    currentUserId={userId}
                   />
                 );
               })}
