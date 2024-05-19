@@ -19,8 +19,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <div className={styles['wrapper']}>
-        <Header />
-  
+        <Header /> 
         <div className={styles['body']}>
           <Sidebar />
           <div className={styles['content']}>{children}</div>

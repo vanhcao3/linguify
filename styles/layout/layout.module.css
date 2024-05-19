@@ -7,5 +7,5 @@
 }
 
 .content {
-  @apply w-[100%];
+  @apply flex-1 min-w-0;
 }
