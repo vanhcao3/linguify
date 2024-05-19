@@ -16,11 +16,11 @@ export const STUDENT_MENU = [
     visible: true,
   },
   {
-    title: 'Roadmap',
+    title: 'My Profile',
     hrTag: true,
-    icon: '/icons/fadeRoadIcon.svg',
-    href: '/learningPath',
+    icon: '/icons/user.svg',
     visible: true,
+    href: '/profile'
   },
   {
     title: 'Blog',
@@ -32,12 +32,6 @@ export const STUDENT_MENU = [
     title: 'Saved Post',
     hrTag: true,
     icon: '/icons/fadeBookmarkIcon.svg',
-    visible: true,
-  },
-  {
-    title: 'About us',
-    hrTag: false,
-    icon: '/icons/fadeInfoCircleIcon.svg',
     visible: true,
   },
   {
