@@ -22,7 +22,7 @@ export const STUDENT_ROUTES = [
 export const TEACHER_ROUTES = [
   {
     title: 'Courses',
-    topIcon: '/icons/listIcon.svg',
+    topIcon: '/icons/bookOpenIcon.svg',
     type: 'square',
     href: '/teacher/courses',
   },

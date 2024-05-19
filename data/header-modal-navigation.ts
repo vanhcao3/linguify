@@ -1,3 +1,5 @@
+import { logout } from "@/actions/sign-out";
+
 export const STUDENT_MENU = [
   {
     title: 'Dashboard',
@@ -14,20 +16,7 @@ export const STUDENT_MENU = [
     visible: true,
   },
   {
-    title: 'Trang cá nhân',
-    icon: '/icons/user.svg',
-    hrTag: false,
-    href: ``,
-    visible: true,
-  },
-  {
-    title: 'Khoá học của tôi',
-    hrTag: true,
-    icon: '/icons/bookOpenIcon.svg',
-    visible: true,
-  },
-  {
-    title: 'Lộ trình',
+    title: 'Roadmap',
     hrTag: true,
     icon: '/icons/fadeRoadIcon.svg',
     href: '/learningPath',
@@ -37,33 +26,35 @@ export const STUDENT_MENU = [
     title: 'Blog',
     hrTag: false,
     icon: '/icons/fadeBlogIcon.svg',
-    href: '/blog?page=1',
     visible: true,
   },
   {
-    title: 'Bài viết đã lưu',
+    title: 'Saved Post',
     hrTag: true,
     icon: '/icons/fadeBookmarkIcon.svg',
     visible: true,
   },
   {
-    title: 'Giới thiệu',
+    title: 'About us',
     hrTag: false,
     icon: '/icons/fadeInfoCircleIcon.svg',
     visible: true,
   },
   {
-    title: 'Cài đặt',
+    title: 'Settings',
     hrTag: true,
     icon: '/icons/fadeGearIcon.svg',
     visible: true,
+    href: '/settings'
   },
   {
-    title: 'Đăng xuất',
+    title: 'Log out',
     hrTag: false,
     icon: '/icons/fadeLogoutIcon.svg',
-    href: '/auth/sign-out',
     visible: true,
+    onClick: () => {
+      logout();
+    }
   },
 ];
 
@@ -83,16 +74,19 @@ export const TEACHER_MENU = [
     visible: true,
   },
   {
-    title: 'Cài đặt',
+    title: 'Settings',
     hrTag: true,
     icon: '/icons/fadeGearIcon.svg',
     visible: true,
+    href: '/settings'
   },
   {
-    title: 'Đăng xuất',
+    title: 'Log out',
     hrTag: false,
     icon: '/icons/fadeLogoutIcon.svg',
-    href: '/sign-out',
     visible: true,
+    onClick: () => {
+      logout();
+    }
   },
 ];

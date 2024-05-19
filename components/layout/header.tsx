@@ -115,17 +115,7 @@ function Header() {
       </div>
 
       <div className={styles['actions']}>
-        {currentUser ? (
           <Fragment>
-            <button className={styles['search-icon']}>
-              <Image
-                src="/icons/searchIcon.svg"
-                width={60}
-                height={80}
-                alt="search-icon"
-              />
-            </button>
-
             {isTeacherPage || isStudentPage ? (
               <Link href="/">
                 <Button size="sm" variant="outline">
@@ -176,7 +166,7 @@ function Header() {
               <div>
                 <Image
                   className={styles['user-avatar']}
-                  src={currentUser.image ? currentUser.image : '/images/no-avatar.png'}
+                  src={currentUser?.image ? currentUser.image : '/images/no-avatar.png'}
                   width={60}
                   height={80}
                   alt="User avatar"
@@ -184,22 +174,6 @@ function Header() {
               </div>
             </Menu>
           </Fragment>
-        ) : (
-          <Fragment>
-            <button
-              className={styles['log-in']}
-              onClick={() => alert('clicked Login Btn')}
-            >
-              Đăng nhập
-            </button>
-            <button
-              className={styles['register']}
-              onClick={() => alert('clicked register Btn')}
-            >
-              Đăng ký
-            </button>
-          </Fragment>
-        )}
       </div>
     </div>
   );

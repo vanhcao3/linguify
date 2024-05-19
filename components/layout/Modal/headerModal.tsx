@@ -44,7 +44,18 @@ function HeaderModal({closeModal} : IProps) {
         <div className={styles['section2']}>
           {MENU.map((item, index) => (
             <div key={index}>
-              {item.visible && (
+              {item.onClick ? (
+                <button className={styles['item']} onClick={item.onClick}>
+                  <Image
+                    src={item.icon || '/images/no-image.png'}
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
+                  {item.title}
+                </button>
+              ) :
+              item.visible && (
                 <Link
                   href={item.href || '/'}
                   className={styles['item']}
@@ -59,6 +70,7 @@ function HeaderModal({closeModal} : IProps) {
                   {item.title}
                 </Link>
               )}
+
               {item.hrTag && item.visible && (
                 <hr className={styles['hrTag']} />
               )}
