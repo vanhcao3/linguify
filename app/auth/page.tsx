@@ -9,12 +9,12 @@ export default function AuthHome() {
         <h1 className="text-6xl font-semibold text-white drop-shadow-md hover:text-green-500">Welcome to Linguify!</h1>
         <p className="text-white text-lg">Unlock the power of language with Linguify</p>
         <div className="flex items-center justify-center w-full space-x-7">
-          <LoginButton>
+          <LoginButton mode="modal" asChild>
             <Button variant="secondary" size="lg">
               Sign in
             </Button>
           </LoginButton>
-          <RegisterButton>
+          <RegisterButton mode="modal" asChild>
             <Button variant="secondary" size="lg">
               Sign up
             </Button>
