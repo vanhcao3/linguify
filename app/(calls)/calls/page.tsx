@@ -57,26 +57,6 @@ export default async function CallsPage(){
             <JoinCallDialog {...cardsData[1] as CardProps} />
             <InviteParticipantsDialog {...cardsData[2] as CardProps} />
           </div>
-          <Link
-            href={{
-              pathname: "/calls/history",
-              query: { page: 1, per_page: 10 }
-            }}
-            className="inline-flex items-center"
-          >
-            <Button
-              size="lg"
-              className="rounded-full mx-auto mt-8 md:mt-12"
-            >
-              View Call History
-              <Icons.arrow
-                color="white"
-                width={14}
-                height={14}
-                className="ml-2 rotate-90"
-              />
-            </Button>
-          </Link>
         </div>
       </section>
     </div>

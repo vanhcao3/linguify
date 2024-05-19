@@ -20,8 +20,6 @@ export default function CallPage(){
   const actions = useHMSActions();
   const roomName = Cookies.get("room-name");
   const roomId = Cookies.get("room-id");
-  const unAuthUsername = Cookies.get("username");
-
   const joinCall = React.useCallback(async () => {
 
     if (!roomId) {
@@ -51,8 +49,6 @@ export default function CallPage(){
         if(session && session.user && session.user.name){
           const userName = session.user.name;
           await hmsActions.join({ userName, authToken });
-        } else if(!session && unAuthUsername){
-          await hmsActions.join({ userName: unAuthUsername, authToken });
         }
         else {
           console.error("Session or user name is not defined");
@@ -69,7 +65,7 @@ export default function CallPage(){
       router.replace("/calls");
     }
 
-  }, [hmsActions, toast, params.slug, router, roomName, roomId, unAuthUsername]);
+  }, [hmsActions, toast, params.slug, router, roomName, roomId]);
 
   const leaveCall = React.useCallback(async () => {
 
@@ -107,7 +103,7 @@ export default function CallPage(){
 
 
   return(
-    <div className="flex flex-col w-full h-full bg-neutral-950 text-gray-200">
+    <div className="flex flex-col w-screen h-screen overflow-hidden bg-neutral-950 text-gray-200">
       <Conference/>
       <CallFooter/>
     </div>

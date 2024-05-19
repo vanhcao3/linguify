@@ -30,30 +30,10 @@ export default function JoinCallDialog (card: CardProps)  {
     resolver: zodResolver(joinCallFormSchema)
   });
 
-  async function joinCall(data: FormData) {
+ function previewCall(data: FormData) {
 
     setIsJoinCallLoading(true);
     const callName = extractId(data.meetingLink);
-
-    const response = await fetch(`/api/call/join`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        callName: callName,
-        username: data.name,
-      }),
-    }).catch(error => {
-      console.error('Error during fetch:', error);
-    });
-
-
-    if (!response?.ok) {
-      setIsJoinCallLoading(false);
-      return toast.error("This call cannot be joined. Please try again.")
-    }
-
     setIsJoinCallLoading(false);
     router.push(`/preview/${callName}`)
   }
@@ -72,17 +52,7 @@ export default function JoinCallDialog (card: CardProps)  {
             Join a call by entering the meeting link or ID.
           </DialogDescription>
         </DialogHeader>
-        <form className='pt-4' onSubmit={handleSubmit(joinCall)}>
-          <div className='w-full space-y-1'>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              {...register('name', { required: true })}
-              type="text"
-              placeholder="Your name (optional)"
-              className='mb-4 w-full'
-              id='name'
-            />
-          </div>
+        <form className='pt-4' onSubmit={handleSubmit(previewCall)}>
           <div className='w-full space-y-1 mt-4'>
             <Label htmlFor="meeting-link">Meeting URL</Label>
             <Input

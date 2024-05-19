@@ -63,7 +63,7 @@ export default function CallFooter() {
   }, [actions, isScreenShareEnabled, toast]);
 
   return (
-    <footer className={`w-full rounded-lg flex items-center mt-auto justify-center sm:justify-start px-5 py-8`}>
+    <footer className={`w-full rounded-lg flex items-center mt-auto justify-center sm:justify-start px-5 py-8 absolute bottom-0`}>
       <div className="w-full flex justify-center gap-3">
         <Button
           size="sm"

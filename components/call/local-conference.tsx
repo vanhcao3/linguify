@@ -1,12 +1,11 @@
 "use client";
-import { selectLocalPeer, useHMSStore } from "@100mslive/react-sdk";
+import { selectLocalPeer, useHMSStore } from '@100mslive/react-sdk';
 import React from "react";
 import Peer from '../ui/calls/peer';
 import { Icons } from "../ui/calls/icons";
 
 export default function LocalConference() {
   const peer = useHMSStore(selectLocalPeer);
-  console.log(peer);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
