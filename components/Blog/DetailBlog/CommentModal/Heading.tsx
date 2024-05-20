@@ -7,8 +7,7 @@ interface HeadingProps {
 function Heading({ numComments }: HeadingProps) {
   return (
     <div className={styles['heading']}>
-      <div className={styles['count-comments']}>{numComments} Bình Luận</div>
-      <div className={styles['help']}>(Nếu thấy bình luận spam, các bạn bấm report giúp admin nhé)</div>
+      <div className={styles['count-comments']}>{numComments < 2 ? numComments + ' comment' : numComments + ' comments'}  </div>
     </div>
   );
 }

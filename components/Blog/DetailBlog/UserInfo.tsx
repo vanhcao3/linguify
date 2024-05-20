@@ -40,21 +40,21 @@ function UserInfo({
   const handleAddFavorite = async () => {
     try {
       const res = await addFavoriteBlog(blogId, currentUser.id);
-      toast.success('Đã thêm vào danh sách yêu thích');
+      toast.success('Added to favorites');
       router.refresh();
     } catch (error) {
       console.log('[UserInfo]', error);
-      toast.error('Đã có lỗi xảy ra');
+      toast.error('Something went wrong!');
     }
   };
   const handleRemoveFavorite = async () => {
     try {
       const res = await removeFavoriteBlog(blogId, currentUser.id);
-      toast.success('Đã huỷ yêu thích bài viết');
+      toast.success('Removed from favorite');
       router.refresh();
     } catch (error) {
       console.log('[UserInfo]', error);
-      toast.error('Đã có lỗi xảy ra');
+      toast.error('Something went wrong!');
     }
   };
   return (

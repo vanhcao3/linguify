@@ -37,7 +37,7 @@ async function Blog({ searchParams }: props) {
   );
 
   return (
-    <div className={styles['wrapper']}>
+    <div className={"styles['wrapper']"}>
       <Header />
 
       {!data.length ? (
@@ -73,11 +73,6 @@ async function Blog({ searchParams }: props) {
               page={page}
               perPage={perPage}
             />
-          </div>
-          <div className={styles['section2']}>
-            <div className={styles['section2-header']}>
-              Các chủ đề được đề xuất
-            </div>
           </div>
         </div>
       )}

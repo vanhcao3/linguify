@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex flex-col;
+  @apply flex flex-col justify-center;
   @apply px-10 pt-6 mb-6;
 }
 

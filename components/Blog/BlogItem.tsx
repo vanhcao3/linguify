@@ -32,21 +32,21 @@ function BlogItem({
   const handleAddFavorite = async () => {
     try {
       const res = await addFavoriteBlog(data.id, currentUserId);
-      toast.success('Đã thêm vào danh sách yêu thích');
+      toast.success('Added to favorites');
       router.refresh();
     } catch (error) {
       console.log('[UserInfo]', error);
-      toast.error('Đã có lỗi xảy ra');
+      toast.error('Something went wrong!');
     }
   };
   const handleRemoveFavorite = async () => {
     try {
       const res = await removeFavoriteBlog(data.id, currentUserId);
-      toast.success('Đã huỷ yêu thích bài viết');
+      toast.success('Remove from favorites');
       router.refresh();
     } catch (error) {
       console.log('[UserInfo]', error);
-      toast.error('Đã có lỗi xảy ra');
+      toast.error('Something went wrong!');
     }
   };
   return (
@@ -106,6 +106,9 @@ function BlogItem({
       </div>
       <div className="text-xs text-gray-400">
         {calculateTime(data.updatedAt)}
+      </div>
+      <div className='text-xs text-muted-foreground mt-2 italic'>
+        *You can click the title to see the post and add comment
       </div>
     </div>
   );

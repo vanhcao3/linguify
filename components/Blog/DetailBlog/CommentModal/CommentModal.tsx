@@ -80,7 +80,7 @@ function CommentModal({
               className={styles['pseudoInput']}
               onClick={() => setShowEditor(true)}
             >
-              Viết bình luận của bạn...
+              Comment something...
             </div>
           ) : (
             <form
