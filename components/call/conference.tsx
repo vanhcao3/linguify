@@ -21,12 +21,8 @@ export default function Conference() {
 
   React.useEffect(() => {
     setPinned({ pinned: localPeer, isPinnedScreenSharing: false });
-  }, [localPeer]);
-
-  React.useEffect(() => {
-    setPinned({ pinned: localPeer, isPinnedScreenSharing: false });
-  }, [presenters, localPeer]);
-
+  }, [localPeer,presenters,peers]);
+  
   return (
     <div className="w-full conference pt-4">
       {loading ? (
