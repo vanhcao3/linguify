@@ -6,7 +6,7 @@ import * as z from 'zod';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-import styles from '@/styles/BLog/CommentModal.module.css';
+import styles from '@/styles/BLog/commentmodal.module.css';
 import CommentItem from '../CommentItem';
 import Editor from '../../Editor';
 import Heading from './Heading';

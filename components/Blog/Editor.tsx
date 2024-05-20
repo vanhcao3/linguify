@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
-import styles from '@/styles/Blog/CreateBlog.module.css';
+import styles from '@/styles/Blog/createblog.module.css';
 import ReactQuill, { ReactQuillProps } from 'react-quill';
 
 interface props {

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '@/styles/BLog/Blog.module.css';
+import styles from '@/styles/BLog/blog.module.css';
 
 function NoBlog() {
   return (

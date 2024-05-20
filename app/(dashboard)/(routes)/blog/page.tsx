@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import styles from '@/styles/BLog/Blog.module.css';
+import styles from '@/styles/BLog/blog.module.css';
 import Pagiantion from '@/components/Blog/Pagination';
 import Header from '@/components/Blog/Header';
 import NoBlog from '@/components/Blog/NoBlog';

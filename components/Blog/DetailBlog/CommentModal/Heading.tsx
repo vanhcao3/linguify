@@ -1,4 +1,4 @@
-import styles from '@/styles/BLog/CommentModal.module.css';
+import styles from '@/styles/BLog/commentmodal.module.css';
 
 interface HeadingProps {
   numComments?: number;
