@@ -41,7 +41,7 @@ function Notification(props: IProps) {
         })}
       </div>
       <div className={styles['view-all-noti']} onClick={() => router.push('/me/notification')}>
-        Xem tất cả thông báo
+        See all notification
       </div>
     </div>
   );
