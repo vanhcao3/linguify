@@ -7,16 +7,9 @@ export const USER_MENU = [
       href: '/profile'
     },
     {
-      title: 'Post blog',
+      title: 'Livechat',
+      href: '/calls',
       hrTag: false,
-    },
-    {
-      title: 'My Post',
-      hrTag: true,
-    },
-    {
-      title: 'Favorite Post',
-      hrTag: true,
     },
     {
       title: 'Settings',

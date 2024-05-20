@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 "use client"
 import React, { useState } from 'react'
 import CardShell, { type CardProps } from '../layout/call-shell';

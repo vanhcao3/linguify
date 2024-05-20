@@ -23,16 +23,11 @@ export const STUDENT_MENU = [
     href: '/profile'
   },
   {
-    title: 'Blog',
+    title: 'Livechat',
     hrTag: false,
     icon: '/icons/fadeBlogIcon.svg',
     visible: true,
-  },
-  {
-    title: 'Saved Post',
-    hrTag: true,
-    icon: '/icons/fadeBookmarkIcon.svg',
-    visible: true,
+    href: '/calls',
   },
   {
     title: 'Settings',
