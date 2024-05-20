@@ -122,15 +122,20 @@ function CommentModal({
         </div>
 
         <div className={styles['comments']}>
-          {comments?.map((comment, index) => (
-            <CommentItem
-              key={index}
-              content={comment.content}
-              commentOwner={commentsOwner[index]}
-              createdAt={comment.createdAt}
-              updatedAt={comment.updatedAt}
-            />
-          ))}
+          {comments?.map((comment, index) => {
+            let isLiked = false;
+
+            return (
+              <CommentItem
+                key={index}
+                content={comment.content}
+                commentOwner={commentsOwner[index]}
+                createdAt={comment.createdAt}
+                updatedAt={comment.updatedAt}
+                isLiked={isLiked}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ interface props {
   commentOwner: any;
   createdAt: Date;
   updatedAt: Date;
+  isLiked: boolean;
 }
 
 function CommentItem({
@@ -15,6 +16,7 @@ function CommentItem({
   commentOwner,
   createdAt,
   updatedAt,
+  isLiked,
 }: props) {
   return (
     <div className={styles['item-wrapper']}>
@@ -40,7 +42,11 @@ function CommentItem({
         ></div>
         <div className={styles['item-actions']}>
           <div>{calculateTimeComment(createdAt, updatedAt)}</div>
-          <div>Like</div>
+          {isLiked ? (
+            <div className="text-blue-500">Liked</div>
+          ) : (
+            <div>Like</div>
+          )}
           <div>Reply</div>
         </div>
       </div>
