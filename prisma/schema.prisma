@@ -181,7 +181,7 @@ model TwoFactorConfirmation {
 }
 
 model Blog {
-  id        String    @id @default(uuid()) @map("_id")
+  id        String    @id @default(uuid())
   title     String
   content   String
   owner     String
@@ -192,7 +192,7 @@ model Blog {
 }
 
 model Comment {
-  id        String   @id @default(uuid()) @map("_id")
+  id        String   @id @default(uuid())
   content   String
   owner     String
   blogId    String
@@ -200,4 +200,4 @@ model Comment {
   blog      Blog     @relation(fields: [blogId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
+} 
