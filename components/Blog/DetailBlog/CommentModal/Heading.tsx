@@ -7,7 +7,7 @@ interface HeadingProps {
 function Heading({ numComments }: HeadingProps) {
   return (
     <div className={styles['heading']}>
-      <div className={styles['count-comments']}>{numComments < 2 ? numComments + ' comment' : numComments + ' comments'}  </div>
+      <div className={styles['count-comments']}>{numComments! < 2 ? numComments + ' comment' : numComments + ' comments'}  </div>
     </div>
   );
 }
