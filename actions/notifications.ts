@@ -15,3 +15,15 @@ export const getNotifications = async () => {
     return null;
   }
 };
+
+export const readAllNotifications = async () => {
+  try {
+    const userId = await currentUserId();
+    await db.notification.updateMany({
+      where: { userId },
+      data: { isRead: true },
+    });
+  } catch (error) {
+    console.log('[actions/notifications]', error);
+  }
+};
