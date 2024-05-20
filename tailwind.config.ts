@@ -69,6 +69,26 @@ const config = withUt({
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        floatLeftToRight: {
+          '0%': {
+            transform: 'translateX(-100%)',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+          },
+        },
+        floatRightToLeft: {
+          '0%': {
+            transform: 'translateX(100%)',
+          },
+          '100%': {
+            transform: 'translateX(0)',
+          },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -76,7 +96,6 @@ const config = withUt({
         floatLeftToRight: 'floatLeftToRight 0.5s ease-out',
         floatRightToLeft: 'floatRightToLeft 0.5s ease-out',
         fadeIn: 'fadeIn 0.5s ease-out',
-        fadeOut: 'fadeOut 0.5s ease-out',
       },
     },
   },

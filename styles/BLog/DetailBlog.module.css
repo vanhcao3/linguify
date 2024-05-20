@@ -20,7 +20,12 @@
 }
 
 .user-info-image {
-  @apply rounded-full overflow-hidden;
+  @apply flex justify-center items-center;
+  @apply w-[50px] h-[50px] rounded-full overflow-hidden;
+}
+
+.user-info-image > img {
+  @apply w-full h-full object-cover;
 }
 
 .section2 {

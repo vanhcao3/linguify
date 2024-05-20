@@ -3,103 +3,110 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 model Customer {
-  id String @id @default(uuid())
-  userId String @unique
+  id         String @id @default(uuid())
+  userId     String @unique
   CustomerId String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 model Purchase {
-  id String @id @default(uuid())
-  userId String
-  courseId String
-  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  userId    String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([userId, courseId])
   @@index([courseId])
 }
+
 model UserProgress {
-  id String @id @default(uuid())
-  userId String
+  id        String  @id @default(uuid())
+  userId    String
   chapterId String
-  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
   isCompleted Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([chapterId])
   @@unique([userId, chapterId])
+  @@index([chapterId])
 }
+
 model MuxData {
-  id String @id @default(uuid())
-  chapterId String @unique
-  assetId String
+  id         String  @id @default(uuid())
+  chapterId  String  @unique
+  assetId    String
   playbackId String?
 
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 }
+
 model Chapter {
-  id String @id @default(uuid())
-  title String
-  description String? @db.Text
-  videoUrl String? @db.Text
-  position Int
-  isPublished Boolean @default(false)
-  isFree Boolean @default(false)
-  muxData MuxData?
-  courseId String
-  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id           String         @id @default(uuid())
+  title        String
+  description  String?        @db.Text
+  videoUrl     String?        @db.Text
+  position     Int
+  isPublished  Boolean        @default(false)
+  isFree       Boolean        @default(false)
+  muxData      MuxData?
+  courseId     String
+  course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
   userProgress UserProgress[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 
   @@index([courseId])
 }
+
 model Category {
-  id String @id @default(uuid())
-  name String @unique
+  id      String   @id @default(uuid())
+  name    String   @unique
   courses Course[]
 }
 
 model Attachment {
-  id String @id @default(uuid())
-  name String
-  url String @db.Text
+  id       String @id @default(uuid())
+  name     String
+  url      String @db.Text
   courseId String
-  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([courseId])
 }
+
 model Course {
-  id String @id @default(uuid())
-  userId String
-  title String @db.Text
-  description String? @db.Text
-  imageUrl String? @db.Text
-  price Float?
-  isPublished Boolean @default(false)
-  categoryId String?
-  category Category? @relation(fields: [categoryId], references: [id])
-  chapters Chapter[]
+  id          String       @id @default(uuid())
+  userId      String
+  title       String       @db.Text
+  description String?      @db.Text
+  imageUrl    String?      @db.Text
+  price       Float?
+  isPublished Boolean      @default(false)
+  categoryId  String?
+  category    Category?    @relation(fields: [categoryId], references: [id])
+  chapters    Chapter[]
   attachments Attachment[]
-  purchases Purchase[]
-  createAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  purchases   Purchase[]
+  createAt    DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
   @@index([categoryId])
 }
 
@@ -107,25 +114,29 @@ enum UserRole {
   ADMIN
   USER
 }
-model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  role          UserRole @default(USER)
-  accounts      Account[]
-  isTwoFactorEnabled Boolean @default(false)
-  twoFactorConfirmation TwoFactorConfirmation?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  Blog      Blog[]
-  Comment   Comment[]
+model User {
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String                 @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  role                  UserRole               @default(USER)
+  accounts              Account[]
+  isTwoFactorEnabled    Boolean                @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  Blog         Blog[]
+  Comment      Comment[]
+  Notification Notification[]
+  FavoriteBlog FavoriteBlog[]
 }
+
 model Account {
-  id                String      @id @default(cuid())
+  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
@@ -137,66 +148,89 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
 }
 
 model verificationToken {
-  id String @id @default(cuid())
-  email String
-  token String @unique
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
   expires DateTime
 
   @@unique([email, token])
 }
 
 model PasswordResetToken {
-  id String @id @default(cuid())
-  email String
-  token String @unique
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
   expires DateTime
 
   @@unique([email, token])
 }
+
 model TwoFactorToken {
-  id String @id @default(cuid())
-  email String
-  token String @unique
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
   expires DateTime
 
   @@unique([email, token])
 }
+
 model TwoFactorConfirmation {
   id String @id @default(cuid())
 
   userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
 }
 
 model Blog {
-  id        String    @id @default(uuid()) @map("_id")
-  title     String
-  content   String
-  owner     String
-  comments  Comment[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  user      User      @relation(fields: [owner], references: [id])
+  id           String         @id @default(uuid())
+  title        String
+  content      String
+  owner        String
+  comments     Comment[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         User           @relation(fields: [owner], references: [id])
+  FavoriteBlog FavoriteBlog[]
 }
 
 model Comment {
-  id        String   @id @default(uuid()) @map("_id")
+  id        String   @id @default(uuid())
   content   String
   owner     String
   blogId    String
   user      User     @relation(fields: [owner], references: [id])
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model FavoriteBlog {
+  id        String   @id @default(uuid())
+  userId    String
+  blogId    String
+  user      User     @relation(fields: [userId], references: [id])
   blog      Blog     @relation(fields: [blogId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

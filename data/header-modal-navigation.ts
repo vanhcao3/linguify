@@ -23,16 +23,18 @@ export const STUDENT_MENU = [
     href: '/profile'
   },
   {
-    title: 'Blog',
+    title: 'Blogs',
     hrTag: false,
     icon: '/icons/fadeBlogIcon.svg',
     visible: true,
+    href: '/blog'
   },
   {
-    title: 'Saved Post',
+    title: 'Write',
     hrTag: true,
-    icon: '/icons/fadeBookmarkIcon.svg',
+    icon: '/icons/newspaperIcon.svg',
     visible: true,
+    href: 'blog/create'
   },
   {
     title: 'Settings',
@@ -66,6 +68,20 @@ export const TEACHER_MENU = [
     hrTag: false,
     href: '/teacher/analytics',
     visible: true,
+  },
+  {
+    title: 'Blogs',
+    hrTag: false,
+    icon: '/icons/fadeBlogIcon.svg',
+    visible: true,
+    href: '/blog'
+  },
+  {
+    title: 'Write',
+    hrTag: true,
+    icon: '/icons/newspaperIcon.svg',
+    visible: true,
+    href: 'blog/create'
   },
   {
     title: 'Settings',
