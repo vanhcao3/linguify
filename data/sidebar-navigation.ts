@@ -13,7 +13,7 @@ export const STUDENT_ROUTES = [
   },
   {
     title: 'Livechat',
-    topIcon: '/icons/blogIcon.svg',
+    topIcon: '/icons/chatIcon.svg',
     type: 'square',
     href: '/calls',
   },
@@ -32,7 +32,7 @@ export const STUDENT_ROUTES = [
   },
   {
     title: 'Favorite',
-    topIcon: '/icons/newspaperIcon.svg',
+    topIcon: '/icons/solidHeartIcon.svg',
     type: 'square',
     href: '/blog/favorite',
   },
@@ -65,7 +65,7 @@ export const TEACHER_ROUTES = [
   },
   {
     title: 'Favorite',
-    topIcon: '/icons/newspaperIcon.svg',
+    topIcon: '/icons/solidHeartIcon.svg',
     type: 'square',
     href: '/blog/favorite',
   },

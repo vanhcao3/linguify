@@ -25,7 +25,7 @@ export const STUDENT_MENU = [
   {
     title: 'Livechat',
     hrTag: false,
-    icon: '/icons/fadeBlogIcon.svg',
+    icon: '/icons/chatIcon.svg',
     visible: true,
     href: '/calls',
   },
