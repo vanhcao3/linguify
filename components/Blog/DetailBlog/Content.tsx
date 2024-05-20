@@ -1,3 +1,4 @@
+
 import styles from '@/styles/blog/detailblog.module.css';
 
 interface IProps {
