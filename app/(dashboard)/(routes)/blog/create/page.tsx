@@ -29,11 +29,11 @@ const CreateBlog = () => {
         data,
       );
       console.log(response);
-      toast.success('Xuất bản bài viết thành công!');
+      toast.success('Blog posted');
       router.push('/blog?page=1');
     } catch (error) {
       console.log('[CreateBlog]', error);
-      toast.error('Xuất bản bài viết thất bại');
+      toast.error('Something went wrong');
     }
   };
 
@@ -53,7 +53,7 @@ const CreateBlog = () => {
             className={styles['submit-button']}
             disabled={form.formState.isSubmitting}
           >
-            Xuất bản
+            Publish 
           </button>
         </div>
         <ContentInput

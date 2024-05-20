@@ -47,11 +47,11 @@ export function calculateTime(time: Date) {
   let timeCourseText = '';
 
   if (diffInYears > 0) {
-    timeCourseText = `${diffInYears} năm trước`;
+    timeCourseText = `${diffInYears} ${(diffInYears < 2) ? 'day': 'days'} ago`;
   } else if (diffInMonths > 0) {
-    timeCourseText = `${diffInMonths} tháng trước`;
+    timeCourseText = `${diffInMonths} ${diffInMonths < 2 ? 'month' : 'months'} ago`;
   } else {
-    timeCourseText = `${diffInDays} ngày trước`;
+    timeCourseText = `${diffInDays} ${diffInDays < 2 ? 'day': 'days'} ago`;
   }
 
   return timeCourseText;

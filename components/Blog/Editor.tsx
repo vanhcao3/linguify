@@ -59,7 +59,7 @@ function Editor(
         formats={formats}
         value={value}
         onChange={onChange}
-        placeholder="Nội dung viết ở đây"
+        placeholder="Write something here"
         className={`${styles['editor']} ${className}`}
         style={{ minHeight: `${height}px` }}
       />

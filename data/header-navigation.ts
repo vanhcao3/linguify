@@ -7,16 +7,14 @@ export const USER_MENU = [
       href: '/profile'
     },
     {
-      title: 'Post blog',
+      title: 'Blogs',
       hrTag: false,
+      href: '/blog'
     },
     {
-      title: 'My Post',
+      title: 'Write',
       hrTag: true,
-    },
-    {
-      title: 'Favorite Post',
-      hrTag: true,
+      href: '/blog/create'
     },
     {
       title: 'Settings',
