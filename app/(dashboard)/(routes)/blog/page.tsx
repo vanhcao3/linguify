@@ -35,6 +35,7 @@ async function Blog({ searchParams }: props) {
   const favoriteBlogs = await Promise.all(
     data.map((blog: any) => isFavoriteBlog(blog.id, userId)),
   );
+  console.log('[blog]', favoriteBlogs);
 
   return (
     <div className={styles['wrapper']}>
@@ -55,12 +56,14 @@ async function Blog({ searchParams }: props) {
                 if (!item.avt) {
                   item.avt = '/images/no-image.png';
                 }
+                const currentBlogIndex = (page - 1) * perPage + index;
+
                 return (
                   <BlogItem
                     key={index}
                     data={item}
-                    owner={blogOwners[index]}
-                    isFavoriteBlog={favoriteBlogs[index]}
+                    owner={blogOwners[currentBlogIndex]}
+                    isFavoriteBlog={favoriteBlogs[currentBlogIndex]}
                     currentUserId={userId}
                   />
                 );
