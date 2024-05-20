@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 
-import styles from '@/styles/Blog/createblog.module.css';
+import styles from '@/styles/blog/createblog.module.css';
 
 interface props {
   name: string;

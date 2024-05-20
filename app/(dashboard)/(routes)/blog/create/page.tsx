@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useRouter } from 'next/navigation';
 
-import styles from '@/styles/Blog/createblog.module.css';
+import styles from '@/styles/blog/createblog.module.css';
 import TitleInput from '@/components/Blog/CreateBlog/TitleInput';
 import ContentInput from '@/components/Blog/CreateBlog/ContentInput';
 import { NewBlogSchema } from '@/schemas';
