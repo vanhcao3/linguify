@@ -8,21 +8,15 @@ import {
   STUDENT_MENU,
 } from '@/data/header-modal-navigation';
 import { usePathname } from 'next/navigation';
-import path from 'path';
+import { useCurrentUser } from '@/hooks/use-current-user';
 
 interface IProps {
-  userInfo: {
-    avt: string;
-    name: string;
-    nickname: string;
-  };
-  currentUser: boolean;
   closeModal: () => void;
 }
 
-function HeaderModal(props: IProps) {
-  const { userInfo, currentUser, closeModal } = props;
+function HeaderModal({closeModal} : IProps) {
   const pathname = usePathname();
+  const currentUser = useCurrentUser();
 
   const isTeacherPage = pathname?.includes('/teacher');
   const MENU = isTeacherPage ? TEACHER_MENU : STUDENT_MENU;
@@ -37,20 +31,31 @@ function HeaderModal(props: IProps) {
           <div className={styles['section1']}>
             <div className={styles['avt']}>
               <Image
-                src={userInfo.avt}
+                src={currentUser.image || '/images/no-avatar.png'}
                 alt=""
                 width={40}
                 height={40}
               />
             </div>
-            <div className={styles['name']}>{userInfo.name}</div>
+            <div className={styles['name']}>{currentUser.name}</div>
           </div>
         )}
         {currentUser && <hr className={styles['hrTag']} />}
         <div className={styles['section2']}>
           {MENU.map((item, index) => (
             <div key={index}>
-              {item.visible && (
+              {item.onClick ? (
+                <button className={styles['item']} onClick={item.onClick}>
+                  <Image
+                    src={item.icon || '/images/no-image.png'}
+                    alt=""
+                    width={24}
+                    height={24}
+                  />
+                  {item.title}
+                </button>
+              ) :
+              item.visible && (
                 <Link
                   href={item.href || '/'}
                   className={styles['item']}
@@ -65,6 +70,7 @@ function HeaderModal(props: IProps) {
                   {item.title}
                 </Link>
               )}
+
               {item.hrTag && item.visible && (
                 <hr className={styles['hrTag']} />
               )}
