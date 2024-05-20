@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import styles from '@/styles/BLog/Blog.module.css';
+import styles from '@/styles/blog/blog.module.css';
 
 function NoBlog() {
   return (
     <div>
-      Chưa có bài viết nào. Hãy là người{' '}
+      No post yet. Be the first person to{' '}
       <Link href="/blog/create" className={styles['create-first-blog']}>
-        viết bài đầu tiên
+        write something
       </Link>
     </div>
   );

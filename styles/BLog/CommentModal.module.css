@@ -33,6 +33,15 @@
   @apply my-12 w-full;
 }
 
+.user-image {
+  @apply flex justify-center items-center;
+  @apply w-[50px] h-[50px] rounded-full overflow-hidden shrink-0;
+}
+
+.user-image > img {
+  @apply object-cover w-full h-full;
+}
+
 .pseudoInput {
   @apply w-full text-gray-400 border-b hover:cursor-text;
 }

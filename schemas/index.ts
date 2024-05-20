@@ -108,10 +108,10 @@ export const CommentSchema = z.object({
 
 export const NewBlogSchema = z.object({
   title: z.string().min(1, {
-    message: 'Tiêu đề không được để trống',
+    message: 'Title is required',
   }),
   content: z.string().refine((value) => stripHtmlTags(value).length > 0, {
-    message: 'Nội dung không được để trống',
+    message: 'Message is required',
   }),
 });
 

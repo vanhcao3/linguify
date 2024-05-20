@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 
-import styles from '@/styles/Blog/CreateBlog.module.css';
+import styles from '@/styles/blog/createblog.module.css';
 
 interface props {
   name: string;
@@ -18,7 +18,7 @@ function TitleInput({ name, control, errorMessage }: props) {
         control={control}
         rules={{ required: true }}
         render={({ field }) => (
-          <textarea value={field.value} onChange={field.onChange} placeholder="Tiêu đề" className={className} />
+          <textarea value={field.value} onChange={field.onChange} placeholder="Title" className={className} />
         )}
       />
       <p className={styles['error-message']}>{errorMessage}</p>

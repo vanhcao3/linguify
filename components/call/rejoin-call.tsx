@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Button } from "../ui/button";
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -37,7 +36,7 @@ export default  function RejoinCall({
 
     await actions.leave();
 
-  }, [roomName, roomId, toast, actions]);
+  }, [roomName, roomId, actions]);
 
 
   React.useEffect(() => {
