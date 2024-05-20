@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
-import styles from '@/styles/Blog/detailblog.module.css';
+import styles from '@/styles/blog/detailblog.module.css';
 import { addFavoriteBlog, removeFavoriteBlog } from '@/actions/blogs';
 // import CommentModal from './CommentModal/CommentModal';
 const CommentModal = dynamic(

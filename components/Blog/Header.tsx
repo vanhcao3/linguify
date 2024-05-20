@@ -1,4 +1,5 @@
-import styles from '@/styles/BLog/blog.module.css';
+
+import styles from '@/styles/blog/blog.module.css';
 
 function Header() {
   return (

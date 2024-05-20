@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import styles from '@/styles/BLog/blog.module.css';
+import styles from '@/styles/blog/blog.module.css';
 
 interface IProps {
   totalBlogs: number;
