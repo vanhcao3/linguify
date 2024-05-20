@@ -12,11 +12,18 @@ export const STUDENT_ROUTES = [
     href: '/search',
   },
   {
+    title: 'Livechat',
+    topIcon: '/icons/blogIcon.svg',
+    type: 'square',
+    href: '/calls',
+  },
+  {
     title: 'Blogs',
     topIcon: '/icons/blogIcon.svg',
     type: 'square',
-    href: '/blog',
+    href: '/calls',
   },
+  
   {
     title: 'Write',
     topIcon: '/icons/newspaperIcon.svg',
