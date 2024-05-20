@@ -257,3 +257,48 @@ model FavoriteBlog {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Exam {
+  id String @id @default(cuid())
+  nameExam String
+  lstTopic Topic[]
+  readingId String
+  reading Reading? @relation(fields: [readingId], references: [id])
+  @@index([readingId])
+}
+
+model Topic {
+  id String @id @default(cuid())
+  nameTopic String
+  readingId String
+  reading Reading? @relation(fields: [readingId], references: [id])
+  examId String
+  exam Exam @relation(fields: [examId], references: [id])
+}
+
+model Skill {
+  id String @id @default(cuid())
+  nameSkill String
+}
+
+model AnswerOptions {
+  id String @id @default(cuid())
+  answerText String
+  isCorrect Boolean
+  readingId String
+  reading Reading? @relation(fields: [readingId], references: [id])
+  @@index([readingId])
+}
+
+model Reading {
+  id String @id @default(cuid())
+  questionText String
+  answerOptions AnswerOptions[]
+  topics Topic[]
+  exams Exam[]
+}
+
+model Writting {
+  id String @id @default(cuid())
+  questionText String
+}
