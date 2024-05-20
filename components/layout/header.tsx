@@ -15,48 +15,24 @@ import HeaderModal from '@/components/layout/Modal/headerModal';
 import GoBackButton from '../GoBackButton';
 import { useRouter } from 'next/navigation';
 import { useCurrentUser } from '@/hooks/use-current-user';
+import { USER_MENU } from '@/data/header-navigation';
 
 const pseudoNotification = [
   {
     image:
       'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Chào mừng bạn!!!',
-    createdTime: '25 ngày trước',
+    content: 'Welcome to Linguify!',
+    createdTime: '2 days ago',
   },
   {
     image:
       'https://files.fullstack.edu.vn/f8-prod/user_photos/276294/6396eb8215dda.jpg',
-    content: 'Hãy học ngay thôi nào!!!',
-    createdTime: '5 ngày trước',
+    content: "Let's unlock the power of language with Linguify",
+    createdTime: 'today',
   },
 ];
 
-const USER_MENU = [
-  {
-    title: 'Post blog',
-    hrTag: false,
-  },
-  {
-    title: 'My Post',
-    hrTag: true,
-  },
-  {
-    title: 'Favorite Post',
-    hrTag: true,
-  },
-  {
-    title: 'Settings',
-    hrTag: false,
-    href: '/settings'
-  },
-  {
-    title: 'Log out',
-    hrTag: false,
-    onClick: () => {
-      logout();
-    }
-  },
-];
+
 
 function Header() {
   const currentUser = useCurrentUser();
@@ -140,8 +116,8 @@ function Header() {
               />
             ) : (
               <Menu
-                title="Thông Báo"
-                btnTitle="Đánh dấu đã đọc"
+                title="Notifications"
+                btnTitle="Mark as read"
                 type="notification"
                 items={pseudoNotification}
               >

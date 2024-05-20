@@ -12,11 +12,14 @@ datasource db {
 model Customer {
   id         String @id @default(uuid())
   userId     String @unique
+  id         String @id @default(uuid())
+  userId     String @unique
   CustomerId String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
 
 model Purchase {
   id        String   @id @default(uuid())
@@ -115,7 +118,17 @@ enum UserRole {
   USER
 }
 
+
 model User {
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String                 @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  role                  UserRole               @default(USER)
+  accounts              Account[]
+  isTwoFactorEnabled    Boolean                @default(false)
   id                    String                 @id @default(cuid())
   name                  String?
   email                 String                 @unique
@@ -131,8 +144,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Blog      Blog[]
-  Comment   Comment[]
+  Blog         Blog[]
+  Comment      Comment[]
+  Notification Notification[]
+  FavoriteBlog FavoriteBlog[]
 }
 
 model Account {
@@ -224,22 +239,43 @@ model Participant {
   endTime   DateTime?
 }
 model Blog {
-  id        String    @id @default(uuid()) @map("_id")
-  title     String
-  content   String
-  owner     String
-  comments  Comment[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  user      User      @relation(fields: [owner], references: [id])
+  id           String         @id @default(uuid())
+  title        String
+  content      String
+  owner        String
+  comments     Comment[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         User           @relation(fields: [owner], references: [id])
+  FavoriteBlog FavoriteBlog[]
 }
 
 model Comment {
-  id        String   @id @default(uuid()) @map("_id")
+  id        String   @id @default(uuid())
   content   String
   owner     String
   blogId    String
   user      User     @relation(fields: [owner], references: [id])
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model FavoriteBlog {
+  id        String   @id @default(uuid())
+  userId    String
+  blogId    String
+  user      User     @relation(fields: [userId], references: [id])
   blog      Blog     @relation(fields: [blogId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -1,8 +1,10 @@
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
+
+import { useMemo } from 'react';
 import 'react-quill/dist/quill.snow.css';
-import { forwardRef } from 'react';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
+import ReactQuill, { ReactQuillProps } from 'react-quill';
 
 interface props {
   value: string;
@@ -11,12 +13,24 @@ interface props {
   className?: string;
 }
 
-function Editor({ value, onChange, height, className }: props, ref?: React.ForwardedRef<any>) {
+function Editor(
+  { value, onChange, height, className }: props,
+) {
+  const ReactQuill = useMemo(
+    () => dynamic(() => import('react-quill'), { ssr: false }),
+    [],
+  );
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
       ['link', 'image'],
       ['clean'],
     ],
@@ -39,13 +53,12 @@ function Editor({ value, onChange, height, className }: props, ref?: React.Forwa
   return (
     <div className="h-max">
       <ReactQuill
-        ref={ref}
         theme="snow"
         modules={modules}
         formats={formats}
         value={value}
         onChange={onChange}
-        placeholder="Nội dung viết ở đây"
+        placeholder="Write here"
         className={`${styles['editor']} ${className}`}
         style={{ minHeight: `${height}px` }}
       />
@@ -53,4 +66,4 @@ function Editor({ value, onChange, height, className }: props, ref?: React.Forwa
   );
 }
 
-export default forwardRef(Editor);
+export default Editor;

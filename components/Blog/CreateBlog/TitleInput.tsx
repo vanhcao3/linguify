@@ -18,7 +18,7 @@ function TitleInput({ name, control, errorMessage }: props) {
         control={control}
         rules={{ required: true }}
         render={({ field }) => (
-          <textarea value={field.value} onChange={field.onChange} placeholder="Tiêu đề" className={className} />
+          <textarea value={field.value} onChange={field.onChange} placeholder="Title" className={className} />
         )}
       />
       <p className={styles['error-message']}>{errorMessage}</p>
