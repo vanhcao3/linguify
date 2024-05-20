@@ -128,11 +128,13 @@ function CommentModal({
             return (
               <CommentItem
                 key={index}
+                commentId={comment.id}
                 content={comment.content}
                 commentOwner={commentsOwner[index]}
                 createdAt={comment.createdAt}
                 updatedAt={comment.updatedAt}
                 isLiked={isLiked}
+                currentUserId={currentUser.id}
               />
             );
           })}
