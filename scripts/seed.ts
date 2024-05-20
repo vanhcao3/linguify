@@ -3,12 +3,31 @@ const database = new PrismaClient();
 
 async function main() {
   try {
-    await database.favoriteBlog.createMany({
+    await database.category.createMany({
       data: [
-        {
-          userId: 'clwdlhgsg00002a9tclvpc0ca',
-          blogId: '876851a8-2f8f-4b55-beb2-62ef36669bab',
-        },
+        { name: 'IELTS' },
+        { name: 'TOEFL' },
+        { name: 'TOEIC' },
+        { name: 'Aptis' },
+        { name: 'SAT' },
+        { name: 'CAE' },
+        { name: 'CPE' },
+        { name: 'KET' },
+        { name: 'PET' },
+        { name: 'Foundation' },
+        { name: 'Elementary' },
+        { name: 'Pre-intermediate' },
+        { name: 'Intermediate' },
+        { name: 'Upper-intermediate' },
+        { name: 'Advanced' },
+        { name: 'Proficiency' },
+        { name: 'Vocabulary Intensive' },
+        { name: 'Grammar Intensive' },
+        { name: 'Reading' },
+        { name: 'Writting' },
+        { name: 'Speaking' },
+        { name: 'Listening' },
+        { name: 'Miscellaneous' },
       ],
     });
   } catch (error) {
