@@ -1,13 +1,13 @@
 'use client';
 
-import { LogOut, UserCircle } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
+import { LogOut,  } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export const CourseNavbarRoutes = () => {
+
   const pathname = usePathname();
-  const router = useRouter();
 
   const isTeacherPage = pathname?.startsWith('/teacher');
   const isStudentPage = pathname?.startsWith('/courses');
