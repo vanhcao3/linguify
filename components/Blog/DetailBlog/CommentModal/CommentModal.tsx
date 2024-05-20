@@ -53,6 +53,7 @@ function CommentModal({
       );
       console.log(response);
       toast.success('Bình luận thành công');
+      form.reset();
       setShowEditor(false);
       route.refresh();
     } catch (err) {

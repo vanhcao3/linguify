@@ -65,3 +65,21 @@ export const removeFavoriteBlog = async (
     return null;
   }
 };
+
+export const getFavoriteBlogs = async (userId: string) => {
+  try {
+    const favoriteBlogs = await db.favoriteBlog.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        user: true,
+        blog: true,
+      },
+    });
+    return favoriteBlogs;
+  } catch (error) {
+    console.log('[actions/blogs]', error);
+    return null;
+  }
+};

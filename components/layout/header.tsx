@@ -95,7 +95,7 @@ function Header() {
             {isTeacherPage || isStudentPage ? (
               <Link href="/">
                 <Button size="sm" variant="outline">
-                  Exit teacher mode
+                  Student mode
                 </Button>
               </Link>
             ) : (

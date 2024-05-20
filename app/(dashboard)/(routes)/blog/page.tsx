@@ -37,7 +37,7 @@ async function Blog({ searchParams }: props) {
   );
 
   return (
-    <div className={"styles['wrapper']"}>
+    <div className={styles['wrapper']}>
       <Header />
 
       {!data.length ? (

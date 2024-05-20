@@ -12,16 +12,29 @@ export const STUDENT_ROUTES = [
     href: '/search',
   },
   {
+    title: 'Livechat',
+    topIcon: '/icons/chatIcon.svg',
+    type: 'square',
+    href: '/calls',
+  },
+  {
     title: 'Blogs',
     topIcon: '/icons/blogIcon.svg',
     type: 'square',
     href: '/blog',
   },
+  
   {
     title: 'Write',
     topIcon: '/icons/newspaperIcon.svg',
     type: 'square',
     href: '/blog/create',
+  },
+  {
+    title: 'Favorite',
+    topIcon: '/icons/solidHeartIcon.svg',
+    type: 'square',
+    href: '/blog/favorite',
   },
 ];
 
@@ -49,5 +62,11 @@ export const TEACHER_ROUTES = [
     topIcon: '/icons/newspaperIcon.svg',
     type: 'square',
     href: '/blog/create',
+  },
+  {
+    title: 'Favorite',
+    topIcon: '/icons/solidHeartIcon.svg',
+    type: 'square',
+    href: '/blog/favorite',
   },
 ];
