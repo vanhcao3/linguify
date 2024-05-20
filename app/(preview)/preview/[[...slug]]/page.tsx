@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -60,7 +59,7 @@ export default function CallPreviewPage() {
       router.replace("/calls");
     }
 
-  }, [hmsActions, toast, params.slug, router, roomName]);
+  }, [hmsActions, params.slug, router, roomName]);
 
 
   async function joinCall() {
