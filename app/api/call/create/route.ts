@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     if (existingCall) {
       throw new Error('A call with this ID already exists');
     }
-
+    console.log(db.call);
     const newCall = await db.call.create({
       data: {
         id: roomId,
@@ -51,11 +51,10 @@ export async function POST(req: Request) {
         endTime: null,
       },
     });
-
     if (!newCall) {
       throw new Error('Error creating call');
     }
-
+    console.log(newCall);
     const inviteLink = `localhost:3000/call/${newCall.name}`;
 
     // Update the call with the invite link
