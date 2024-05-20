@@ -55,22 +55,26 @@ export const UserInfo = ({
                         {user?.isTwoFactorEnabled ? 'ON' : 'OFF'}
                     </Badge>
                 </div>
-                <div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
-                    <p className='text-sm font-medium'>
-                        Course Completed
-                    </p>
-                    <p className='truncate text-md max-w-[180px] font-mono p-1 bg-slate-100 rounded-md'>
-                        {numberOfCourseCompleted ? numberOfCourseCompleted : '0'}
-                    </p>
-                </div>
-                <div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
-                    <p className='text-sm font-medium'>
-                        Course Enrolled
-                    </p>
-                    <p className='truncate text-md max-w-[180px] font-mono p-1 bg-slate-100 rounded-md'>
-                        {numberOfCourseInProgress ? numberOfCourseInProgress : '0'}
-                    </p>
-                </div>
+                {user?.role !== 'ADMIN' && (
+                <>
+                    <div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                        <p className='text-sm font-medium'>
+                            Course Completed
+                        </p>
+                        <p className='truncate text-md max-w-[180px] font-mono p-1 bg-slate-100 rounded-md'>
+                            {numberOfCourseCompleted ? numberOfCourseCompleted : '0'}
+                        </p>
+                    </div>
+                    <div className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                        <p className='text-sm font-medium'>
+                            Course Enrolled
+                        </p>
+                        <p className='truncate text-md max-w-[180px] font-mono p-1 bg-slate-100 rounded-md'>
+                            {numberOfCourseInProgress ? numberOfCourseInProgress : '0'}
+                        </p>
+                    </div>
+                </>
+                )}
             </CardContent>
         </Card>
         

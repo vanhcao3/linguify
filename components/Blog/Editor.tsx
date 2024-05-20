@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import 'react-quill/dist/quill.snow.css';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
+import ReactQuill, { ReactQuillProps } from 'react-quill';
 
 interface props {
   value: string;
@@ -14,7 +15,6 @@ interface props {
 
 function Editor(
   { value, onChange, height, className }: props,
-  ref?: React.ForwardedRef<any>,
 ) {
   const ReactQuill = useMemo(
     () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -53,13 +53,12 @@ function Editor(
   return (
     <div className="h-max">
       <ReactQuill
-        ref={ref}
         theme="snow"
         modules={modules}
         formats={formats}
         value={value}
         onChange={onChange}
-        placeholder="Write something here"
+        placeholder="Write here"
         className={`${styles['editor']} ${className}`}
         style={{ minHeight: `${height}px` }}
       />
