@@ -133,6 +133,7 @@ model User {
   Comment      Comment[]
   Notification Notification[]
   FavoriteBlog FavoriteBlog[]
+  Like         Like[]
 }
 
 model Account {
@@ -214,6 +215,7 @@ model Comment {
   blog      Blog     @relation(fields: [blogId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Like      Like[]
 }
 
 model Notification {
@@ -232,6 +234,16 @@ model FavoriteBlog {
   blogId    String
   user      User     @relation(fields: [userId], references: [id])
   blog      Blog     @relation(fields: [blogId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  userId    String
+  commentId String
+  user      User     @relation(fields: [userId], references: [id])
+  comment   Comment  @relation(fields: [commentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
