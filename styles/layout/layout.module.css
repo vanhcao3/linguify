@@ -4,6 +4,7 @@
 
 .body {
   @apply flex flex-row w-[100%] bg-slate-100;
+  min-height: calc(100vh - 4rem);
 }
 
 .content {
