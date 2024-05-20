@@ -126,6 +126,8 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  Call                  Call[]
+  Participant           Participant[]
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
 
@@ -191,6 +193,37 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Call {
+  id              String        @id @default(cuid())
+  name            String
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String?
+  status          String?
+  startTime       DateTime
+  endTime         DateTime?
+  duration        Int?
+  maxParticipants Int?
+  inviteLink      String?
+  participants    Participant[]
+  createdAt       DateTime      @default(now())
+}
+
+model Participant {
+  id        String    @id @default(cuid())
+  callId    String
+  callName  String
+  call      Call      @relation(fields: [callId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  email     String?
+  role      String
+  status    String
+  startTime DateTime?
+  endTime   DateTime?
 }
 
 model Blog {

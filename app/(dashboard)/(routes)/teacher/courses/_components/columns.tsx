@@ -99,7 +99,7 @@ export const columns: ColumnDef<Course>[] = [
 
       /* const onDelete = async () => {
         try {
-          await axios.delete(`/api/courses/${id}`);
+          await axios.preview(`/api/courses/${id}`);
           toast.success('Course deleted successfully');
         } catch {
           toast.error('Something went wrong!');
