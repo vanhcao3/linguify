@@ -96,7 +96,6 @@ function CommentItem({
               <div>{numLikes}</div>
             </div>
           )}
-          <div>Reply</div>
         </div>
       </div>
     </div>
