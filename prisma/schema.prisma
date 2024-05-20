@@ -12,14 +12,11 @@ datasource db {
 model Customer {
   id         String @id @default(uuid())
   userId     String @unique
-  id         String @id @default(uuid())
-  userId     String @unique
   CustomerId String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 
 model Purchase {
   id        String   @id @default(uuid())
@@ -118,17 +115,7 @@ enum UserRole {
   USER
 }
 
-
 model User {
-  id                    String                 @id @default(cuid())
-  name                  String?
-  email                 String                 @unique
-  emailVerified         DateTime?
-  image                 String?
-  password              String?
-  role                  UserRole               @default(USER)
-  accounts              Account[]
-  isTwoFactorEnabled    Boolean                @default(false)
   id                    String                 @id @default(cuid())
   name                  String?
   email                 String                 @unique
@@ -141,8 +128,8 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
   Call                  Call[]
   Participant           Participant[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
 
   Blog         Blog[]
   Comment      Comment[]
@@ -238,6 +225,7 @@ model Participant {
   startTime DateTime?
   endTime   DateTime?
 }
+
 model Blog {
   id           String         @id @default(uuid())
   title        String
