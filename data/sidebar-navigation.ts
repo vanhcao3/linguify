@@ -21,7 +21,7 @@ export const STUDENT_ROUTES = [
     title: 'Blogs',
     topIcon: '/icons/blogIcon.svg',
     type: 'square',
-    href: '/calls',
+    href: '/blog',
   },
   
   {
