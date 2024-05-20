@@ -35,7 +35,6 @@ async function Blog({ searchParams }: props) {
   const favoriteBlogs = await Promise.all(
     data.map((blog: any) => isFavoriteBlog(blog.id, userId)),
   );
-  console.log('[blog]', favoriteBlogs);
 
   return (
     <div className={styles['wrapper']}>

@@ -49,7 +49,10 @@ const CreateBlog = () => {
             control={form.control}
             errorMessage={form.formState.errors.title?.message}
           />
-          <button className={styles['submit-button']}>
+          <button
+            className={styles['submit-button']}
+            disabled={form.formState.isSubmitting}
+          >
             Xuất bản
           </button>
         </div>
