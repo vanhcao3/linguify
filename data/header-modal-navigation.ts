@@ -37,6 +37,13 @@ export const STUDENT_MENU = [
     href: '/blog'
   },
   {
+    title: 'Favorite',
+    hrTag: false,
+    icon: '/icons/solidHeartIcon.svg',
+    visible: true,
+    href: '/blog/favorite'
+  },
+  {
     title: 'Write',
     hrTag: true,
     icon: '/icons/newspaperIcon.svg',
@@ -82,6 +89,13 @@ export const TEACHER_MENU = [
     icon: '/icons/fadeBlogIcon.svg',
     visible: true,
     href: '/blog'
+  },
+  {
+    title: 'Favorite',
+    hrTag: false,
+    icon: '/icons/solidHeartIcon.svg',
+    visible: true,
+    href: '/blog/favorite'
   },
   {
     title: 'Write',

@@ -18,16 +18,13 @@ export const USER_MENU = [
     },
     {
       title: 'Write',
-      hrTag: true,
+      hrTag: false,
       href: '/blog/create'
     },
     {
-      title: 'My Post',
+      title: 'Favorite',
       hrTag: true,
-    },
-    {
-      title: 'Favorite Post',
-      hrTag: true,
+      href: '/blog/favorite'
     },
     {
       title: 'Settings',

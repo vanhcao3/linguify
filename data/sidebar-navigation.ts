@@ -30,6 +30,12 @@ export const STUDENT_ROUTES = [
     type: 'square',
     href: '/blog/create',
   },
+  {
+    title: 'Favorite',
+    topIcon: '/icons/newspaperIcon.svg',
+    type: 'square',
+    href: '/blog/favorite',
+  },
 ];
 
 export const TEACHER_ROUTES = [
@@ -56,5 +62,11 @@ export const TEACHER_ROUTES = [
     topIcon: '/icons/newspaperIcon.svg',
     type: 'square',
     href: '/blog/create',
+  },
+  {
+    title: 'Favorite',
+    topIcon: '/icons/newspaperIcon.svg',
+    type: 'square',
+    href: '/blog/favorite',
   },
 ];
