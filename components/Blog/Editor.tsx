@@ -1,6 +1,7 @@
-import ReactQuill from 'react-quill';
+import dynamic from 'next/dynamic';
+
+import { useMemo } from 'react';
 import 'react-quill/dist/quill.snow.css';
-import { forwardRef } from 'react';
 
 import styles from '@/styles/Blog/CreateBlog.module.css';
 
@@ -11,12 +12,25 @@ interface props {
   className?: string;
 }
 
-function Editor({ value, onChange, height, className }: props, ref?: React.ForwardedRef<any>) {
+function Editor(
+  { value, onChange, height, className }: props,
+  ref?: React.ForwardedRef<any>,
+) {
+  const ReactQuill = useMemo(
+    () => dynamic(() => import('react-quill'), { ssr: false }),
+    [],
+  );
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
       ['link', 'image'],
       ['clean'],
     ],
@@ -53,4 +67,4 @@ function Editor({ value, onChange, height, className }: props, ref?: React.Forwa
   );
 }
 
-export default forwardRef(Editor);
+export default Editor;
