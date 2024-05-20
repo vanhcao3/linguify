@@ -42,7 +42,7 @@ export default function CallPreviewPage() {
         const session = await getSession();
         if(session && session.user && session.user.name){
           const userName = session.user.name;
-          await hmsActions.preview({ userName, authToken })
+          await hmsActions.preview({ userName, authToken})
         }
         else {
           console.error("Session or user name is not defined");
