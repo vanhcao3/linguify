@@ -125,6 +125,13 @@ function CommentModal({
           {comments?.map((comment, index) => {
             let isLiked = false;
 
+            for (const like of comment.Like) {
+              if (like.userId === currentUser.id) {
+                isLiked = true;
+                break;
+              }
+            }
+
             return (
               <CommentItem
                 key={index}

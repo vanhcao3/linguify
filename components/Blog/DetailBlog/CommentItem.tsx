@@ -29,9 +29,8 @@ function CommentItem({
 
   const handleLike = async () => {
     try {
-      const res = await likeComment(commentId, currentUserId);
+      await likeComment(commentId, currentUserId);
       router.refresh();
-      console.log(res);
     } catch (error) {
       console.log('[CommentItem]', error);
       toast.error('Something went wrong!');
@@ -40,9 +39,8 @@ function CommentItem({
 
   const handleUnLike = async () => {
     try {
-      const res = await unLikeComment(commentId, currentUserId);
+      await unLikeComment(commentId, currentUserId);
       router.refresh();
-      console.log(res);
     } catch (error) {
       console.log('[CommentItem]', error);
       toast.error('Something went wrong!');
