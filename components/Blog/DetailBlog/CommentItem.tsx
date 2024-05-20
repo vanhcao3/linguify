@@ -14,6 +14,7 @@ interface props {
   updatedAt: Date;
   isLiked: boolean;
   currentUserId: string;
+  numLikes: number;
 }
 
 function CommentItem({
@@ -24,6 +25,7 @@ function CommentItem({
   updatedAt,
   isLiked,
   currentUserId,
+  numLikes,
 }: props) {
   const router = useRouter();
 
@@ -80,6 +82,18 @@ function CommentItem({
           ) : (
             <div onClick={handleLike} className="cursor-pointer">
               Like
+            </div>
+          )}
+
+          {numLikes !== 0 && (
+            <div className="absolute flex flex-row gap-1 w-max p-[2px] -right-[5px] -top-[17px] bg-slate-100 rounded-2xl">
+              <Image
+                src="/icons/likeIcon.svg"
+                alt="like"
+                width={16}
+                height={16}
+              />
+              <div>{numLikes}</div>
             </div>
           )}
           <div>Reply</div>

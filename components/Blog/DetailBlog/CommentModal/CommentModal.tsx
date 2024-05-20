@@ -142,6 +142,7 @@ function CommentModal({
                 updatedAt={comment.updatedAt}
                 isLiked={isLiked}
                 currentUserId={currentUser.id}
+                numLikes={comment.Like.length}
               />
             );
           })}
