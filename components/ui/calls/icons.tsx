@@ -2,6 +2,19 @@ import { LucideTrash, Signal, SignalHigh, SignalLow, SignalMedium, SignalZero } 
 import { type SVGProps } from "react";
 
 export const Icons = {
+  camera: ({color, ..._props}: SVGProps<SVGSVGElement>)  => (
+    <svg
+      {..._props}
+      viewBox="0 0 28 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19 9.5V6C19 5.45 18.55 5 18 5H6C5.45 5 5 5.45 5 6V16C5 16.55 5.45 17 6 17H18C18.55 17 19 16.55 19 16V12.5L23 16.5V5.5L19 9.5ZM17 7.67V15H7V7H17V7.67ZM9.11 10.11L13 14L16.77 10.21L15.99 9.42L13 12.43L9.89 9.33H12.44V8.22H8V12.66H9.11V10.11Z"
+        fill={color || "#0F172A"}
+      />
+    </svg>
+  ),
   spinner: ({color, ..._props}: SVGProps<SVGSVGElement>) => (
     <svg {..._props} viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke={color || "#0F172A"}>
       <g fill="none" fillRule="evenodd">
@@ -89,16 +102,22 @@ export const Icons = {
       <path d="M9 18l6-6-6-6" />
     </svg>
   ),
+  logout: ({color, ..._props}: SVGProps<SVGSVGElement>) => (
+    <svg {..._props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      <path d="M14 8V6C14 5.46957 13.7893 4.96086 13.4142 4.58579C13.0391 4.21071 12.5304 4 12 4H5C4.46957 4 3.96086 4.21071 3.58579 4.58579C3.21071 4.96086 3 5.46957 3 6V18C3 18.5304 3.21071 19.0391 3.58579 19.4142C3.96086 19.7893 4.46957 20 5 20H12C12.5304 20 13.0391 19.7893 13.4142 19.4142C13.7893 19.0391 14 18.5304 14 18V16" stroke={color || "#0F172A"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9 12H21M21 12L18 9M21 12L18 15" stroke={color || "#0F172A"} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  ),
   join: ({color, ..._props}: SVGProps<SVGSVGElement>) => (
     <svg {..._props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
       <path d="M14 8V6C14 5.46957 13.7893 4.96086 13.4142 4.58579C13.0391 4.21071 12.5304 4 12 4H5C4.46957 4 3.96086 4.21071 3.58579 4.58579C3.21071 4.96086 3 5.46957 3 6V18C3 18.5304 3.21071 19.0391 3.58579 19.4142C3.96086 19.7893 4.46957 20 5 20H12C12.5304 20 13.0391 19.7893 13.4142 19.4142C13.7893 19.0391 14 18.5304 14 18V16" stroke={color || "#0F172A"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M9 12H21M21 12L18 9M21 12L18 15" stroke={color || "#0F172A"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
+  trash: LucideTrash,
   signalZero: SignalZero,
   signalLow: SignalLow,
   signalHigh: SignalHigh,
   signalMedium: SignalMedium,
   signalMax: Signal,
-  trash: LucideTrash,
 }
