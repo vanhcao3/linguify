@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import styles from '@/styles/BLog/commentmodal.module.css';
+import styles from '@/styles/blog/commentmodal.module.css';
 
 interface props {
   onClick: () => void;
