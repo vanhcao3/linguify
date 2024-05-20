@@ -1,25 +1,16 @@
 import Image from 'next/image';
 import styles from '@/styles/layout/footer.module.css';
+import Link from 'next/link';
 
 function Footer() {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['section1']}>
         <div className={styles['logo']}>
-          <div className={styles['logo-image']}>
-            <Image
-              src="/images/dino-logo.png"
-              width={50}
-              height={50}
-              alt="dino"
-              // layout="responsive"
-              // objectFit="cover"
-            />
-          </div>
-          <div>This is a dino</div>
+          Linguify
         </div>
         <div className={styles['subSection1']}>
-          <div>Home</div>
+          <Link href='/'>Home</Link>
           <div>About</div>
           <div>Licenses</div>
         </div>
@@ -27,7 +18,7 @@ function Footer() {
       <hr className={styles['hrTag']} />
       <div className={styles['section2']}>
         <div>
-          <div>Copyright © Thế Anh | Designed by Thế Anh - Powered by ???</div>
+          <div>Copyright © Anh | Designed by Anh - Powered by Anh</div>
         </div>
         <div className={styles['media']}>
           <div className={styles['icon']}>

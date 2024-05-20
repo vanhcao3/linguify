@@ -10,7 +10,7 @@ function GoBackButton() {
   return (
     <button onClick={handleClick} className={styles['wrapper']}>
       <Image src="/icons/angleLeftIcon.svg" alt="" width={22} height={22}></Image>
-      Quay lại
+      Return
     </button>
   );
 }
