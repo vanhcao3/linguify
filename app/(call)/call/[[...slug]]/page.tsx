@@ -65,7 +65,7 @@ export default function CallPage(){
       router.replace("/calls");
     }
 
-  }, [hmsActions, toast, params.slug, router, roomName, roomId]);
+  }, [hmsActions, params.slug, router, roomName, roomId]);
 
   const leaveCall = React.useCallback(async () => {
 
@@ -86,7 +86,7 @@ export default function CallPage(){
 
     await actions.leave();
 
-  }, [roomName, params.slug, roomId, actions, toast]);
+  }, [roomName, params.slug, roomId, actions]);
 
   React.useEffect(() => {
     void joinCall();

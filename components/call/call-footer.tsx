@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 'use client';
 import * as React from 'react';
 import { useAVToggle, useHMSActions } from '@100mslive/react-sdk';
@@ -60,7 +59,7 @@ export default function CallFooter() {
 
     void enableScreenShare();
 
-  }, [actions, isScreenShareEnabled, toast]);
+  }, [actions, isScreenShareEnabled]);
 
   return (
     <footer className={`w-full rounded-lg flex items-center mt-auto justify-center sm:justify-start px-5 py-8 absolute bottom-0`}>
