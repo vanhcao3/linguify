@@ -100,9 +100,9 @@ export default function CallPage() {
 
   }, [isConnected, leaveCall]);
 
-  React.useEffect(() => {
-    void leaveCall();
-  }, [params]);
+  // React.useEffect(() => {
+  //   void leaveCall();
+  // }, [params]);
 
   return (
     <div className="flex flex-col w-screen h-screen overflow-hidden bg-neutral-950 text-gray-200">
