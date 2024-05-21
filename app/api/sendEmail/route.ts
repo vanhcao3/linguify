@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
   try {
     const { error } = await resend.emails.send({
-      from: `onboarding@resend.dev`,
+      from: `<Linguify> support@linguify.fun`,
       to: body.recipient,
       subject: "Invitation to join call on Linguify",
       react: InviteEmail({
