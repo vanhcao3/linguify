@@ -31,7 +31,6 @@ export async function PATCH(req: Request) {
         },
       });
     } else {
-
       participant = await db.participant.findFirst({
         where: {
           name: body.userName,
@@ -66,7 +65,7 @@ export async function PATCH(req: Request) {
     if (otherParticipants.length === 0) {
 
       const managementToken = await generateManagementToken();
-      const response = await fetch(`${process.env.TOKEN_ENDPOINT}/active-rooms/${body.roomId}/end-room`, {
+      const response = await fetch(`https://api.100ms.live/v2/active-rooms/${body.roomId}/end-room`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${managementToken}`,
