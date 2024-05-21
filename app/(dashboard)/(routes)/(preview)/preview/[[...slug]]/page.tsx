@@ -47,7 +47,6 @@ export default function CallPreviewPage() {
         else {
           console.error("Session or user name is not defined");
           toast.error("This call cannot previewed. Please try again.");
-          router.replace("/calls");
         }
       } else {
         throw new Error("Room code response not OK");
@@ -56,7 +55,6 @@ export default function CallPreviewPage() {
     } catch (error) {
       console.error(error)
       toast.error("This call cannot previewed. Please try again.")
-      router.replace("/calls");
     }
 
   }, [hmsActions, params.slug, router, roomName]);
