@@ -4,7 +4,11 @@ import { z } from "zod";
 import { InviteEmail } from "@/components/email-template";
 import { type ErrorResponse } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const getResend = () => {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
+  return new Resend(apiKey);
+};
 
 const emailSchema = z.object({
   recipient: z.string(),
@@ -20,6 +24,10 @@ export async function POST(req: Request) {
   const body = emailSchema.parse(json);
 
   try {
+    const resend = getResend();
+    if (!resend) {
+      return new Response("Email provider not configured", { status: 500 });
+    }
     const { error } = await resend.emails.send({
       from: `<Linguify> support@linguify.fun`,
       to: body.recipient,
