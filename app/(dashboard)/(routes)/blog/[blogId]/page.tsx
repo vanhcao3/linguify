@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import styles from '@/styles/blog/detailblog.module.css';
+import styles from '@/styles/BLog/DetailBlog.module.css';
 import Content from '@/components/Blog/DetailBlog/Content';
 import UserInfo from '@/components/Blog/DetailBlog/UserInfo';
 import { getBlogById } from '@/data/blog';

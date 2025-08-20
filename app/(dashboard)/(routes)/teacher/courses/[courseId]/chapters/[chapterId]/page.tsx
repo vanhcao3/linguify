@@ -18,13 +18,14 @@ import { ChapterAccessForm } from '@/components/ui/chapters/chapter-access-form'
 import { ChapterVideoForm } from '@/components/ui/chapters/chapter-video-form';
 import { ChapterPublish } from '@/components/ui/chapters/chapter-publish';
 import { cn } from '@/lib/utils';
+// removed duplicate import
 
 const ChapterIdPage = async ({
   params,
 }: {
   params: { courseId: string; chapterId: string };
 }) => {
-  const userId = currentUserId;
+  const userId = await currentUserId();
 
   if (!userId) {
     return redirect('/');
@@ -118,6 +119,11 @@ const ChapterIdPage = async ({
                   courseId={params.courseId}
                   chapterId={params.chapterId}
                 />
+                <div className="mt-4">
+                  <Link href={`/teacher/courses/${params.courseId}/chapters/${params.chapterId}/quiz`} className="text-sm underline text-blue-600">
+                    Manage quiz for this chapter
+                  </Link>
+                </div>
               </div>
               <div>
                 <div className="flex items-center gap-x-2 pt-3 pb-0">

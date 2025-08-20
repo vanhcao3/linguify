@@ -63,6 +63,7 @@ model Chapter {
   isPublished  Boolean        @default(false)
   isFree       Boolean        @default(false)
   muxData      MuxData?
+  quiz         Quiz?
   courseId     String
   course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
   userProgress UserProgress[]
@@ -268,4 +269,73 @@ model Like {
   comment   Comment  @relation(fields: [commentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+/// Quiz models
+model Quiz {
+  id               String         @id @default(uuid())
+  chapterId        String         @unique
+  chapter          Chapter        @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  title            String
+  description      String?        @db.Text
+  passPercentage   Int            @default(70)
+  timeLimitSeconds Int?
+  questions        QuizQuestion[]
+  attempts         QuizAttempt[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model QuizQuestion {
+  id        String       @id @default(uuid())
+  quizId    String
+  quiz      Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  prompt    String       @db.Text
+  position  Int
+  options   QuizOption[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([quizId])
+}
+
+model QuizOption {
+  id          String        @id @default(uuid())
+  questionId  String
+  question    QuizQuestion  @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text        String        @db.Text
+  isCorrect   Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([questionId])
+}
+
+model QuizAttempt {
+  id            String   @id @default(uuid())
+  quizId        String
+  quiz          Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  userId        String
+  scorePercent  Int
+  passed        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  answers       QuizAnswer[]
+
+  @@index([quizId])
+  @@index([userId, quizId])
+}
+
+model QuizAnswer {
+  id           String       @id @default(uuid())
+  attemptId    String
+  attempt      QuizAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId   String
+  optionId     String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([attemptId])
+  @@index([questionId])
+  @@index([optionId])
 }

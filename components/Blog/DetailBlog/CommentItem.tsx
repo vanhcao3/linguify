@@ -2,7 +2,7 @@ import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
-import styles from '@/styles/blog/commentmodal.module.css';
+import styles from '@/styles/BLog/CommentModal.module.css';
 import { calculateTimeComment } from '@/lib/utils';
 import { likeComment, unLikeComment } from '@/actions/comment';
 

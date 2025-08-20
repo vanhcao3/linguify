@@ -9,10 +9,13 @@ import {
 } from '@/data/chapter';
 import { getMuxDataByChapterId } from '@/data/mux-data';
 
-const { video } = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
+const getMuxVideo = () => {
+  const tokenId = process.env.MUX_TOKEN_ID;
+  const tokenSecret = process.env.MUX_TOKEN_SECRET;
+  if (!tokenId || !tokenSecret) return null;
+  const { video } = new Mux({ tokenId, tokenSecret });
+  return video;
+};
 
 export async function DELETE(
   req: Request,
@@ -48,8 +51,9 @@ export async function DELETE(
         params.chapterId,
       );
 
-      if (existingMuxData) {
-        await video.assets.delete(existingMuxData.assetId);
+      const muxVideo = getMuxVideo();
+      if (existingMuxData && muxVideo) {
+        await muxVideo.assets.delete(existingMuxData.assetId);
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
@@ -117,6 +121,10 @@ export async function PATCH(
     });
 
     if (values.videoUrl) {
+      const muxVideo = getMuxVideo();
+      if (!muxVideo) {
+        return new NextResponse('MUX not configured', { status: 500 });
+      }
       const existingMuxData = await db.muxData.findFirst({
         where: {
           chapterId: params.chapterId,
@@ -124,7 +132,7 @@ export async function PATCH(
       });
 
       if (existingMuxData) {
-        await video.assets.delete(existingMuxData.assetId);
+        await muxVideo.assets.delete(existingMuxData.assetId);
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
@@ -132,7 +140,7 @@ export async function PATCH(
         });
       }
 
-      const asset = await video.assets.create({
+      const asset = await muxVideo.assets.create({
         input: values.videoUrl,
         playback_policy: ['public'],
         "encoding_tier": "baseline",

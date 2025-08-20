@@ -4,10 +4,13 @@ import { db } from '@/lib/db';
 import Mux from '@mux/mux-node';
 import { getCourseById } from '@/data/courses';
 
-const { video } = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
+const getMuxVideo = () => {
+  const tokenId = process.env.MUX_TOKEN_ID;
+  const tokenSecret = process.env.MUX_TOKEN_SECRET;
+  if (!tokenId || !tokenSecret) return null;
+  const { video } = new Mux({ tokenId, tokenSecret });
+  return video;
+};
 
 export async function DELETE(
   req: Request,
@@ -38,9 +41,10 @@ export async function DELETE(
       return new NextResponse('Not found', { status: 404 });
     }
 
+    const muxVideo = getMuxVideo();
     for (const chapter of course.chapters) {
-      if (chapter.muxData?.assetId) {
-        await video.assets.delete(chapter.muxData.assetId);
+      if (chapter.muxData?.assetId && muxVideo) {
+        await muxVideo.assets.delete(chapter.muxData.assetId);
       }
     }
 

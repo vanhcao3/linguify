@@ -1,5 +1,5 @@
 
-import styles from '@/styles/blog/detailblog.module.css';
+import styles from '@/styles/BLog/DetailBlog.module.css';
 
 interface IProps {
   title: string;

@@ -3,6 +3,7 @@ import { currentUserId } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { Banner } from '@/components/course-banner';
 import { VideoPlayer } from './_components/video-player';
+import { QuizRunner } from './_components/quiz-runner';
 import { CourseEnrollButton } from './_components/course-enroll-button';
 import { Separator } from '@/components/ui/separator';
 import { Preview } from '@/components/preview';
@@ -89,6 +90,14 @@ const ChapterIdPage = async ({
           <Separator />
           <div>
             <Preview value={chapter.description!} />
+          </div>
+          {/* Quiz Runner mounts here */}
+          <div className="p-4">
+            <QuizRunner
+              courseId={params.courseId}
+              chapterId={params.chapterId}
+              isLocked={isLocked}
+            />
           </div>
           {!!attachments.length && (
             <>
